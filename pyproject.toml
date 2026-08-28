@@ -1,0 +1,9 @@
+[project]
+name = "satusehat-integration-python"
+version = "0.1.0"
+description = "SATUSEHAT FHIR R4 SDK for Python"
+requires-python = ">=3.10"
+dependencies = ["requests>=2.31", "pydantic>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff"]
