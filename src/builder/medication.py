@@ -6,7 +6,7 @@ class MedicationBuilder(BaseBuilder):
     _resourceType = "Medication"
 
     def __init__(self) -> None:
-        super().__init__("MedicationBuilder")
+        super().__init__("Medication")
 
     def code(self, codeable_concept: dict) -> "MedicationBuilder":
         return self._set("code", codeable_concept)

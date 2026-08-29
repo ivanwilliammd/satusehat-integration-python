@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class FamilyMemberHistoryBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("FamilyMemberHistoryBuilder")
+        super().__init__("FamilyMemberHistory")
 
     def status(self, value: str) -> "FamilyMemberHistoryBuilder":
         return self._set("status", value)

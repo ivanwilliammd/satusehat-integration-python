@@ -6,7 +6,7 @@ class RelatedPersonBuilder(BaseBuilder):
     _resourceType = "RelatedPerson"
 
     def __init__(self) -> None:
-        super().__init__("RelatedPersonBuilder")
+        super().__init__("RelatedPerson")
 
     def active(self, value: bool) -> "RelatedPersonBuilder":
         return self._set("active", value)

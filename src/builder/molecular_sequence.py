@@ -7,9 +7,7 @@ class MolecularSequenceBuilder(BaseBuilder):
     """Builder for MolecularSequence resource."""
 
     def __init__(self):
-        super().__init__("MolecularSequenceBuilder")
-        self.data = {"resourceType": "MolecularSequence"}
-
+        super().__init__("MolecularSequence")
     def set_id(self, id: str) -> "MolecularSequenceBuilder":
         self.data["id"] = id
         return self

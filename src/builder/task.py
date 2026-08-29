@@ -7,9 +7,7 @@ class TaskBuilder(BaseBuilder):
     """Builder for Task resource."""
 
     def __init__(self):
-        super().__init__("TaskBuilder")
-        self.data = {"resourceType": "Task"}
-
+        super().__init__("Task")
     def set_id(self, id: str) -> "TaskBuilder":
         self.data["id"] = id
         return self

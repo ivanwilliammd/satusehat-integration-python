@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class GroupBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("GroupBuilder")
+        super().__init__("Group")
 
     def type(self, value: str) -> "GroupBuilder":
         return self._set("type", value)

@@ -6,7 +6,7 @@ class EpisodeOfCareBuilder(BaseBuilder):
     _resourceType = "EpisodeOfCare"
 
     def __init__(self) -> None:
-        super().__init__("EpisodeOfCareBuilder")
+        super().__init__("EpisodeOfCare")
 
     def status(self, value: str) -> "EpisodeOfCareBuilder":
         return self._set("status", value)

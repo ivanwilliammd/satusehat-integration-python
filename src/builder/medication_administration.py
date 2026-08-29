@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class MedicationAdministrationBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("MedicationAdministrationBuilder")
+        super().__init__("MedicationAdministration")
 
     def status(self, value: str) -> "MedicationAdministrationBuilder":
         return self._set("status", value)

@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class ChargeItemDefinitionBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("ChargeItemDefinitionBuilder")
+        super().__init__("ChargeItemDefinition")
 
     def url(self, value: str) -> "ChargeItemDefinitionBuilder":
         return self._set("url", value)

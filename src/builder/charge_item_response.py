@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class ChargeItemResponseBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("ChargeItemResponseBuilder")
+        super().__init__("ChargeItemResponse")
 
     def status(self, value: str) -> "ChargeItemResponseBuilder":
         return self._set("status", value)

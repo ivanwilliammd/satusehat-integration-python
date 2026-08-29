@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class PaymentReconciliationBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("PaymentReconciliationBuilder")
+        super().__init__("PaymentReconciliation")
 
     def status(self, value: str) -> "PaymentReconciliationBuilder":
         return self._set("status", value)

@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class QuestionnaireResponseBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("QuestionnaireResponseBuilder")
+        super().__init__("QuestionnaireResponse")
 
     def status(self, value: str) -> "QuestionnaireResponseBuilder":
         return self._set("status", value)

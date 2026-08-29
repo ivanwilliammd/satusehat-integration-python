@@ -7,9 +7,7 @@ class RiskAssessmentBuilder(BaseBuilder):
     """Builder for RiskAssessment resource."""
 
     def __init__(self):
-        super().__init__("RiskAssessmentBuilder")
-        self.data = {"resourceType": "RiskAssessment"}
-
+        super().__init__("RiskAssessment")
     def set_id(self, id: str) -> "RiskAssessmentBuilder":
         self.data["id"] = id
         return self

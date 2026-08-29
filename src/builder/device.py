@@ -6,7 +6,7 @@ class DeviceBuilder(BaseBuilder):
     _resourceType = "Device"
 
     def __init__(self) -> None:
-        super().__init__("DeviceBuilder")
+        super().__init__("Device")
 
     def udi_carrier(self, carrier_aidc: Optional[str] = None, carrier_hrf: Optional[str] = None, device_identifier: Optional[str] = None, issuer: Optional[str] = None, jurisdiction: Optional[str] = None, entry_type: Optional[str] = None) -> "DeviceBuilder":
         u: dict = {}

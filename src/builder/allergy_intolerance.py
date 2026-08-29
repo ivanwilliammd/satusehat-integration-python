@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class AllergyIntoleranceBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("AllergyIntoleranceBuilder")
+        super().__init__("AllergyIntolerance")
 
     def identifier(self, identifier: dict) -> "AllergyIntoleranceBuilder":
         return self._push("identifier", identifier)

@@ -7,9 +7,7 @@ class CoverageBuilder(BaseBuilder):
     """Builder for Coverage resource."""
 
     def __init__(self):
-        super().__init__("CoverageBuilder")
-        self.data = {"resourceType": "Coverage"}
-
+        super().__init__("Coverage")
     def set_id(self, id: str) -> "CoverageBuilder":
         self.data["id"] = id
         return self

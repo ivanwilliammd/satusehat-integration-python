@@ -6,7 +6,7 @@ class ImmunizationBuilder(BaseBuilder):
     _resourceType = "Immunization"
 
     def __init__(self) -> None:
-        super().__init__("ImmunizationBuilder")
+        super().__init__("Immunization")
 
     def status(self, value: str) -> "ImmunizationBuilder":
         return self._set("status", value)

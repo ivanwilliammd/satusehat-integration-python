@@ -6,7 +6,7 @@ class MedicationRequestBuilder(BaseBuilder):
     _resourceType = "MedicationRequest"
 
     def __init__(self) -> None:
-        super().__init__("MedicationRequestBuilder")
+        super().__init__("MedicationRequest")
 
     def status(self, value: str) -> "MedicationRequestBuilder":
         return self._set("status", value)

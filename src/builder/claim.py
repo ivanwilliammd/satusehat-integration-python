@@ -7,9 +7,7 @@ class ClaimBuilder(BaseBuilder):
     """Builder for Claim resource."""
 
     def __init__(self):
-        super().__init__("ClaimBuilder")
-        self.data = {"resourceType": "Claim"}
-
+        super().__init__("Claim")
     def set_id(self, id: str) -> "ClaimBuilder":
         self.data["id"] = id
         return self

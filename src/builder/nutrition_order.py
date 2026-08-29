@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class NutritionOrderBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("NutritionOrderBuilder")
+        super().__init__("NutritionOrder")
 
     def status(self, value: str) -> "NutritionOrderBuilder":
         return self._set("status", value)

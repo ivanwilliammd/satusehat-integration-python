@@ -6,7 +6,7 @@ class GoalBuilder(BaseBuilder):
     _resourceType = "Goal"
 
     def __init__(self) -> None:
-        super().__init__("GoalBuilder")
+        super().__init__("Goal")
 
     def lifecycle_status(self, value: str) -> "GoalBuilder":
         return self._set("lifecycleStatus", value)

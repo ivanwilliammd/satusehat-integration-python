@@ -7,9 +7,7 @@ class AccountBuilder(BaseBuilder):
     """Builder for Account resource."""
 
     def __init__(self):
-        super().__init__("AccountBuilder")
-        self.data = {"resourceType": "Account"}
-
+        super().__init__("Account")
     def set_id(self, id: str) -> "AccountBuilder":
         self.data["id"] = id
         return self

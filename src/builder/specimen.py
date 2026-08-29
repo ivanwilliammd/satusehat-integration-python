@@ -6,7 +6,7 @@ class SpecimenBuilder(BaseBuilder):
     _resourceType = "Specimen"
 
     def __init__(self) -> None:
-        super().__init__("SpecimenBuilder")
+        super().__init__("Specimen")
 
     def identifier(self, system: str, value: str) -> "SpecimenBuilder":
         return self._append("identifier", {"system": system, "value": value})

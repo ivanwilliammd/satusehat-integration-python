@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class ClinicalImpressionBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("ClinicalImpressionBuilder")
+        super().__init__("ClinicalImpression")
 
     def identifier(self, identifier: dict) -> "ClinicalImpressionBuilder":
         return self._push("identifier", identifier)

@@ -7,9 +7,7 @@ class DocumentReferenceBuilder(BaseBuilder):
     """Builder for DocumentReference resource."""
 
     def __init__(self):
-        super().__init__("DocumentReferenceBuilder")
-        self.data = {"resourceType": "DocumentReference"}
-
+        super().__init__("DocumentReference")
     def set_id(self, id: str) -> "DocumentReferenceBuilder":
         self.data["id"] = id
         return self

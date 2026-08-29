@@ -7,9 +7,7 @@ class ImagingStudyBuilder(BaseBuilder):
     """Builder for ImagingStudy resource."""
 
     def __init__(self):
-        super().__init__("ImagingStudyBuilder")
-        self.data = {"resourceType": "ImagingStudy"}
-
+        super().__init__("ImagingStudy")
     def set_id(self, id: str) -> "ImagingStudyBuilder":
         self.data["id"] = id
         return self

@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class SubstanceBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("SubstanceBuilder")
+        super().__init__("Substance")
 
     def identifier(self, system: str, value: str) -> "SubstanceBuilder":
         return self._push("identifier", {"system": system, "value": value})

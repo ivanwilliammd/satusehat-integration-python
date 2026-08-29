@@ -6,7 +6,7 @@ class PractitionerRoleBuilder(BaseBuilder):
     _resourceType = "PractitionerRole"
 
     def __init__(self) -> None:
-        super().__init__("PractitionerRoleBuilder")
+        super().__init__("PractitionerRole")
 
     def active(self, value: bool) -> "PractitionerRoleBuilder":
         return self._set("active", value)

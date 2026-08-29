@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class CoverageEligibilityResponseBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("CoverageEligibilityResponseBuilder")
+        super().__init__("CoverageEligibilityResponse")
 
     def identifier(self, system: str, value: str) -> "CoverageEligibilityResponseBuilder":
         return self._push("identifier", {"system": system, "value": value})

@@ -2,7 +2,7 @@ from src.builder.base_builder import BaseBuilder
 
 class GenomicStudyBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("GenomicStudyBuilder")
+        super().__init__("GenomicStudy")
 
     def status(self, value: str) -> "GenomicStudyBuilder":
         return self._set("status", value)

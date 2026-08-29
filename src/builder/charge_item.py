@@ -7,9 +7,7 @@ class ChargeItemBuilder(BaseBuilder):
     """Builder for ChargeItem resource."""
 
     def __init__(self):
-        super().__init__("ChargeItemBuilder")
-        self.data = {"resourceType": "ChargeItem"}
-
+        super().__init__("ChargeItem")
     def set_id(self, id: str) -> "ChargeItemBuilder":
         self.data["id"] = id
         return self

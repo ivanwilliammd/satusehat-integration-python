@@ -7,9 +7,7 @@ class CarePlanBuilder(BaseBuilder):
     """Builder for CarePlan resource."""
 
     def __init__(self):
-        super().__init__("CarePlanBuilder")
-        self.data = {"resourceType": "CarePlan"}
-
+        super().__init__("CarePlan")
     def set_id(self, id: str) -> "CarePlanBuilder":
         self.data["id"] = id
         return self

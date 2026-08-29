@@ -7,9 +7,7 @@ class CompositionBuilder(BaseBuilder):
     """Builder for Composition resource."""
 
     def __init__(self):
-        super().__init__("CompositionBuilder")
-        self.data = {"resourceType": "Composition"}
-
+        super().__init__("Composition")
     def set_id(self, id: str) -> "CompositionBuilder":
         self.data["id"] = id
         return self

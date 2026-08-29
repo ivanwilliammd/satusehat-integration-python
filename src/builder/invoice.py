@@ -7,9 +7,7 @@ class InvoiceBuilder(BaseBuilder):
     """Builder for Invoice resource."""
 
     def __init__(self):
-        super().__init__("InvoiceBuilder")
-        self.data = {"resourceType": "Invoice"}
-
+        super().__init__("Invoice")
     def set_id(self, id: str) -> "InvoiceBuilder":
         self.data["id"] = id
         return self
