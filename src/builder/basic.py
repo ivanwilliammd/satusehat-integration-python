@@ -2,30 +2,30 @@ from typing import Optional
 from src.builder.base_builder import BaseBuilder
 
 
-class CoverageBuilder(BaseBuilder):
+class BasicBuilder(BaseBuilder):
     def __init__(self) -> None:
-        super().__init__("Coverage")
+        super().__init__("Basic")
 
-    def set_id(id: str) -> "CoverageBuilder":
+    def set_id(id: str) -> "BasicBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "CoverageBuilder":
+    def add_identifier(system: str, value: str) -> "BasicBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "CoverageBuilder":
+    def set_status(status: str) -> "BasicBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "CoverageBuilder":
+    def set_code(code: dict) -> "BasicBuilder":
         self._set("code", code)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "CoverageBuilder":
+    def set_subject(reference: str, display: str = None) -> "BasicBuilder":
         self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
         return self
 
-    def set_description(description: str) -> "CoverageBuilder":
+    def set_description(description: str) -> "BasicBuilder":
         self._set("description", description)
         return self
