@@ -6,6 +6,8 @@
 [![FHIR R4](https://img.shields.io/badge/FHIR-R4-orange)](https://hl7.org/fhir/R4/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![CI](https://github.com/ivanwilliammd/satusehat-integration-python/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanwilliammd/satusehat-integration-python/actions)
+[![PyPI](https://img.shields.io/pypi/v/satusehat-integration)](https://pypi.org/project/satusehat-integration)
+[![PyPI](https://img.shields.io/pypi/dm/satusehat-integration)](https://pypi.org/project/satusehat-integration)
 
 ---
 
