@@ -1,4 +1,4 @@
-# satusehat-integration-python
+# satusehat-integration
 
 > **Open-source Python SDK for integrating with SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4. Pure Python, no framework dependency.
 
@@ -11,7 +11,7 @@
 
 ## Overview
 
-`satusehat-integration-python` is an **open-source** Python SDK for integrating with **SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4.
+`satusehat-integration` is an **open-source** Python SDK for integrating with **SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4.
 
 Built on the official [SATUSEHAT Platform Guidelines](https://satusehat.kemkes.go.id/platform/docs). Ships with:
 - **50 DataType** classes — composable FHIR R4 value objects with `to_json()` serialization
@@ -31,10 +31,10 @@ Zero dependencies beyond standard library. Works standalone or with Django/FastA
 ## Quick Install
 
 ```bash
-pip install satusehat-integration-python
+pip install satusehat-integration
 # or
-git clone https://github.com/ivanwilliammd/satusehat-integration-python.git
-cd satusehat-integration-python && pip install -e .
+git clone https://github.com/ivanwilliammd/satusehat-integration.git
+cd satusehat-integration && pip install -e .
 ```
 
 ```env
@@ -155,12 +155,12 @@ payload = claim.to_json()
 
 | Page | Description |
 |------|-------------|
-| [Wiki Home](https://github.com/ivanwilliammd/satusehat-integration-python.wiki.git) | Full documentation |
-| [Getting Started](https://github.com/ivanwilliammd/satusehat-integration-python/wiki/Getting-Started) | Installation, configuration |
-| [DataTypes](https://github.com/ivanwilliammd/satusehat-integration-python/wiki/DataTypes) | Complete type reference |
-| [Builders](https://github.com/ivanwilliammd/satusehat-integration-python/wiki/Builders) | Builder usage guide |
-| [Resources](https://github.com/ivanwilliammd/satusehat-integration-python/wiki/Resources) | All FHIR resources |
-| [Claim Module](https://github.com/ivanwilliammd/satusehat-integration-python/wiki/Claim-Module) | BPJS Klaim integration |
+| [Wiki Home](https://github.com/ivanwilliammd/satusehat-integration.wiki.git) | Full documentation |
+| [Getting Started](https://github.com/ivanwilliammd/satusehat-integration/wiki/Getting-Started) | Installation, configuration |
+| [DataTypes](https://github.com/ivanwilliammd/satusehat-integration/wiki/DataTypes) | Complete type reference |
+| [Builders](https://github.com/ivanwilliammd/satusehat-integration/wiki/Builders) | Builder usage guide |
+| [Resources](https://github.com/ivanwilliammd/satusehat-integration/wiki/Resources) | All FHIR resources |
+| [Claim Module](https://github.com/ivanwilliammd/satusehat-integration/wiki/Claim-Module) | BPJS Klaim integration |
 
 ---
 
