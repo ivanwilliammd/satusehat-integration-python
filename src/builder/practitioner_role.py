@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class PractitionerRoleBuilder(BaseBuilder):
     _resourceType = "PractitionerRole"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("PractitionerRoleBuilder")
 
     def active(self, value: bool) -> "PractitionerRoleBuilder":
         return self._set("active", value)

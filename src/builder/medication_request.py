@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class MedicationRequestBuilder(BaseBuilder):
     _resourceType = "MedicationRequest"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("MedicationRequestBuilder")
 
     def status(self, value: str) -> "MedicationRequestBuilder":
         return self._set("status", value)

@@ -1,74 +1,74 @@
 """ClaimResponse resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class ClaimResponseBuilder(BaseBuilder):
     """Builder for ClaimResponse resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "ClaimResponse"}
+        super().__init__("ClaimResponseBuilder")
+        self.data = {"resourceType": "ClaimResponse"}
 
     def set_id(self, id: str) -> "ClaimResponseBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "ClaimResponseBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
-        self._data["type"] = {"coding": [{"system": system, "code": code}]}
+        self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["type"]["coding"][0]["display"] = display
+            self.data["type"]["coding"][0]["display"] = display
         return self
 
     def set_sub_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
-        self._data["subType"] = {"coding": [{"system": system, "code": code}]}
+        self.data["subType"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["subType"]["coding"][0]["display"] = display
+            self.data["subType"]["coding"][0]["display"] = display
         return self
 
     def set_use(self, use: str) -> "ClaimResponseBuilder":
-        self._data["use"] = use
+        self.data["use"] = use
         return self
 
     def set_patient(self, reference: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
-        self._data["patient"] = {"reference": reference}
+        self.data["patient"] = {"reference": reference}
         if display:
-            self._data["patient"]["display"] = display
+            self.data["patient"]["display"] = display
         return self
 
     def set_created(self, created: str) -> "ClaimResponseBuilder":
-        self._data["created"] = created
+        self.data["created"] = created
         return self
 
     def set_insurer(self, reference: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
-        self._data["insurer"] = {"reference": reference}
+        self.data["insurer"] = {"reference": reference}
         if display:
-            self._data["insurer"]["display"] = display
+            self.data["insurer"]["display"] = display
         return self
 
     def set_request(self, reference: str) -> "ClaimResponseBuilder":
-        self._data["request"] = {"reference": reference}
+        self.data["request"] = {"reference": reference}
         return self
 
     def set_outcome(self, outcome: str) -> "ClaimResponseBuilder":
-        self._data["outcome"] = outcome
+        self.data["outcome"] = outcome
         return self
 
     def add_decision_reason(self, code: str, system: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
-        self._data.setdefault("decisionReason", [])
+        self.data.setdefault("decisionReason", [])
         reason: dict = {"coding": [{"system": system, "code": code}]}
         if display:
             reason["coding"][0]["display"] = display
-        self._data["decisionReason"].append(reason)
+        self.data["decisionReason"].append(reason)
         return self
 
     def add_communication_request(self, reference: str) -> "ClaimResponseBuilder":
-        self._data.setdefault("communicationRequest", [])
-        self._data["communicationRequest"].append({"reference": reference})
+        self.data.setdefault("communicationRequest", [])
+        self.data["communicationRequest"].append({"reference": reference})
         return self
 
     def add_insurance(
@@ -78,7 +78,7 @@ class ClaimResponseBuilder(BaseBuilder):
         focal: bool = False,
         coverage_display: Optional[str] = None
     ) -> "ClaimResponseBuilder":
-        self._data.setdefault("insurance", [])
+        self.data.setdefault("insurance", [])
         ins: dict = {
             "sequence": str(sequence),
             "coverage": {"reference": coverage_reference},
@@ -86,7 +86,7 @@ class ClaimResponseBuilder(BaseBuilder):
         }
         if coverage_display:
             ins["coverage"]["display"] = coverage_display
-        self._data["insurance"].append(ins)
+        self.data["insurance"].append(ins)
         return self
 
     def add_item(
@@ -98,7 +98,7 @@ class ClaimResponseBuilder(BaseBuilder):
         adjudication_value: Optional[float] = None,
         adjudication_display: Optional[str] = None
     ) -> "ClaimResponseBuilder":
-        self._data.setdefault("item", [])
+        self.data.setdefault("item", [])
         item: dict = {"itemSequence": item_sequence}
         if adjudication_code:
             item.setdefault("adjudication", [])
@@ -110,5 +110,5 @@ class ClaimResponseBuilder(BaseBuilder):
             item["adjudication"].append(adj)
         if note_sequence:
             item["noteNumber"] = [note_sequence]
-        self._data["item"].append(item)
+        self.data["item"].append(item)
         return self

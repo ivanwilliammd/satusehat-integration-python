@@ -1,49 +1,49 @@
 """Claim resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class ClaimBuilder(BaseBuilder):
     """Builder for Claim resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "Claim"}
+        super().__init__("ClaimBuilder")
+        self.data = {"resourceType": "Claim"}
 
     def set_id(self, id: str) -> "ClaimBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "ClaimBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimBuilder":
-        self._data["type"] = {"coding": [{"system": system, "code": code}]}
+        self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["type"]["coding"][0]["display"] = display
+            self.data["type"]["coding"][0]["display"] = display
         return self
 
     def set_sub_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimBuilder":
-        self._data["subType"] = {"coding": [{"system": system, "code": code}]}
+        self.data["subType"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["subType"]["coding"][0]["display"] = display
+            self.data["subType"]["coding"][0]["display"] = display
         return self
 
     def set_use(self, use: str) -> "ClaimBuilder":
-        self._data["use"] = use
+        self.data["use"] = use
         return self
 
     def set_priority(self, code: str, system: str, display: Optional[str] = None) -> "ClaimBuilder":
-        self._data["priority"] = {"coding": [{"system": system, "code": code}]}
+        self.data["priority"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["priority"]["coding"][0]["display"] = display
+            self.data["priority"]["coding"][0]["display"] = display
         return self
 
     def set_patient(self, reference: str, display: Optional[str] = None) -> "ClaimBuilder":
-        self._data["patient"] = {"reference": reference}
+        self.data["patient"] = {"reference": reference}
         if display:
-            self._data["patient"]["display"] = display
+            self.data["patient"]["display"] = display
         return self
 
     def set_billable_period(self, start: Optional[str] = None, end: Optional[str] = None) -> "ClaimBuilder":
@@ -52,35 +52,35 @@ class ClaimBuilder(BaseBuilder):
             period["start"] = start
         if end:
             period["end"] = end
-        self._data["billablePeriod"] = period
+        self.data["billablePeriod"] = period
         return self
 
     def set_created(self, created: str) -> "ClaimBuilder":
-        self._data["created"] = created
+        self.data["created"] = created
         return self
 
     def set_insurer(self, reference: str, display: Optional[str] = None) -> "ClaimBuilder":
-        self._data["insurer"] = {"reference": reference}
+        self.data["insurer"] = {"reference": reference}
         if display:
-            self._data["insurer"]["display"] = display
+            self.data["insurer"]["display"] = display
         return self
 
     def set_provider(self, reference: str, display: Optional[str] = None) -> "ClaimBuilder":
-        self._data["provider"] = {"reference": reference}
+        self.data["provider"] = {"reference": reference}
         if display:
-            self._data["provider"]["display"] = display
+            self.data["provider"]["display"] = display
         return self
 
     def set_priority_code(self, code: str, system: str = "http://hl7.org/fhir/request-priority") -> "ClaimBuilder":
-        self._data["priority"] = {"coding": [{"system": system, "code": code}]}
+        self.data["priority"] = {"coding": [{"system": system, "code": code}]}
         return self
 
     def add_supporting_info(self, sequence: int, code: str, code_system: str, value: Optional[str] = None) -> "ClaimBuilder":
-        self._data.setdefault("supportingInfo", [])
+        self.data.setdefault("supportingInfo", [])
         info: dict = {"sequence": sequence, "category": {"coding": [{"code": code, "system": code_system}]}}
         if value:
             info["valueString"] = value
-        self._data["supportingInfo"].append(info)
+        self.data["supportingInfo"].append(info)
         return self
 
     def add_diagnosis(
@@ -91,14 +91,14 @@ class ClaimBuilder(BaseBuilder):
         type_code: Optional[str] = None,
         type_system: Optional[str] = None
     ) -> "ClaimBuilder":
-        self._data.setdefault("diagnosis", [])
+        self.data.setdefault("diagnosis", [])
         diag: dict = {
             "sequence": sequence,
             "diagnosisCodeableConcept": {"coding": [{"code": diagnosis_code, "system": diagnosis_system}]}
         }
         if type_code:
             diag["type"] = [{"coding": [{"code": type_code, "system": type_system or "http://hl7.org/fhir/ex-diagnosistype"}]}]
-        self._data["diagnosis"].append(diag)
+        self.data["diagnosis"].append(diag)
         return self
 
     def add_insurance(
@@ -108,7 +108,7 @@ class ClaimBuilder(BaseBuilder):
         focal: bool = False,
         coverage_display: Optional[str] = None
     ) -> "ClaimBuilder":
-        self._data.setdefault("insurance", [])
+        self.data.setdefault("insurance", [])
         ins: dict = {
             "sequence": str(sequence),
             "coverage": {"reference": coverage_reference},
@@ -116,7 +116,7 @@ class ClaimBuilder(BaseBuilder):
         }
         if coverage_display:
             ins["coverage"]["display"] = coverage_display
-        self._data["insurance"].append(ins)
+        self.data["insurance"].append(ins)
         return self
 
     def add_item(
@@ -126,18 +126,18 @@ class ClaimBuilder(BaseBuilder):
         service_system: str,
         serviced_date: Optional[str] = None
     ) -> "ClaimBuilder":
-        self._data.setdefault("item", [])
+        self.data.setdefault("item", [])
         item: dict = {
             "sequence": sequence,
             "service": {"coding": [{"code": service_code, "system": service_system}]}
         }
         if serviced_date:
             item["servicedDate"] = serviced_date
-        self._data["item"].append(item)
+        self.data["item"].append(item)
         return self
 
     def add_item_encounter(self, item_index: int, encounter_reference: str) -> "ClaimBuilder":
-        if "item" in self._data and len(self._data["item"]) > item_index:
-            self._data["item"][item_index].setdefault("encounter", [])
-            self._data["item"][item_index]["encounter"].append({"reference": encounter_reference})
+        if "item" in self.data and len(self.data["item"]) > item_index:
+            self.data["item"][item_index].setdefault("encounter", [])
+            self.data["item"][item_index]["encounter"].append({"reference": encounter_reference})
         return self

@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class BodyStructureBuilder(BaseBuilder):
     _resourceType = "BodyStructure"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("BodyStructureBuilder")
 
     def identifier(self, system: str, value: str) -> "BodyStructureBuilder":
         return self._append("identifier", {"system": system, "value": value})

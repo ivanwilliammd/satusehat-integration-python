@@ -1,59 +1,59 @@
 """DocumentReference resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class DocumentReferenceBuilder(BaseBuilder):
     """Builder for DocumentReference resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "DocumentReference"}
+        super().__init__("DocumentReferenceBuilder")
+        self.data = {"resourceType": "DocumentReference"}
 
     def set_id(self, id: str) -> "DocumentReferenceBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "DocumentReferenceBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_doc_status(self, doc_status: str) -> "DocumentReferenceBuilder":
-        self._data["docStatus"] = doc_status
+        self.data["docStatus"] = doc_status
         return self
 
     def set_type(self, code: str, system: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
-        self._data["type"] = {"coding": [{"system": system, "code": code}]}
+        self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["type"]["coding"][0]["display"] = display
+            self.data["type"]["coding"][0]["display"] = display
         return self
 
     def set_category(self, code: str, system: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
-        self._data["category"] = [{"coding": [{"system": system, "code": code}]}]
+        self.data["category"] = [{"coding": [{"system": system, "code": code}]}]
         if display:
-            self._data["category"][0]["coding"][0]["display"] = display
+            self.data["category"][0]["coding"][0]["display"] = display
         return self
 
     def set_subject(self, reference: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
-        self._data["subject"] = {"reference": reference}
+        self.data["subject"] = {"reference": reference}
         if display:
-            self._data["subject"]["display"] = display
+            self.data["subject"]["display"] = display
         return self
 
     def set_date(self, date: str) -> "DocumentReferenceBuilder":
-        self._data["date"] = date
+        self.data["date"] = date
         return self
 
     def set_description(self, description: str) -> "DocumentReferenceBuilder":
-        self._data["description"] = description
+        self.data["description"] = description
         return self
 
     def add_security_label(self, code: str, system: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
-        self._data.setdefault("securityLabel", [])
+        self.data.setdefault("securityLabel", [])
         label: dict = {"coding": [{"system": system, "code": code}]}
         if display:
             label["coding"][0]["display"] = display
-        self._data["securityLabel"].append(label)
+        self.data["securityLabel"].append(label)
         return self
 
     def set_content(
@@ -79,28 +79,28 @@ class DocumentReferenceBuilder(BaseBuilder):
             att["title"] = attachment_title
         if attachment_creation:
             att["creation"] = attachment_creation
-        self._data["content"] = [attachment]
+        self.data["content"] = [attachment]
         return self
 
     def add_context_encounter(self, reference: str) -> "DocumentReferenceBuilder":
-        self._data.setdefault("context", {}).setdefault("encounter", [])
-        self._data["context"]["encounter"].append({"reference": reference})
+        self.data.setdefault("context", {}).setdefault("encounter", [])
+        self.data["context"]["encounter"].append({"reference": reference})
         return self
 
     def set_context_period(self, start: Optional[str] = None, end: Optional[str] = None) -> "DocumentReferenceBuilder":
-        self._data.setdefault("context", {})
+        self.data.setdefault("context", {})
         period: dict = {}
         if start:
             period["start"] = start
         if end:
             period["end"] = end
-        self._data["context"]["period"] = period
+        self.data["context"]["period"] = period
         return self
 
     def add_author(self, reference: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
-        self._data.setdefault("author", [])
+        self.data.setdefault("author", [])
         author: dict = {"reference": reference}
         if display:
             author["display"] = display
-        self._data["author"].append(author)
+        self.data["author"].append(author)
         return self

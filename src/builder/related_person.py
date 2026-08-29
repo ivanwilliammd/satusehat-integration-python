@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class RelatedPersonBuilder(BaseBuilder):
     _resourceType = "RelatedPerson"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("RelatedPersonBuilder")
 
     def active(self, value: bool) -> "RelatedPersonBuilder":
         return self._set("active", value)

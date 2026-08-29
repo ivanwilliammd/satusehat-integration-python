@@ -1,27 +1,27 @@
 """CareTeam resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class CareTeamBuilder(BaseBuilder):
     """Builder for CareTeam resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "CareTeam"}
+        super().__init__("CareTeamBuilder")
+        self.data = {"resourceType": "CareTeam"}
 
     def set_id(self, id: str) -> "CareTeamBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "CareTeamBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_subject(self, reference: str, display: Optional[str] = None) -> "CareTeamBuilder":
-        self._data["subject"] = {"reference": reference}
+        self.data["subject"] = {"reference": reference}
         if display:
-            self._data["subject"]["display"] = display
+            self.data["subject"]["display"] = display
         return self
 
     def set_period(self, start: Optional[str] = None, end: Optional[str] = None) -> "CareTeamBuilder":
@@ -30,15 +30,15 @@ class CareTeamBuilder(BaseBuilder):
             period["start"] = start
         if end:
             period["end"] = end
-        self._data["period"] = period
+        self.data["period"] = period
         return self
 
     def add_category(self, code: str, system: str, display: Optional[str] = None) -> "CareTeamBuilder":
-        self._data.setdefault("category", [])
+        self.data.setdefault("category", [])
         cat: dict = {"coding": [{"system": system, "code": code}]}
         if display:
             cat["coding"][0]["display"] = display
-        self._data["category"].append(cat)
+        self.data["category"].append(cat)
         return self
 
     def add_participant(
@@ -49,7 +49,7 @@ class CareTeamBuilder(BaseBuilder):
         member_reference: Optional[str] = None,
         member_display: Optional[str] = None
     ) -> "CareTeamBuilder":
-        self._data.setdefault("participant", [])
+        self.data.setdefault("participant", [])
         participant: dict = {}
         if role_code:
             participant["role"] = {"coding": [{"code": role_code}]}
@@ -61,18 +61,18 @@ class CareTeamBuilder(BaseBuilder):
             participant["member"] = {"reference": member_reference}
             if member_display:
                 participant["member"]["display"] = member_display
-        self._data["participant"].append(participant)
+        self.data["participant"].append(participant)
         return self
 
     def add_reason_code(self, code: str, system: str, display: Optional[str] = None) -> "CareTeamBuilder":
-        self._data.setdefault("reasonCode", [])
+        self.data.setdefault("reasonCode", [])
         rc: dict = {"coding": [{"system": system, "code": code}]}
         if display:
             rc["coding"][0]["display"] = display
-        self._data["reasonCode"].append(rc)
+        self.data["reasonCode"].append(rc)
         return self
 
     def add_note(self, text: str) -> "CareTeamBuilder":
-        self._data.setdefault("note", [])
-        self._data["note"].append({"text": text})
+        self.data.setdefault("note", [])
+        self.data["note"].append({"text": text})
         return self

@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class GoalBuilder(BaseBuilder):
     _resourceType = "Goal"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("GoalBuilder")
 
     def lifecycle_status(self, value: str) -> "GoalBuilder":
         return self._set("lifecycleStatus", value)

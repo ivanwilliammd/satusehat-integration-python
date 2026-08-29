@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class ImmunizationRecommendationBuilder(BaseBuilder):
     _resourceType = "ImmunizationRecommendation"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("ImmunizationRecommendationBuilder")
 
     def subject(self, reference: str, display: Optional[str] = None) -> "ImmunizationRecommendationBuilder":
         sub: dict = {"reference": reference}

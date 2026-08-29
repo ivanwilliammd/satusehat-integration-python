@@ -1,58 +1,58 @@
 """Media resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class MediaBuilder(BaseBuilder):
     """Builder for Media resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "Media"}
+        super().__init__("MediaBuilder")
+        self.data = {"resourceType": "Media"}
 
     def set_id(self, id: str) -> "MediaBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "MediaBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_type(self, code: str, system: str, display: Optional[str] = None) -> "MediaBuilder":
-        self._data["type"] = {"coding": [{"system": system, "code": code}]}
+        self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["type"]["coding"][0]["display"] = display
+            self.data["type"]["coding"][0]["display"] = display
         return self
 
     def set_modality(self, code: str, system: str, display: Optional[str] = None) -> "MediaBuilder":
-        self._data["modality"] = {"coding": [{"system": system, "code": code}]}
+        self.data["modality"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["modality"]["coding"][0]["display"] = display
+            self.data["modality"]["coding"][0]["display"] = display
         return self
 
     def set_subject(self, reference: str, display: Optional[str] = None) -> "MediaBuilder":
-        self._data["subject"] = {"reference": reference}
+        self.data["subject"] = {"reference": reference}
         if display:
-            self._data["subject"]["display"] = display
+            self.data["subject"]["display"] = display
         return self
 
     def set_encounter(self, reference: str) -> "MediaBuilder":
-        self._data["encounter"] = {"reference": reference}
+        self.data["encounter"] = {"reference": reference}
         return self
 
     def set_created_datetime(self, created_datetime: str) -> "MediaBuilder":
-        self._data["createdDateTime"] = created_datetime
+        self.data["createdDateTime"] = created_datetime
         return self
 
     def set_extension(self, url: str, value: str) -> "MediaBuilder":
-        self._data.setdefault("extension", [])
-        self._data["extension"].append({"url": url, "valueString": value})
+        self.data.setdefault("extension", [])
+        self.data["extension"].append({"url": url, "valueString": value})
         return self
 
     def set_body_site(self, code: str, system: str, display: Optional[str] = None) -> "MediaBuilder":
-        self._data["bodySite"] = {"coding": [{"system": system, "code": code}]}
+        self.data["bodySite"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["bodySite"]["coding"][0]["display"] = display
+            self.data["bodySite"]["coding"][0]["display"] = display
         return self
 
     def set_content(
@@ -72,16 +72,16 @@ class MediaBuilder(BaseBuilder):
             content["title"] = title
         if creation:
             content["creation"] = creation
-        self._data["content"] = content
+        self.data["content"] = content
         return self
 
     def add_operator(self, reference: str, display: Optional[str] = None) -> "MediaBuilder":
-        self._data["operator"] = {"reference": reference}
+        self.data["operator"] = {"reference": reference}
         if display:
-            self._data["operator"]["display"] = display
+            self.data["operator"]["display"] = display
         return self
 
     def add_note(self, text: str) -> "MediaBuilder":
-        self._data.setdefault("note", [])
-        self._data["note"].append({"text": text})
+        self.data.setdefault("note", [])
+        self.data["note"].append({"text": text})
         return self

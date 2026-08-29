@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class AllergyIntoleranceBuilder(BaseBuilder):
     _resourceType = "AllergyIntolerance"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("AllergyIntoleranceBuilder")
 
     def clinical_status(self, code: str, system: str = "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical") -> "AllergyIntoleranceBuilder":
         return self._set("clinicalStatus", {"coding": [{"code": code, "system": system}]})

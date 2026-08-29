@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class FlagBuilder(BaseBuilder):
     _resourceType = "Flag"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("FlagBuilder")
 
     def status(self, value: str) -> "FlagBuilder":
         return self._set("status", value)

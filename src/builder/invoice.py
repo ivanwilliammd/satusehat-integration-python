@@ -1,37 +1,37 @@
 """Invoice resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class InvoiceBuilder(BaseBuilder):
     """Builder for Invoice resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "Invoice"}
+        super().__init__("InvoiceBuilder")
+        self.data = {"resourceType": "Invoice"}
 
     def set_id(self, id: str) -> "InvoiceBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "InvoiceBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_code(self, code: str, system: str, display: Optional[str] = None) -> "InvoiceBuilder":
-        self._data["code"] = {"coding": [{"system": system, "code": code}]}
+        self.data["code"] = {"coding": [{"system": system, "code": code}]}
         if display:
-            self._data["code"]["coding"][0]["display"] = display
+            self.data["code"]["coding"][0]["display"] = display
         return self
 
     def set_subject(self, reference: str, display: Optional[str] = None) -> "InvoiceBuilder":
-        self._data["subject"] = {"reference": reference}
+        self.data["subject"] = {"reference": reference}
         if display:
-            self._data["subject"]["display"] = display
+            self.data["subject"]["display"] = display
         return self
 
     def set_date(self, date: str) -> "InvoiceBuilder":
-        self._data["date"] = date
+        self.data["date"] = date
         return self
 
     def set_participant(
@@ -41,32 +41,32 @@ class InvoiceBuilder(BaseBuilder):
         actor_reference: str,
         actor_display: Optional[str] = None
     ) -> "InvoiceBuilder":
-        self._data.setdefault("participant", [])
+        self.data.setdefault("participant", [])
         part: dict = {
             "role": {"coding": [{"code": role_code, "system": role_system}]},
             "actor": {"reference": actor_reference}
         }
         if actor_display:
             part["actor"]["display"] = actor_display
-        self._data["participant"].append(part)
+        self.data["participant"].append(part)
         return self
 
     def set_participant_party(self, actor_reference: str, actor_display: Optional[str] = None) -> "InvoiceBuilder":
-        self._data.setdefault("participant", [])
+        self.data.setdefault("participant", [])
         part: dict = {"actor": {"reference": actor_reference}}
         if actor_display:
             part["actor"]["display"] = actor_display
-        self._data["participant"].append(part)
+        self.data["participant"].append(part)
         return self
 
     def set_issuer(self, reference: str, display: Optional[str] = None) -> "InvoiceBuilder":
-        self._data["issuer"] = {"reference": reference}
+        self.data["issuer"] = {"reference": reference}
         if display:
-            self._data["issuer"]["display"] = display
+            self.data["issuer"]["display"] = display
         return self
 
     def set_account(self, reference: str) -> "InvoiceBuilder":
-        self._data["account"] = {"reference": reference}
+        self.data["account"] = {"reference": reference}
         return self
 
     def add_line_item(
@@ -76,14 +76,14 @@ class InvoiceBuilder(BaseBuilder):
         service_system: str,
         service_display: Optional[str] = None
     ) -> "InvoiceBuilder":
-        self._data.setdefault("lineItem", [])
+        self.data.setdefault("lineItem", [])
         line: dict = {
             "sequence": str(sequence),
             "service": {"coding": [{"code": service_code, "system": service_system}]}
         }
         if service_display:
             line["service"]["coding"][0]["display"] = service_display
-        self._data["lineItem"].append(line)
+        self.data["lineItem"].append(line)
         return self
 
     def add_line_item_price_component(
@@ -94,10 +94,10 @@ class InvoiceBuilder(BaseBuilder):
         code_system: str,
         value: float
     ) -> "InvoiceBuilder":
-        if "lineItem" in self._data and len(self._data["lineItem"]) > line_index:
-            self._data["lineItem"][line_index].setdefault("priceComponent", [])
+        if "lineItem" in self.data and len(self.data["lineItem"]) > line_index:
+            self.data["lineItem"][line_index].setdefault("priceComponent", [])
             comp: dict = {"type": type_code, "code": {"coding": [{"code": code, "system": code_system}]}, "value": value}
-            self._data["lineItem"][line_index]["priceComponent"].append(comp)
+            self.data["lineItem"][line_index]["priceComponent"].append(comp)
         return self
 
     def set_total_price_component(
@@ -115,18 +115,18 @@ class InvoiceBuilder(BaseBuilder):
         }
         if display:
             comp["code"]["coding"][0]["display"] = display
-        self._data["totalPriceComponent"] = [comp]
+        self.data["totalPriceComponent"] = [comp]
         return self
 
     def set_total_net(self, value: float, currency: str) -> "InvoiceBuilder":
-        self._data["totalNet"] = {"value": value, "currency": currency}
+        self.data["totalNet"] = {"value": value, "currency": currency}
         return self
 
     def set_payment_terms(self, text: str) -> "InvoiceBuilder":
-        self._data["paymentTerms"] = {"text": text}
+        self.data["paymentTerms"] = {"text": text}
         return self
 
     def add_note(self, text: str) -> "InvoiceBuilder":
-        self._data.setdefault("note", [])
-        self._data["note"].append({"text": text})
+        self.data.setdefault("note", [])
+        self.data["note"].append({"text": text})
         return self

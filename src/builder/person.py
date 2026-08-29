@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class PersonBuilder(BaseBuilder):
     _resourceType = "Person"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("PersonBuilder")
 
     def identifier(self, system: str, value: str) -> "PersonBuilder":
         return self._append("identifier", {"system": system, "value": value})

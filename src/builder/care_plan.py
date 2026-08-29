@@ -1,35 +1,35 @@
 """CarePlan resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class CarePlanBuilder(BaseBuilder):
     """Builder for CarePlan resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "CarePlan"}
+        super().__init__("CarePlanBuilder")
+        self.data = {"resourceType": "CarePlan"}
 
     def set_id(self, id: str) -> "CarePlanBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "CarePlanBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_intent(self, intent: str) -> "CarePlanBuilder":
-        self._data["intent"] = intent
+        self.data["intent"] = intent
         return self
 
     def set_subject(self, reference: str, display: Optional[str] = None) -> "CarePlanBuilder":
-        self._data["subject"] = {"reference": reference}
+        self.data["subject"] = {"reference": reference}
         if display:
-            self._data["subject"]["display"] = display
+            self.data["subject"]["display"] = display
         return self
 
     def set_encounter(self, reference: str) -> "CarePlanBuilder":
-        self._data["encounter"] = {"reference": reference}
+        self.data["encounter"] = {"reference": reference}
         return self
 
     def set_period(self, start: Optional[str] = None, end: Optional[str] = None) -> "CarePlanBuilder":
@@ -38,34 +38,34 @@ class CarePlanBuilder(BaseBuilder):
             period["start"] = start
         if end:
             period["end"] = end
-        self._data["period"] = period
+        self.data["period"] = period
         return self
 
     def set_author(self, reference: str, display: Optional[str] = None) -> "CarePlanBuilder":
-        self._data["author"] = {"reference": reference}
+        self.data["author"] = {"reference": reference}
         if display:
-            self._data["author"]["display"] = display
+            self.data["author"]["display"] = display
         return self
 
     def add_category(self, code: str, system: str, display: Optional[str] = None) -> "CarePlanBuilder":
-        self._data.setdefault("category", [])
+        self.data.setdefault("category", [])
         cat: dict = {"coding": [{"system": system, "code": code}]}
         if display:
             cat["coding"][0]["display"] = display
-        self._data["category"].append(cat)
+        self.data["category"].append(cat)
         return self
 
     def add_addresses(self, reference: str, display: Optional[str] = None) -> "CarePlanBuilder":
-        self._data.setdefault("addresses", [])
+        self.data.setdefault("addresses", [])
         addr: dict = {"reference": reference}
         if display:
             addr["display"] = display
-        self._data["addresses"].append(addr)
+        self.data["addresses"].append(addr)
         return self
 
     def add_supporting_info(self, reference: str) -> "CarePlanBuilder":
-        self._data.setdefault("supportingInfo", [])
-        self._data["supportingInfo"].append({"reference": reference})
+        self.data.setdefault("supportingInfo", [])
+        self.data["supportingInfo"].append({"reference": reference})
         return self
 
     def add_activity(
@@ -75,7 +75,7 @@ class CarePlanBuilder(BaseBuilder):
         detail_display: Optional[str] = None,
         status: Optional[str] = None
     ) -> "CarePlanBuilder":
-        self._data.setdefault("activity", [])
+        self.data.setdefault("activity", [])
         activity: dict = {}
         if detail_code:
             activity["detail"] = {"code": {"coding": [{"code": detail_code}]}}
@@ -85,10 +85,10 @@ class CarePlanBuilder(BaseBuilder):
                 activity["detail"]["code"]["coding"][0]["display"] = detail_display
         if status:
             activity.setdefault("detail", {})["status"] = status
-        self._data["activity"].append(activity)
+        self.data["activity"].append(activity)
         return self
 
     def add_note(self, text: str) -> "CarePlanBuilder":
-        self._data.setdefault("note", [])
-        self._data["note"].append({"text": text})
+        self.data.setdefault("note", [])
+        self.data["note"].append({"text": text})
         return self

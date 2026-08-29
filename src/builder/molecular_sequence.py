@@ -1,43 +1,43 @@
 """MolecularSequence resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class MolecularSequenceBuilder(BaseBuilder):
     """Builder for MolecularSequence resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "MolecularSequence"}
+        super().__init__("MolecularSequenceBuilder")
+        self.data = {"resourceType": "MolecularSequence"}
 
     def set_id(self, id: str) -> "MolecularSequenceBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_type(self, type: str) -> "MolecularSequenceBuilder":
-        self._data["type"] = type
+        self.data["type"] = type
         return self
 
     def set_coordinate_system(self, coordinate_system: int) -> "MolecularSequenceBuilder":
-        self._data["coordinateSystem"] = coordinate_system
+        self.data["coordinateSystem"] = coordinate_system
         return self
 
     def set_patient(self, reference: str, display: Optional[str] = None) -> "MolecularSequenceBuilder":
-        self._data["patient"] = {"reference": reference}
+        self.data["patient"] = {"reference": reference}
         if display:
-            self._data["patient"]["display"] = display
+            self.data["patient"]["display"] = display
         return self
 
     def set_specimen(self, reference: str) -> "MolecularSequenceBuilder":
-        self._data["specimen"] = {"reference": reference}
+        self.data["specimen"] = {"reference": reference}
         return self
 
     def set_device(self, reference: str) -> "MolecularSequenceBuilder":
-        self._data["device"] = {"reference": reference}
+        self.data["device"] = {"reference": reference}
         return self
 
     def set_observation(self, reference: str) -> "MolecularSequenceBuilder":
-        self._data["observation"] = [{"reference": reference}]
+        self.data["observation"] = [{"reference": reference}]
         return self
 
     def set_reference_seq(
@@ -53,7 +53,7 @@ class MolecularSequenceBuilder(BaseBuilder):
             ref["genomeBuild"] = genome_build
         if reference_seq:
             ref["referenceSeqString"] = reference_seq
-        self._data["referenceSeq"] = ref
+        self.data["referenceSeq"] = ref
         return self
 
     def add_variant(
@@ -63,13 +63,13 @@ class MolecularSequenceBuilder(BaseBuilder):
         observed_allele: Optional[str] = None,
         reference_allele: Optional[str] = None
     ) -> "MolecularSequenceBuilder":
-        self._data.setdefault("variant", [])
+        self.data.setdefault("variant", [])
         variant: dict = {"start": start, "end": end}
         if observed_allele:
             variant["observedAllele"] = observed_allele
         if reference_allele:
             variant["referenceAllele"] = reference_allele
-        self._data["variant"].append(variant)
+        self.data["variant"].append(variant)
         return self
 
     def add_quality(
@@ -81,7 +81,7 @@ class MolecularSequenceBuilder(BaseBuilder):
         method_code: Optional[str] = None,
         method_system: Optional[str] = None
     ) -> "MolecularSequenceBuilder":
-        self._data.setdefault("quality", [])
+        self.data.setdefault("quality", [])
         qual: dict = {"type": quality_type}
         if start is not None:
             qual["start"] = start
@@ -93,9 +93,9 @@ class MolecularSequenceBuilder(BaseBuilder):
             qual["method"] = {"coding": [{"code": method_code}]}
             if method_system:
                 qual["method"]["coding"][0]["system"] = method_system
-        self._data["quality"].append(qual)
+        self.data["quality"].append(qual)
         return self
 
     def set_pointer(self, reference: str) -> "MolecularSequenceBuilder":
-        self._data["pointer"] = [{"reference": reference}]
+        self.data["pointer"] = [{"reference": reference}]
         return self

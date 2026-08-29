@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class MedicationBuilder(BaseBuilder):
     _resourceType = "Medication"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("MedicationBuilder")
 
     def code(self, codeable_concept: dict) -> "MedicationBuilder":
         return self._set("code", codeable_concept)

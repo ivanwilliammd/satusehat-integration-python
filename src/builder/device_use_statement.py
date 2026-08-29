@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class DeviceUseStatementBuilder(BaseBuilder):
     _resourceType = "DeviceUseStatement"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("DeviceUseStatementBuilder")
 
     def status(self, value: str) -> "DeviceUseStatementBuilder":
         return self._set("status", value)

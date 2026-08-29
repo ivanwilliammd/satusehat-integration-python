@@ -1,12 +1,12 @@
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class ImmunizationBuilder(BaseBuilder):
     _resourceType = "Immunization"
 
     def __init__(self) -> None:
-        super().__init__()
+        super().__init__("ImmunizationBuilder")
 
     def status(self, value: str) -> "ImmunizationBuilder":
         return self._set("status", value)

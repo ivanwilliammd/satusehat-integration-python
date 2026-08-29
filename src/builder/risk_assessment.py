@@ -1,41 +1,41 @@
 """RiskAssessment resource builder for SATUSEHAT FHIR R4."""
 from typing import List, Optional
-from .base import BaseBuilder
+from src.builder.base_builder import BaseBuilder
 
 
 class RiskAssessmentBuilder(BaseBuilder):
     """Builder for RiskAssessment resource."""
 
     def __init__(self):
-        super().__init__()
-        self._data = {"resourceType": "RiskAssessment"}
+        super().__init__("RiskAssessmentBuilder")
+        self.data = {"resourceType": "RiskAssessment"}
 
     def set_id(self, id: str) -> "RiskAssessmentBuilder":
-        self._data["id"] = id
+        self.data["id"] = id
         return self
 
     def set_status(self, status: str) -> "RiskAssessmentBuilder":
-        self._data["status"] = status
+        self.data["status"] = status
         return self
 
     def set_subject(self, reference: str, display: Optional[str] = None) -> "RiskAssessmentBuilder":
-        self._data["subject"] = {"reference": reference}
+        self.data["subject"] = {"reference": reference}
         if display:
-            self._data["subject"]["display"] = display
+            self.data["subject"]["display"] = display
         return self
 
     def set_encounter(self, reference: str) -> "RiskAssessmentBuilder":
-        self._data["encounter"] = {"reference": reference}
+        self.data["encounter"] = {"reference": reference}
         return self
 
     def set_occurrence_datetime(self, occurrence_datetime: str) -> "RiskAssessmentBuilder":
-        self._data["occurrenceDateTime"] = occurrence_datetime
+        self.data["occurrenceDateTime"] = occurrence_datetime
         return self
 
     def set_condition(self, reference: str, display: Optional[str] = None) -> "RiskAssessmentBuilder":
-        self._data["condition"] = {"reference": reference}
+        self.data["condition"] = {"reference": reference}
         if display:
-            self._data["condition"]["display"] = display
+            self.data["condition"]["display"] = display
         return self
 
     def add_prediction(
@@ -47,7 +47,7 @@ class RiskAssessmentBuilder(BaseBuilder):
         probability_range_high: Optional[float] = None,
         risk_direction: Optional[str] = None
     ) -> "RiskAssessmentBuilder":
-        self._data.setdefault("prediction", [])
+        self.data.setdefault("prediction", [])
         pred: dict = {
             "outcome": {"coding": [{"code": outcome, "system": outcome_system}]}
         }
@@ -62,19 +62,19 @@ class RiskAssessmentBuilder(BaseBuilder):
             pred["probabilityRange"] = range
         if risk_direction:
             pred["riskDirection"] = risk_direction
-        self._data["prediction"].append(pred)
+        self.data["prediction"].append(pred)
         return self
 
     def set_mitigation(self, mitigation: str) -> "RiskAssessmentBuilder":
-        self._data["mitigation"] = mitigation
+        self.data["mitigation"] = mitigation
         return self
 
     def add_note(self, text: str) -> "RiskAssessmentBuilder":
-        self._data.setdefault("note", [])
-        self._data["note"].append({"text": text})
+        self.data.setdefault("note", [])
+        self.data["note"].append({"text": text})
         return self
 
     def add_basis(self, reference: str) -> "RiskAssessmentBuilder":
-        self._data.setdefault("basis", [])
-        self._data["basis"].append({"reference": reference})
+        self.data.setdefault("basis", [])
+        self.data["basis"].append({"reference": reference})
         return self
