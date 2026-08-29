@@ -66,3 +66,23 @@ class ConditionBuilder(BaseBuilder):
     def set_subject(self, ref: str, display: str):
         self.data["subject"] = {"reference": ref, "display": display}
         return self
+
+class ClaimBuilder(BaseBuilder):
+    def __init__(self):
+        super().__init__("Claim")
+        
+    def set_status(self, status: str):
+        self.data["status"] = status
+        return self
+        
+    def set_use(self, use: str):
+        self.data["use"] = use
+        return self
+
+class CoverageBuilder(BaseBuilder):
+    def __init__(self):
+        super().__init__("Coverage")
+        
+    def set_status(self, status: str):
+        self.data["status"] = status
+        return self
