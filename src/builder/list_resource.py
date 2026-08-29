@@ -1,31 +1,40 @@
-from typing import Optional
-from src.builder.base_builder import BaseBuilder
-
+from .base_builder import BaseBuilder
+from ..datatype.datatypes import CodeableConcept, Reference
 
 class ListResourceBuilder(BaseBuilder):
-    def __init__(self) -> None:
-        super().__init__("List")
+    resourceType = "List"
 
-    def set_id(id: str) -> "ListResourceBuilder":
+    def __init__(self):
+        super().__init__(self.resourceType)
+
+    def set_id(self, id: str) -> "ListResourceBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "ListResourceBuilder":
+    def add_identifier(self, system: str, value: str) -> "ListResourceBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "ListResourceBuilder":
+    def set_status(self, status: str) -> "ListResourceBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "ListResourceBuilder":
-        self._set("code", code)
+    def set_mode(self, mode: str) -> "ListResourceBuilder":
+        self._set("mode", mode)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "ListResourceBuilder":
-        self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
+    def set_code(self, code: CodeableConcept) -> "ListResourceBuilder":
+        self._set("code", code.to_array())
         return self
 
-    def set_description(description: str) -> "ListResourceBuilder":
-        self._set("description", description)
+    def set_subject(self, ref: Reference) -> "ListResourceBuilder":
+        self._set("subject", ref.to_array())
+        return self
+
+    def set_date(self, date: str) -> "ListResourceBuilder":
+        self._set("date", date)
+        return self
+
+    def set_title(self, title: str) -> "ListResourceBuilder":
+        self._set("title", title)
         return self
