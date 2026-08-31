@@ -16,9 +16,12 @@
 `satusehat-integration` is an **open-source** Python SDK for integrating with **SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4.
 
 Built on the official [SATUSEHAT Platform Guidelines](https://satusehat.kemkes.go.id/platform/docs). Ships with:
+- **115+ PayloadBuilder** classes — fluent builders for all FHIR R4 resources (Patient, Practitioner, Organization, Encounter, Observation, Procedure, etc.)
 - **50 DataType** classes — composable FHIR R4 value objects with `to_json()` serialization
-- **50 PayloadBuilder** classes — fluent builders for all FHIR resources (Patient, Practitioner, Organization, etc.)
+- **TerminologyResolver** — castable terminology strings (`"ICD10:A00"`, `"LOINC:2951-2"`, `"SNOMED:38341003"`) directly to CodeableConcept
+- **3 SATUSEHAT-specific** resources: BillingStatus (NON-FHIR JSON), PurificationDecision (NON-FHIR JSON), Endpoint (FHIR R4)
 - **Queue + Rate Limiter** — in-memory queue with configurable RPM rate limiting
+- **pytest** test suite — all builders have comprehensive unit tests
 
 Zero dependencies beyond standard library. Works standalone or with Django/FastAPI/Flask.
 
@@ -94,23 +97,82 @@ payload = patient.to_json()
 
 ## Supported FHIR Resources
 
-All 51 resources fully implemented via PayloadBuilder classes. Core (✅) + Non-Core (💼):
+**115+ PayloadBuilder classes** covering all FHIR R4 resources used in SATUSEHAT interoperability, plus 3 SATUSEHAT-specific resources.
 
-| # | Resource | Notes |
-|---|----------|-------|
-| 1 | Patient | ✅ MPI |
-| 2 | Practitioner | ✅ SDMK |
-| 3 | PractitionerRole | ✅ |
-| 4 | Organization | ✅ MSI |
-| 5 | Location | ✅ |
-| 6 | Encounter | ✅ |
-| 7 | Condition | ✅ |
-| 8 | Observation | ✅ |
-| 9 | Procedure | ✅ |
-| 10 | MedicationRequest | ✅ |
-| 11 | Bundle | ✅ batch/transaction |
-| 12–37 | CarePlan through Task | ✅ |
-| 38–50 | Account through Invoice | 💼 Billing/Claim resources |
+### SATUSEHAT Interoperability Resources (47)
+
+| # | Resource | Builder |
+|---|----------|---------|
+| 1 | Account | `AccountBuilder` |
+| 2 | AllergyIntolerance | `AllergyIntoleranceBuilder` |
+| 3 | BillingStatus ⚡NON-FHIR | `BillingStatusBuilder` |
+| 4–37 | CarePlan, Condition, Encounter, Goal, Immunization, Location, Medication*, Observation, Organization, Patient, Practitioner, Procedure, ServiceRequest, Specimen, Substance, Task, and more | see `src/builder/` |
+| 38 | **Endpoint** | `EndpointBuilder` |
+| 39 | **MedicationStatement** | `MedicationStatementBuilder` |
+| 40 | **Task** | `TaskBuilder` |
+| 41 | **PurificationDecision** ⚡NON-FHIR | `PurificationDecisionBuilder` |
+| 42–47 | Claim, ClaimResponse, CoverageEligibilityRequest/Response, DocumentReference, QuestionnaireResponse | see `src/builder/` |
+
+⚡ = NON-FHIR JSON (SATUSEHAT-specific extension)
+
+### BillingStatus (NON-FHIR JSON)
+```python
+from src.builder.billing_status import BillingStatusBuilder
+
+billing = (BillingStatusBuilder()
+    .set_id('bs-001')
+    .add_identifier('http://sys-ids.kemkes.go.id/billing/org-001', 'BILL-12345')
+    .set_status('active')
+    .set_insurer('Organization/org-bpjs', 'BPJS Kesehatan')
+    .set_subject('100000030009', 'Budi Santoso')
+    .set_request('cer-001')
+    .build())
+```
+
+### Endpoint (FHIR R4)
+```python
+from src.builder.endpoint import EndpointBuilder
+
+endpoint = (EndpointBuilder()
+    .set_id('ep-001')
+    .set_status('active')
+    .set_connection_type('ihe-xcpd', 'IHE XCPD')
+    .set_name('SATUSEHAT FHIR Endpoint')
+    .set_managing_organization('Organization/org-ihs')
+    .set_address('https://satusehat-api.example.com/fhir/r4')
+    .build())
+```
+
+### PurificationDecision (NON-FHIR JSON)
+```python
+from src.builder.purification_decision import PurificationDecisionBuilder
+
+pd = (PurificationDecisionBuilder()
+    .set_id('pd-001')
+    .add_identifier('http://sys-ids.kemkes.go.id/purification/org-001', 'PD-12345')
+    .set_status('approved', 'Approved')
+    .set_insurer('Organization/org-bpjs', 'BPJS Kesehatan')
+    .set_provider('Organization/hos-001', 'Rumah Sakit Sehat')
+    .set_claim_response('cr-001')
+    .set_created('2024-01-15T10:35:00+00:00')
+    .build())
+```
+
+### TerminologyResolver — castable codes
+```python
+from src.terminology.resolver import resolve, expand_array
+
+# Cast terminology strings directly to CodeableConcept
+resolve('ICD10:A00')
+# → {'coding': [{'system': 'http://hl7.org/fhir/sid/icd-10', 'code': 'A00', 'display': 'A00'}], 'text': 'A00'}
+
+resolve('LOINC:2951-2')
+# → {'coding': [{'system': 'http://loinc.org', 'code': '2951-2', 'display': '2951-2'}], 'text': '2951-2'}
+
+# Batch expand
+expand_array(['ICD10:A00', 'ICD10:J18.9'])
+# → [resolved_A00, resolved_J18.9]
+```
 
 ---
 
