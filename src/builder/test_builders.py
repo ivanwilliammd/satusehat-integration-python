@@ -4,6 +4,32 @@ from src.builder.endpoint import EndpointBuilder
 from src.builder.purification_decision import PurificationDecisionBuilder
 from src.builder.medication_statement import MedicationStatementBuilder
 from src.builder.task import TaskBuilder
+from src.builder.activity_definition import ActivityDefinitionBuilder
+from src.builder.capability_statement import CapabilityStatementBuilder
+from src.builder.catalog_entry import CatalogEntryBuilder
+from src.builder.device_metric import DeviceMetricBuilder
+from src.builder.document_manifest import DocumentManifestBuilder
+from src.builder.enrollment_response import EnrollmentResponseBuilder
+from src.builder.explanation_of_benefit import ExplanationOfBenefitBuilder
+from src.builder.healthcare_service import HealthcareServiceBuilder
+from src.builder.insurance_plan import InsurancePlanBuilder
+from src.builder.medication_knowledge import MedicationKnowledgeBuilder
+from src.builder.medicinal_product import MedicinalProductBuilder
+from src.builder.medicinal_product_authorization import MedicinalProductAuthorizationBuilder
+from src.builder.medicinal_product_contraindication import MedicinalProductContraindicationBuilder
+from src.builder.medicinal_product_indication import MedicinalProductIndicationBuilder
+from src.builder.medicinal_product_ingredient import MedicinalProductIngredientBuilder
+from src.builder.medicinal_product_interaction import MedicinalProductInteractionBuilder
+from src.builder.medicinal_product_manufactured import MedicinalProductManufacturedBuilder
+from src.builder.medicinal_product_packaged import MedicinalProductPackagedBuilder
+from src.builder.medicinal_product_pharmaceutical import MedicinalProductPharmaceuticalBuilder
+from src.builder.medicinal_product_undesirable_effect import MedicinalProductUndesirableEffectBuilder
+from src.builder.observation_definition import ObservationDefinitionBuilder
+from src.builder.organization_affiliation import OrganizationAffiliationBuilder
+from src.builder.research_study import ResearchStudyBuilder
+from src.builder.resource_guide import ResourceGuideBuilder
+from src.builder.specimen_definition import SpecimenDefinitionBuilder
+from src.builder.substance_reference_information import SubstanceReferenceInformationBuilder
 
 
 class TestBillingStatusBuilder:
@@ -187,3 +213,55 @@ class TestTaskBuilder:
         assert res["resourceType"] == "Task"
         assert res["status"] == "requested"
         assert res["for"]["reference"] == "Patient/100000030009"
+
+
+
+# --- Phase 6: FHIR R4 non-SATUSEHAT resources ---
+import pytest
+
+PHASE6_BUILDERS = [
+    (ActivityDefinitionBuilder, 'ActivityDefinition'),
+    (CapabilityStatementBuilder, 'CapabilityStatement'),
+    (CatalogEntryBuilder, 'CatalogEntry'),
+    (DeviceMetricBuilder, 'DeviceMetric'),
+    (DocumentManifestBuilder, 'DocumentManifest'),
+    (EnrollmentResponseBuilder, 'EnrollmentResponse'),
+    (ExplanationOfBenefitBuilder, 'ExplanationOfBenefit'),
+    (HealthcareServiceBuilder, 'HealthcareService'),
+    (InsurancePlanBuilder, 'InsurancePlan'),
+    (MedicationKnowledgeBuilder, 'MedicationKnowledge'),
+    (MedicinalProductBuilder, 'MedicinalProduct'),
+    (MedicinalProductAuthorizationBuilder, 'MedicinalProductAuthorization'),
+    (MedicinalProductContraindicationBuilder, 'MedicinalProductContraindication'),
+    (MedicinalProductIndicationBuilder, 'MedicinalProductIndication'),
+    (MedicinalProductIngredientBuilder, 'MedicinalProductIngredient'),
+    (MedicinalProductInteractionBuilder, 'MedicinalProductInteraction'),
+    (MedicinalProductManufacturedBuilder, 'MedicinalProductManufactured'),
+    (MedicinalProductPackagedBuilder, 'MedicinalProductPackaged'),
+    (MedicinalProductPharmaceuticalBuilder, 'MedicinalProductPharmaceutical'),
+    (MedicinalProductUndesirableEffectBuilder, 'MedicinalProductUndesirableEffect'),
+    (ObservationDefinitionBuilder, 'ObservationDefinition'),
+    (OrganizationAffiliationBuilder, 'OrganizationAffiliation'),
+    (ResearchStudyBuilder, 'ResearchStudy'),
+    (ResourceGuideBuilder, 'ResourceGuide'),
+    (SpecimenDefinitionBuilder, 'SpecimenDefinition'),
+    (SubstanceReferenceInformationBuilder, 'SubstanceReferenceInformation'),
+]
+
+@pytest.mark.parametrize("builder_cls, resource_type", PHASE6_BUILDERS)
+def test_phase6_builder_valid_payload(builder_cls, resource_type):
+    builder = builder_cls()
+    payload = builder.set_id(f"ph6-{resource_type.lower()}").set_status("active").build()
+    assert payload["resourceType"] == resource_type
+    assert payload["id"] == f"ph6-{resource_type.lower()}"
+    assert payload["status"] == "active"
+
+def test_phase6_organization_affiliation_typed_fields():
+    payload = (
+        OrganizationAffiliationBuilder()
+        .set_organization("org-1", "RSCM")
+        .set_code("http://terminology.hl7.org/CodeSystem/organization-role", "provider", "Provider")
+        .build()
+    )
+    assert payload["organization"]["reference"] == "Organization/org-1"
+    assert payload["code"]["coding"][0]["code"] == "provider"
