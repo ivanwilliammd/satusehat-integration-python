@@ -9,8 +9,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
-      contents: read
+      id-token: write   # PyPI trusted publishing (OIDC)
+      contents: write   # create GitHub release
     steps:
       - uses: actions/checkout@v4
 
