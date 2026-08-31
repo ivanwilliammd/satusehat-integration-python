@@ -4,6 +4,7 @@ from src.builder.endpoint import EndpointBuilder
 from src.builder.purification_decision import PurificationDecisionBuilder
 from src.builder.medication_statement import MedicationStatementBuilder
 from src.builder.task import TaskBuilder
+from src.builder.observation import ObservationBuilder
 from src.builder.activity_definition import ActivityDefinitionBuilder
 from src.builder.capability_statement import CapabilityStatementBuilder
 from src.builder.catalog_entry import CatalogEntryBuilder
@@ -265,3 +266,25 @@ def test_phase6_organization_affiliation_typed_fields():
     )
     assert payload["organization"]["reference"] == "Organization/org-1"
     assert payload["code"]["coding"][0]["code"] == "provider"
+
+
+# --- Phase 7: terminology castable ---
+def test_phase7_observation_set_code_icd10():
+    payload = ObservationBuilder().set_code("ICD10:A00").build()
+    assert payload["code"]["coding"][0]["system"] == "http://hl7.org/fhir/sid/icd-10"
+    assert payload["code"]["coding"][0]["code"] == "A00"
+
+def test_phase7_observation_set_code_loinc():
+    payload = ObservationBuilder().set_code("LOINC:2951-2").build()
+    assert payload["code"]["coding"][0]["system"] == "http://loinc.org"
+    assert payload["code"]["coding"][0]["code"] == "2951-2"
+
+def test_phase7_observation_add_category_castable():
+    payload = ObservationBuilder().add_category("SNOMED:386053000").build()
+    assert payload["category"][0]["coding"][0]["system"] == "http://snomed.info/sct"
+    assert payload["category"][0]["coding"][0]["code"] == "386053000"
+
+def test_phase7_observation_legacy_api_preserved():
+    payload = ObservationBuilder().set_code("718-7", "Hemoglobin").build()
+    assert payload["code"]["coding"][0]["system"] == "http://loinc.org"
+    assert payload["code"]["coding"][0]["display"] == "Hemoglobin"

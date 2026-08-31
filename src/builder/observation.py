@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional
 
 from src.builder.base_builder import BaseBuilder
+from src.terminology.resolver import resolve
 
 
 class ObservationBuilder(BaseBuilder):
@@ -20,24 +21,32 @@ class ObservationBuilder(BaseBuilder):
     def add_category(
         self,
         code: str,
-        display: str,
+        display: str = None,
         system: str = "http://terminology.hl7.org/CodeSystem/observation-category",
     ) -> "ObservationBuilder":
         if "category" not in self.data:
             self.data["category"] = []
+        # Support "System:Code" castable notation
+        if ":" in code and display is None:
+            self.data["category"].append(resolve(code))
+            return self
         self.data["category"].append({
-            "coding": [{"system": system, "code": code, "display": display}]
+            "coding": [{"system": system, "code": code, "display": display or code}]
         })
         return self
 
     def set_code(
         self,
         code: str,
-        display: str,
+        display: str = None,
         system: str = "http://loinc.org",
     ) -> "ObservationBuilder":
+        # Support "System:Code" castable notation
+        if ":" in code and display is None:
+            self.data["code"] = resolve(code)
+            return self
         self.data["code"] = {
-            "coding": [{"system": system, "code": code, "display": display}]
+            "coding": [{"system": system, "code": code, "display": display or code}]
         }
         return self
 
