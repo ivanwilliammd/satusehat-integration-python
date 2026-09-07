@@ -21,6 +21,8 @@ from .immunization_terminology import ImmunizationTerminology
 from .family_relationship import FamilyRelationship
 from .composition_terminology import CompositionTerminology
 from .occupation import Occupation
+from .terminology_client import TerminologyClient
+from .terminology_query_builder import TerminologyQueryBuilder
 
 __all__ = [
     "TerminologyBase",
@@ -45,4 +47,6 @@ __all__ = [
     "FamilyRelationship",
     "CompositionTerminology",
     "Occupation",
+    "TerminologyClient",
+    "TerminologyQueryBuilder",
 ]

@@ -176,6 +176,60 @@ expand_array(['ICD10:A00', 'ICD10:J18.9'])
 
 ---
 
+### TerminologyClient — HTTP client SmarTerm (terminology.ivanmd.id)
+
+`TerminologyClient` adalah HTTP client standalone untuk **SmarTerm**, TERPISAH
+dari ekosistem SATUSEHAT — jangan reuse OAuth SATUSEHAT Kemkes. SmarTerm punya
+auth sendiri, dual-mode:
+
+1. **Sanctum PAT** (token statis) — header `Bearer`. Env `TERMINOLOGY_API_TOKEN`.
+2. **OIDC client_credentials** ke `auth.ivanmd.id` (Passport) — JWT di-fetch
+   lazy, di-cache sampai expire, auto-refresh sekali saat respon `401`.
+   Env `TERMINOLOGY_CLIENT_ID`, `TERMINOLOGY_CLIENT_SECRET`,
+   `TERMINOLOGY_TOKEN_URL` (default `https://auth.ivanmd.id/oauth/token`).
+
+Jika keduanya diberikan, PAT menang. Env lain: `TERMINOLOGY_BASE_URL` (default
+`https://terminology.ivanmd.id`).
+
+```python
+from src.terminology import TerminologyClient
+
+term = TerminologyClient()  # baca env, atau: TerminologyClient(token='pat-xxx')
+
+# Fluent chaining
+term.query('pemasangan kateter').on('kptl').limit(10).get()
+term.query('demam').category('diagnosis').first()
+term.query('paracetamol').on('kfa').all()
+
+# as_code() → POST validate, sistem ditebak dari bentuk kode
+term.query('93004944').as_code().get()   # 93xxxx → system 'kfa'
+term.query('J18.9').as_code().get()      # ICD-10
+
+# Pencarian & mapping
+term.search('demam', category='all', limit=20)          # unified search
+term.search_system('icd10', 'demam', limit=20)          # per-sistem
+term.kptl_combine('9.10.1', ['9.11.1', '9.11.2'])       # modifier join koma
+term.map('icd10', 'snomed', 'J18.9')                    # cross-mapping
+term.validate('icd10', 'J18.9')
+term.auto_map('icd10', 'J18.9')                         # → SNOMED
+
+# Context-aware FHIR resolution (body otomatis buang field None)
+term.resolve_condition('J18.9')
+term.resolve_chief_complaint('demam')
+term.resolve_observation('2951-2', system_hint='loinc')
+term.resolve_medication('93004944')
+term.resolve_service_request('LAB001', category='lab')
+
+# Value sets
+term.value_sets()
+term.value_set('kfa')
+```
+
+HTTP status `>= 400` melempar `RuntimeError("TerminologyClient HTTP {status}: …")`;
+network error melempar `RuntimeError("TerminologyClient network error: …")`.
+
+---
+
 ## Usage Examples
 
 ### Patient
