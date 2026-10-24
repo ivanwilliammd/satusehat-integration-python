@@ -3,6 +3,11 @@ from src.builder.base_builder import BaseBuilder
 
 
 class TestScriptBuilder(BaseBuilder):
+    # Nama FHIR-nya memang berawalan "Test" (TestReport/TestScript), tetapi ini
+    # pembangun resource — bukan kelas uji. Tanpa penanda ini pytest mencoba
+    # mengumpulkannya sebagai berkas uji dan memunculkan peringatan yang menyembunyikan
+    # peringatan lain.
+    __test__ = False
     def __init__(self) -> None:
         super().__init__("TestScript")
 

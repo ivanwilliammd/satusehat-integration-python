@@ -1,4 +1,4 @@
-"""
+r"""
 Occupation terminology constants.
 
 Ported from: Satusehat\Integration\Terminology\Occupation

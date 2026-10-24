@@ -1,4 +1,4 @@
-"""
+r"""
 KFA (Katalog Farmasi Alat Kesehatan) terminology model.
 
 Ported from: Satusehat\Integration\Terminology\Kfa

@@ -1,4 +1,4 @@
-"""
+r"""
 ICD-9-CM terminology model.
 
 Ported from: Satusehat\Integration\Terminology\Icd9cm

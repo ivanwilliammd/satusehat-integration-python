@@ -1,4 +1,4 @@
-"""
+r"""
 Immunization terminology constants.
 
 Ported from: Satusehat\Integration\Terminology\ImmunizationTerminology

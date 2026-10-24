@@ -1,4 +1,4 @@
-"""
+r"""
 Kode Wilayah Indonesia (Indonesian Geographic Codes) terminology model.
 
 Ported from: Satusehat\Integration\Terminology\KodeWilayahIndonesia

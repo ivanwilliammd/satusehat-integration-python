@@ -1,4 +1,4 @@
-"""
+r"""
 LOINC Answer List terminology model.
 
 Ported from: Satusehat\Integration\Terminology\LoincAnswer

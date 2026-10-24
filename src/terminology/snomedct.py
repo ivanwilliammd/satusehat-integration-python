@@ -1,4 +1,4 @@
-"""
+r"""
 SNOMED CT terminology model.
 
 Ported from: Satusehat\Integration\Terminology\Snomedct

@@ -1,4 +1,4 @@
-"""
+r"""
 CVX (Vaccine Administered) terminology model.
 
 Ported from: Satusehat\Integration\Terminology\Cvx

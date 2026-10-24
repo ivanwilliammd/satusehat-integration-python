@@ -1,4 +1,4 @@
-"""
+r"""
 ICD-10 terminology model.
 
 Ported from: Satusehat\Integration\Terminology\Icd10

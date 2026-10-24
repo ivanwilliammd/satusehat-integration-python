@@ -1,4 +1,4 @@
-"""
+r"""
 LOINC terminology model.
 
 Ported from: Satusehat\Integration\Terminology\Loinc

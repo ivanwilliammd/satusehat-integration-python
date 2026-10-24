@@ -1,4 +1,4 @@
-"""
+r"""
 Medication terminology constants.
 
 Ported from: Satusehat\Integration\Terminology\MedicationTerminology

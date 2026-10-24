@@ -1,4 +1,4 @@
-"""
+r"""
 Composition terminology constants.
 
 Ported from: Satusehat\Integration\Terminology\CompositionTerminology
