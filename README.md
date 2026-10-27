@@ -16,7 +16,7 @@
 `satusehat-integration` is an **open-source** Python SDK for integrating with **SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4.
 
 Built on the official [SATUSEHAT Platform Guidelines](https://satusehat.kemkes.go.id/platform/docs). Ships with:
-- **115+ PayloadBuilder** classes — fluent builders for all FHIR R4 resources (Patient, Practitioner, Organization, Encounter, Observation, Procedure, etc.)
+- **140 PayloadBuilder** classes — fluent builders for all FHIR R4 resources (Patient, Practitioner, Organization, Encounter, Observation, Procedure, etc.)
 - **50 DataType** classes — composable FHIR R4 value objects with `to_json()` serialization
 - **TerminologyResolver** — castable terminology strings (`"ICD10:A00"`, `"LOINC:2951-2"`, `"SNOMED:38341003"`) directly to CodeableConcept
 - **3 SATUSEHAT-specific** resources: BillingStatus (NON-FHIR JSON), PurificationDecision (NON-FHIR JSON), Endpoint (FHIR R4)
@@ -97,7 +97,7 @@ payload = patient.to_json()
 
 ## Supported FHIR Resources
 
-**115+ PayloadBuilder classes** covering all FHIR R4 resources used in SATUSEHAT interoperability, plus 3 SATUSEHAT-specific resources.
+**140 PayloadBuilder classes** covering all FHIR R4 resources used in SATUSEHAT interoperability, plus 3 SATUSEHAT-specific resources.
 
 ### SATUSEHAT Interoperability Resources (47)
 

@@ -81,8 +81,10 @@ fungsi diparametrisasi.
 
 ## 8. Utang Teknis & Langkah Berikut
 
-- **T-01** `pyproject.toml` menyebut "**115 PayloadBuilder classes**", nyata **140** (kelas builder
-  tanpa berkas uji). Klaim di metadata paket adalah yang dibaca pengguna PyPI → perlu dikoreksi.
+- **T-01** ~~`pyproject.toml` menyebut "115 PayloadBuilder classes", nyata 140.~~ **SELESAI
+  2026-10-27**: `pyproject.toml` (description) dan `README.md` (2 tempat) kini menyebut **140**.
+  Angka itu memakai metrik yang sama dengan manifest paritas, dan dapat diukur ulang dengan:
+  `grep -rhoE '^class [A-Za-z0-9_]+Builder' src/builder --include='*.py' --exclude='test_*.py' | wc -l`
 - **T-02** `SYNC_MANIFEST.json` menyatakan semua komponen `pending` dengan total 51 builder; nyata 140.
   Diperbaiki pada commit yang sama dengan dokumen ini.
 - **T-03** Tidak ada lapisan pengiriman FHIR (`SSRequest`/`SSResponse`) maupun Parser. Keputusan pemilik
