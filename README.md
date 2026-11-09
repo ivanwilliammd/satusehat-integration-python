@@ -18,12 +18,15 @@
 Built on the official [SATUSEHAT Platform Guidelines](https://satusehat.kemkes.go.id/platform/docs). Ships with:
 - **140 PayloadBuilder** classes — fluent builders for all FHIR R4 resources (Patient, Practitioner, Organization, Encounter, Observation, Procedure, etc.)
 - **50 DataType** classes — composable FHIR R4 value objects with `to_json()` serialization
-- **TerminologyResolver** — castable terminology strings (`"ICD10:A00"`, `"LOINC:2951-2"`, `"SNOMED:38341003"`) directly to CodeableConcept
+- **`OAuth2Client` & `SSRequest`** — full SATUSEHAT OAuth2 authentication (`DEV`, `STG`, `PROD`), FHIR R4 HTTP client (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `patch_fhir_path`, `post_bundle`) with automatic 401 token refresh and 429/5xx exponential backoff
+- **`SSResponse`, `BundleResponse` & `SSValidationError`** — response wrappers and complete 558-rule SATUSEHAT validation error dictionary (`RuleNumber` 10003–20021)
+- **18 FHIR Resource Parsers** — `PatientParser`, `EncounterParser`, `ObservationParser`, `DiagnosticReportParser`, `PractitionerParser`, `ProcedureParser`, `ServiceRequestParser`, `SpecimenParser`, `TaskParser`, and more
+- **SQLite Queue + Worker + Monitor** — full 8-module persistent SQLite queue (`SqliteQueue`, `Worker`, `QueueMonitor`, `RateLimiter`, `ErrorClassifier`, `QueueResult`, `QueueException`, `QueueInterface`) with DLQ and retry scheduling
+- **`TerminologyClient` & `TerminologyResolver`** — SmarTerm HTTP client + castable terminology strings (`"ICD10:A00"`, `"LOINC:2951-2"`, `"SNOMED:38341003"`) directly to CodeableConcept
 - **3 SATUSEHAT-specific** resources: BillingStatus (NON-FHIR JSON), PurificationDecision (NON-FHIR JSON), Endpoint (FHIR R4)
-- **Queue + Rate Limiter** — in-memory queue with configurable RPM rate limiting
-- **pytest** test suite — all builders have comprehensive unit tests
+- **pytest** test suite — 92 unit tests covering builders, datatypes, HTTP transport, validation rules, parsers, queue, and terminology
 
-Zero dependencies beyond standard library. Works standalone or with Django/FastAPI/Flask.
+Works standalone or with Django/FastAPI/Flask.
 
 ---
 
@@ -91,6 +94,51 @@ patient.set_gender('male')
 patient.set_birth_date('1990-01-15')
 
 payload = patient.to_json()
+```
+
+### HTTP Client & Response Handling (`src/ssrequest/`, `src/ssresponse/`)
+
+```python
+from src.ssrequest import OAuth2Client, SSRequest
+from src.ssresponse import BundleResponse, SSValidationError
+
+oauth = OAuth2Client(satusehat_env="DEV")
+req = SSRequest(oauth2=oauth)
+
+res = req.post("Observation", observation_payload)
+if res.is_success():
+    print("Created resource ID:", res.get_resource_id())
+else:
+    validator = SSValidationError.from_response(res)
+    print(validator.get_summary())
+```
+
+### Resource Parsers (`src/parser/`)
+
+```python
+from src.parser import EncounterParser, ObservationParser
+
+enc = EncounterParser(encounter_json)
+print(enc.get_subject_reference(), enc.get_location_references())
+```
+
+### SQLite Queue & Worker (`src/queue/`)
+
+```python
+from src.queue import SqliteQueue, Worker, QueueMonitor
+
+queue = SqliteQueue("satusehat_queue.db")
+queue.enqueue("POST", "Encounter", "Encounter", encounter_payload)
+
+worker = Worker(queue, {
+    "base_url": oauth.base_url,
+    "fhir_url": oauth.fhir_url,
+    "client_id": oauth.client_id,
+    "client_secret": oauth.client_secret,
+})
+stats = worker.process(limit=50)
+monitor = QueueMonitor(queue)
+print(monitor.health_check())
 ```
 
 ---
