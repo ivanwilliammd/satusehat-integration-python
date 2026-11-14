@@ -69,3 +69,79 @@ class GoalBuilder(BaseBuilder):
 
     def subject_history(self, reference: str) -> "GoalBuilder":
         return self._append("subjectHistory", {"reference": reference})
+
+    # --- Nama kanon (cermin PayloadBuilderGoal) ---
+
+    def set_id(self, id: str) -> "GoalBuilder":
+        self.data["id"] = id
+        return self
+
+    def add_identifier(self, identifier: Any, value: Optional[str] = None) -> "GoalBuilder":
+        entry = {"system": identifier, "value": value} if value is not None else (
+            identifier.to_array() if hasattr(identifier, "to_array") else identifier
+        )
+        self.data.setdefault("identifier", []).append(entry)
+        return self
+
+    def set_lifecycle_status(self, status: str) -> "GoalBuilder":
+        self.data["lifecycleStatus"] = status
+        return self
+
+    def set_description(self, description: Any) -> "GoalBuilder":
+        self.data["description"] = description.to_array() if hasattr(description, "to_array") else description
+        return self
+
+    def set_subject(self, subject: Any, display: Optional[str] = None) -> "GoalBuilder":
+        if isinstance(subject, str):
+            ref: Dict[str, Any] = {"reference": subject}
+            if display:
+                ref["display"] = display
+            self.data["subject"] = ref
+        else:
+            self.data["subject"] = subject.to_array() if hasattr(subject, "to_array") else subject
+        return self
+
+    def set_start_date_time(self, start_date_time: str) -> "GoalBuilder":
+        self.data["startDateTime"] = start_date_time
+        return self
+
+    def set_start_age(self, start_age: Any) -> "GoalBuilder":
+        self.data["startAge"] = start_age.to_array() if hasattr(start_age, "to_array") else start_age
+        return self
+
+    def set_start_period(self, start_period: Any) -> "GoalBuilder":
+        self.data["startPeriod"] = start_period.to_array() if hasattr(start_period, "to_array") else start_period
+        return self
+
+    def add_target_detail_quantity(self, detail: Any) -> "GoalBuilder":
+        entry = detail.to_array() if hasattr(detail, "to_array") else detail
+        self.data.setdefault("target", []).append({"detailQuantity": entry})
+        return self
+
+    def add_target_detail_codeable_concept(self, detail: Any) -> "GoalBuilder":
+        entry = detail.to_array() if hasattr(detail, "to_array") else detail
+        self.data.setdefault("target", []).append({"detailCodeableConcept": entry})
+        return self
+
+    def add_target_range(self, target_range: Any) -> "GoalBuilder":
+        entry = target_range.to_array() if hasattr(target_range, "to_array") else target_range
+        self.data.setdefault("target", []).append({"detailRange": entry})
+        return self
+
+    def set_status_reason(self, status_reason: str) -> "GoalBuilder":
+        self.data["statusReason"] = status_reason
+        return self
+
+    def add_note(self, note: Any) -> "GoalBuilder":
+        entry = {"text": note} if isinstance(note, str) else (
+            note.to_array() if hasattr(note, "to_array") else note
+        )
+        self.data.setdefault("note", []).append(entry)
+        return self
+
+    def add_outcome_reference(self, outcome_reference: Any) -> "GoalBuilder":
+        entry = {"reference": outcome_reference} if isinstance(outcome_reference, str) else (
+            outcome_reference.to_array() if hasattr(outcome_reference, "to_array") else outcome_reference
+        )
+        self.data.setdefault("outcomeReference", []).append(entry)
+        return self

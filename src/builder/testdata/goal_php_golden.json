@@ -1,0 +1,58 @@
+{
+    "resourceType": "Goal",
+    "id": "goal-1",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/goal/1",
+            "value": "goal-1"
+        }
+    ],
+    "lifecycleStatus": "active",
+    "description": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "386661006",
+                "display": "Fever"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "startDateTime": "2026-01-05",
+    "target": [
+        {
+            "detailQuantity": {
+                "value": 120,
+                "unit": "mmHg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mm[Hg]"
+            }
+        },
+        {
+            "detailRange": {
+                "low": {
+                    "value": 60,
+                    "unit": "bpm"
+                },
+                "high": {
+                    "value": 100,
+                    "unit": "bpm"
+                }
+            }
+        }
+    ],
+    "statusReason": "Patient declined further follow-up",
+    "note": [
+        {
+            "text": "Target tekanan darah < 140/90"
+        }
+    ],
+    "outcomeReference": [
+        {
+            "reference": "Observation/3000000001"
+        }
+    ]
+}

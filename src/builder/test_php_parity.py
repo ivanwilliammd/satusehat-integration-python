@@ -27,6 +27,7 @@ from src.builder.specimen import SpecimenBuilder
 from src.builder.practitioner import PractitionerBuilder
 from src.builder.organization import OrganizationBuilder
 from src.builder.location import LocationBuilder
+from src.builder.goal import GoalBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -684,3 +685,24 @@ def test_location_matches_php_payload():
         .set_part_of("Location/1000000009")
     )
     assert b.build() == golden("location")
+
+
+def test_goal_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        GoalBuilder()
+        .set_id("goal-1")
+        .add_identifier("http://sys-ids.kemkes.go.id/goal/1", "goal-1")
+        .set_lifecycle_status("active")
+        .set_description(cc("http://snomed.info/sct", "386661006", "Fever"))
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_start_date_time("2026-01-05")
+        .add_target_detail_quantity(
+            {"value": 120, "unit": "mmHg", "system": "http://unitsofmeasure.org", "code": "mm[Hg]"}
+        )
+        .add_target_range({"low": {"value": 60, "unit": "bpm"}, "high": {"value": 100, "unit": "bpm"}})
+        .set_status_reason("Patient declined further follow-up")
+        .add_note("Target tekanan darah < 140/90")
+        .add_outcome_reference("Observation/3000000001")
+    )
+    assert b.build() == golden("goal")
