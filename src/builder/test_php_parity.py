@@ -20,6 +20,7 @@ from src.builder.medication_dispense import MedicationDispenseBuilder
 from src.builder.medication import MedicationBuilder
 from src.builder.medication_statement import MedicationStatementBuilder
 from src.builder.medication_administration import MedicationAdministrationBuilder
+from src.builder.encounter import EncounterBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -486,3 +487,29 @@ def test_medication_administration_matches_php_payload():
         )
     )
     assert b.build() == golden("medication_administration")
+
+
+def test_encounter_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        EncounterBuilder()
+        .set_id("2000000001")
+        .add_identifier({"system": "http://sys-ids.kemkes.go.id/encounter/1000000001", "value": "2000000001"})
+        .set_status("finished")
+        .set_class("AMB", "ambulatory")
+        .add_type(cc("http://terminology.hl7.org/CodeSystem/encounter-type", "AMB", "Ambulatory"))
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .add_participant(
+            "Practitioner/1000000002",
+            "dr. Ani",
+            "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+            "ATND",
+            "attender",
+        )
+        .add_location("Location/1000000003", "active", display="Poli Umum")
+        .set_period("2026-01-05T08:00:00+07:00", "2026-01-05T09:00:00+07:00")
+        .set_service_provider("Organization/1000000001", "RS Contoh")
+        .add_diagnosis_canonical("Condition/1000000004", 1)
+        .add_reason_code(cc("http://hl7.org/fhir/sid/icd-10", "A09", "Diarrhoea"))
+    )
+    assert b.build() == golden("encounter")
