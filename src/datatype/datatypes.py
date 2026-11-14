@@ -611,3 +611,70 @@ class TriggerDefinition(DataType):
     def set_event_data(self, event_data: 'DataRequirement') -> 'TriggerDefinition':
         self.eventData = event_data
         return self
+
+
+# ── SampledData ──────────────────────────────────────────────────────────────
+# FHIR R4 SampledData: periodic sampled values (waveforms, continuous monitoring).
+class SampledData(DataType):
+    origin: Optional[Quantity] = None
+    period: Optional[float] = None
+    factor: Optional[float] = None
+    lowerLimit: Optional[float] = None
+    upperLimit: Optional[float] = None
+    dimensions: Optional[int] = None
+    data: Optional[str] = None
+
+    def __init__(
+        self,
+        origin: Optional[Quantity] = None,
+        period: Optional[float] = None,
+        factor: Optional[float] = None,
+        lowerLimit: Optional[float] = None,
+        upperLimit: Optional[float] = None,
+        dimensions: Optional[int] = None,
+        data: Optional[str] = None,
+    ):
+        self.origin = origin
+        self.period = period
+        self.factor = factor
+        self.lowerLimit = lowerLimit
+        self.upperLimit = upperLimit
+        self.dimensions = dimensions
+        self.data = data
+
+
+# ── ParameterComponent ───────────────────────────────────────────────────────
+# FHIR R4 Parameters.parameter. `value_key` names the value[x] variant
+# (valueString, valueQuantity, ...). FHIR has no bare `value` key.
+class ParameterComponent(DataType):
+    name: Optional[str] = None
+    value_key: Optional[str] = None
+    value: Any = None
+    resource: Any = None
+    part: Optional[List["ParameterComponent"]] = None
+
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        value_key: Optional[str] = None,
+        value: Any = None,
+        resource: Any = None,
+        part: Optional[List["ParameterComponent"]] = None,
+    ):
+        self.name = name
+        self.value_key = value_key
+        self.value = value
+        self.resource = resource
+        self.part = part
+
+    def to_array(self) -> dict:
+        hasil = {}
+        if self.name:
+            hasil["name"] = self.name
+        if self.value_key and self.value is not None:
+            hasil[self.value_key] = _filter_none(self.value)
+        if self.resource is not None:
+            hasil["resource"] = _filter_none(self.resource)
+        if self.part:
+            hasil["part"] = _filter_none(self.part)
+        return hasil
