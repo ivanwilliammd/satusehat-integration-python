@@ -1,0 +1,24 @@
+"""CommunicationParser tested against the official example payload: every accessor must return the same
+element the payload holds."""
+import json
+from pathlib import Path
+
+from src.parser.communication_parser import CommunicationParser
+
+DATA = Path(__file__).parent / "testdata" / "Communication.json"
+
+
+def test_matches_official_example() -> None:
+    data = json.loads(DATA.read_text())
+    assert data["resourceType"] == "Communication"
+
+    parser = CommunicationParser(data)
+    assert parser.get_raw() == data
+    assert parser.get_resource_type() == data["resourceType"]
+    assert parser.get_status() == data["status"]
+    assert parser.get_based_on() == data["basedOn"]
+    assert parser.get_payload() == data["payload"]
+    assert parser.get_about() == data["about"]
+    assert parser.get_in_response_to() == data["inResponseTo"]
+    assert parser.get_sender() == data["sender"]
+    assert parser.get_recipient() == data["recipient"]
