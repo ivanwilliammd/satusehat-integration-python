@@ -19,6 +19,7 @@ from src.builder.medication_request import MedicationRequestBuilder
 from src.builder.medication_dispense import MedicationDispenseBuilder
 from src.builder.medication import MedicationBuilder
 from src.builder.medication_statement import MedicationStatementBuilder
+from src.builder.medication_administration import MedicationAdministrationBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -458,3 +459,30 @@ def test_medication_statement_matches_php_payload():
         .add_dosage_instruction("3 x 1 tablet sesudah makan", 3, 1, "d")
     )
     assert b.build() == golden("medication_statement")
+
+
+def test_medication_administration_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        MedicationAdministrationBuilder()
+        .set_id("9100000001")
+        .add_identifier(
+            "http://sys-ids.kemkes.go.id/medicationadministration/1000000001", "9100000001"
+        )
+        .status("completed")
+        .set_medication_reference("Medication/6000000001")
+        .set_subject("Patient/1000000001")
+        .set_context("Encounter/2000000001")
+        .set_effective_period(
+            {"start": "2026-01-05T08:00:00+07:00", "end": "2026-01-05T08:10:00+07:00"}
+        )
+        .add_performer("Practitioner/1000000002", "Ns. Dwi")
+        .add_reason_code(cc("http://hl7.org/fhir/sid/icd-10", "A09", "Diarrhoea"))
+        .set_request("MedicationRequest/7000000001")
+        .set_dosage(
+            {"value": 500, "unit": "mg", "system": "http://unitsofmeasure.org", "code": "mg"},
+            cc("http://terminology.hl7.org/CodeSystem/v3-RouteOfAdministration", "PO", "Oral"),
+            cc("http://snomed.info/sct", "181251004", "Structure of mouth"),
+        )
+    )
+    assert b.build() == golden("medication_administration")
