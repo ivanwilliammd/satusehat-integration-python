@@ -30,6 +30,7 @@ from src.builder.location import LocationBuilder
 from src.builder.goal import GoalBuilder
 from src.builder.care_plan import CarePlanBuilder
 from src.builder.document_reference import DocumentReferenceBuilder
+from src.builder.composition import CompositionBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -768,3 +769,28 @@ def test_document_reference_matches_php_payload():
         .set_context({"encounter": [{"reference": "Encounter/2000000001"}]})
     )
     assert b.build() == golden("document_reference")
+
+
+def test_composition_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        CompositionBuilder()
+        .set_id("comp-1")
+        .add_identifier("http://sys-ids.kemkes.go.id/composition/1000000001", "comp-1")
+        .set_status("final")
+        .set_type("11488-4", "http://loinc.org", "Consult note")
+        .add_category(cc("http://terminology.hl7.org/CodeSystem/v3-ActCode", "LP173421-1", "Report"))
+        .set_title("Resume Medis Rawat Jalan")
+        .set_date("2026-01-05T09:30:00+07:00")
+        .add_author({"reference": "Practitioner/1000000002", "display": "dr. Ani"})
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .set_custodian("Organization/1000000001", "RS Contoh")
+        .add_attester("legal", "Practitioner/1000000002")
+        .add_section_ready({
+            "title": "Keluhan Utama",
+            "code": cc("http://loinc.org", "10154-3", "Chief complaint"),
+            "text": {"status": "generated", "div": "<div>Demam tiga hari</div>"},
+        })
+    )
+    assert b.build() == golden("composition")

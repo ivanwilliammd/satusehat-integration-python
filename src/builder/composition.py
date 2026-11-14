@@ -81,3 +81,42 @@ class CompositionBuilder(BaseBuilder):
             self.data["section"][index].setdefault("entry", [])
             self.data["section"][index]["entry"].append({"reference": reference})
         return self
+
+    # --- Nama kanon (cermin PayloadBuilderComposition) ---
+
+    def _arr(self, value: Any) -> Any:
+        return value.to_array() if hasattr(value, "to_array") else value
+
+    def add_identifier(self, identifier: Any, value: Optional[str] = None) -> "CompositionBuilder":
+        entry = {"system": identifier, "value": value} if value is not None else self._arr(identifier)
+        self.data.setdefault("identifier", []).append(entry)
+        return self
+
+    def add_category(self, category: Any) -> "CompositionBuilder":
+        self.data.setdefault("category", []).append(self._arr(category))
+        return self
+
+    def add_author(self, author: Any) -> "CompositionBuilder":
+        entry = {"reference": author} if isinstance(author, str) else self._arr(author)
+        self.data.setdefault("author", []).append(entry)
+        return self
+
+    def set_custodian(self, custodian: Any, display: Optional[str] = None) -> "CompositionBuilder":
+        if isinstance(custodian, str):
+            ref: Dict[str, Any] = {"reference": custodian}
+            if display:
+                ref["display"] = display
+            self.data["custodian"] = ref
+        else:
+            self.data["custodian"] = self._arr(custodian)
+        return self
+
+    def add_attester(self, mode: str, party: Any) -> "CompositionBuilder":
+        entry = {"reference": party} if isinstance(party, str) else self._arr(party)
+        self.data.setdefault("attester", []).append({"mode": mode, "party": entry})
+        return self
+
+    def add_section_ready(self, section: Dict[str, Any]) -> "CompositionBuilder":
+        """Bentuk kanon: section diterima siap pakai, tanpa dibentuk ulang."""
+        self.data.setdefault("section", []).append(section)
+        return self
