@@ -7,6 +7,7 @@ dan effective[x]. Bentuk payload diuji terhadap golden yang sama dipakai port Go
 from typing import Any, Dict, Optional
 
 from src.builder.base_builder import BaseBuilder
+from src.terminology.resolver import resolve
 
 
 def _arr(value: Any) -> Any:
@@ -21,17 +22,36 @@ class ObservationBuilder(BaseBuilder):
     def set_id(self, id: str) -> "ObservationBuilder":
         return self._set("id", id)
 
-    def add_identifier(self, identifier: Any) -> "ObservationBuilder":
+    def add_identifier(self, identifier: Any, value: Optional[str] = None) -> "ObservationBuilder":
+        # Dua bentuk: objek Identifier/dict, atau (system, value) seperti API lama.
+        if value is not None:
+            return self._push("identifier", {"system": identifier, "value": value})
         return self._push("identifier", _arr(identifier))
 
     def set_status(self, status: str) -> "ObservationBuilder":
         return self._set("status", status)
 
-    def add_category(self, category: Any) -> "ObservationBuilder":
-        # String dilewatkan resolver terminologi pada PHP; di sini dict/datatype diterima apa adanya.
+    def add_category(
+        self,
+        category: Any,
+        display: Optional[str] = None,
+        system: str = "http://terminology.hl7.org/CodeSystem/observation-category",
+    ) -> "ObservationBuilder":
+        if isinstance(category, str):
+            if ":" in category and display is None:
+                return self._push("category", resolve(category))
+            return self._push(
+                "category", {"coding": [{"system": system, "code": category, "display": display or category}]}
+            )
         return self._push("category", _arr(category))
 
-    def set_code(self, code: Any) -> "ObservationBuilder":
+    def set_code(
+        self, code: Any, display: Optional[str] = None, system: str = "http://loinc.org"
+    ) -> "ObservationBuilder":
+        if isinstance(code, str):
+            if ":" in code and display is None:
+                return self._set("code", resolve(code))
+            return self._set("code", {"coding": [{"system": system, "code": code, "display": display or code}]})
         return self._set("code", _arr(code))
 
     def set_subject(self, subject: Any) -> "ObservationBuilder":
