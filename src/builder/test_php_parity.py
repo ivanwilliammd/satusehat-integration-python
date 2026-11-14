@@ -31,6 +31,7 @@ from src.builder.goal import GoalBuilder
 from src.builder.care_plan import CarePlanBuilder
 from src.builder.document_reference import DocumentReferenceBuilder
 from src.builder.composition import CompositionBuilder
+from src.builder.bundle import BundleBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -794,3 +795,22 @@ def test_composition_matches_php_payload():
         })
     )
     assert b.build() == golden("composition")
+
+
+def test_bundle_matches_php_payload():
+    b = (
+        BundleBuilder("transaction")
+        .set_timestamp("2026-01-05T09:00:00+07:00")
+        .set_id("bundle-1")
+        .set_total(2)
+        .add_transaction_entry(
+            {"resourceType": "Patient", "id": "1000000001"},
+            "urn:uuid:1",
+            "POST",
+            "Patient",
+            if_none_exist="identifier=http://sys-ids.kemkes.go.id/patient/1000000001|1000000001",
+        )
+        .add_get_entry("urn:uuid:2", "Patient/1000000001")
+        .add_link("self", "https://api.satusehat.kemkes.go.id/fhir-r4/v1")
+    )
+    assert b.build() == golden("bundle")
