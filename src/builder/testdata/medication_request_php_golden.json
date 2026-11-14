@@ -1,0 +1,89 @@
+{
+    "resourceType": "MedicationRequest",
+    "id": "7000000001",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/medicationrequest/1000000001",
+            "value": "7000000001"
+        }
+    ],
+    "status": "active",
+    "intent": "order",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                    "code": "outpatient",
+                    "display": "Outpatient"
+                }
+            ]
+        }
+    ],
+    "medicationCodeableConcept": {
+        "coding": [
+            {
+                "system": "http://terminology.kemkes.go.id/CodeSystem/medication-code",
+                "code": "910002021",
+                "display": "Paracetamol 500 mg"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "encounter": {
+        "reference": "Encounter/2000000001"
+    },
+    "authoredOn": "2026-01-05T09:10:00+07:00",
+    "requester": {
+        "reference": "Practitioner/1000000002",
+        "display": "dr. Ani"
+    },
+    "reasonCode": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/sid/icd-10",
+                    "code": "A09",
+                    "display": "Diarrhoea"
+                }
+            ]
+        }
+    ],
+    "dosageInstruction": [
+        {
+            "text": "3 x 1 tablet sesudah makan"
+        }
+    ],
+    "dispenseRequest": {
+        "numberOfRepeatsAllowed": 1,
+        "quantity": {
+            "value": 10,
+            "unit": "tablet"
+        },
+        "expectedSupplyDuration": {
+            "value": 3,
+            "unit": "day",
+            "system": "http://unitsofmeasure.org",
+            "code": "d"
+        },
+        "initialFill": {
+            "value": 10,
+            "unit": "tablet"
+        }
+    },
+    "substitution": {
+        "code": {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution",
+                    "code": "G",
+                    "display": "generic"
+                }
+            ]
+        },
+        "allowedBoolean": true
+    }
+}

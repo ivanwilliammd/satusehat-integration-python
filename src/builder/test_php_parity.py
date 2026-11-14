@@ -15,6 +15,7 @@ from src.builder.condition import ConditionBuilder
 from src.builder.service_request import ServiceRequestBuilder
 from src.builder.immunization import ImmunizationBuilder
 from src.builder.patient import PatientBuilder
+from src.builder.medication_request import MedicationRequestBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -305,3 +306,54 @@ def test_patient_matches_php_payload():
         .add_extension("https://fhir.kemkes.go.id/r4/StructureDefinition/patient-mother", "1000000002")
     )
     assert b.build() == golden("patient")
+
+
+def test_medication_request_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        MedicationRequestBuilder()
+        .set_id("7000000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/medicationrequest/1000000001", "7000000001")
+        .status("active")
+        .intent("order")
+        .add_category(
+            cc(
+                "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "outpatient",
+                "Outpatient",
+            )
+        )
+        .set_medication_codeable_concept(
+            cc(
+                "http://terminology.kemkes.go.id/CodeSystem/medication-code",
+                "910002021",
+                "Paracetamol 500 mg",
+            )
+        )
+        .subject("Patient/1000000001", "Budi Santoso")
+        .encounter("Encounter/2000000001")
+        .authored_on("2026-01-05T09:10:00+07:00")
+        .requester("Practitioner/1000000002", "dr. Ani")
+        .add_reason_code(cc("http://hl7.org/fhir/sid/icd-10", "A09", "Diarrhoea"))
+        .add_dosage_instruction({"text": "3 x 1 tablet sesudah makan"})
+        .set_dispense_request(
+            number_of_repeats_allowed=1,
+            quantity={"value": 10, "unit": "tablet"},
+            expected_supply_duration={
+                "value": 3,
+                "unit": "day",
+                "system": "http://unitsofmeasure.org",
+                "code": "d",
+            },
+        )
+        .set_initial_fill({"value": 10, "unit": "tablet"})
+        .set_substitution(
+            cc(
+                "http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution",
+                "G",
+                "generic",
+            ),
+            True,
+        )
+    )
+    assert b.build() == golden("medication_request")
