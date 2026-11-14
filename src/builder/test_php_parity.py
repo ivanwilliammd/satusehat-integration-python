@@ -29,6 +29,7 @@ from src.builder.organization import OrganizationBuilder
 from src.builder.location import LocationBuilder
 from src.builder.goal import GoalBuilder
 from src.builder.care_plan import CarePlanBuilder
+from src.builder.document_reference import DocumentReferenceBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -734,3 +735,36 @@ def test_care_plan_matches_php_payload():
         })
     )
     assert b.build() == golden("care_plan")
+
+
+def test_document_reference_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        DocumentReferenceBuilder()
+        .set_id("doc-1")
+        .add_identifier("http://sys-ids.kemkes.go.id/document/1000000001", "doc-1")
+        .set_master_identifier("urn:oid:1.2.3.4", "master-1")
+        .set_status("current")
+        .set_doc_status("final")
+        .add_type(cc("http://loinc.org", "11488-4", "Consult note"))
+        .add_category(cc("http://terminology.hl7.org/CodeSystem/v3-ActCode", "LP173421-1", "Report"))
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_date("2026-01-05T10:00:00+07:00")
+        .add_author("Practitioner/1000000002", "dr. Ani")
+        .set_custodian("Organization/1000000001")
+        .add_relates_to("replaces", "DocumentReference/doc-0")
+        .set_description("Resume medis rawat jalan")
+        .add_security_label_canonical(
+            cc("http://terminology.hl7.org/CodeSystem/v3-Confidentiality", "N", "Normal")
+        )
+        .add_content(
+            {"contentType": "application/pdf", "url": "https://example.org/doc-1.pdf"},
+            cc(
+                "http://ihe.net/fhir/ValueSet/IHE.FormatCode.codesystem",
+                "urn:ihe:iti:xds:2017:mimeTypeSufficient",
+                "PDF",
+            ),
+        )
+        .set_context({"encounter": [{"reference": "Encounter/2000000001"}]})
+    )
+    assert b.build() == golden("document_reference")

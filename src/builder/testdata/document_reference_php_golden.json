@@ -1,0 +1,96 @@
+{
+    "resourceType": "DocumentReference",
+    "id": "doc-1",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/document/1000000001",
+            "value": "doc-1"
+        }
+    ],
+    "masterIdentifier": {
+        "system": "urn:oid:1.2.3.4",
+        "value": "master-1"
+    },
+    "status": "current",
+    "docStatus": "final",
+    "type": [
+        {
+            "coding": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "11488-4",
+                    "display": "Consult note"
+                }
+            ]
+        }
+    ],
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                    "code": "LP173421-1",
+                    "display": "Report"
+                }
+            ]
+        }
+    ],
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "date": "2026-01-05T10:00:00+07:00",
+    "author": [
+        {
+            "reference": "Practitioner/1000000002",
+            "display": "dr. Ani"
+        }
+    ],
+    "custodian": {
+        "reference": "Organization/1000000001"
+    },
+    "relatesTo": [
+        {
+            "code": "replaces",
+            "target": {
+                "reference": "DocumentReference/doc-0"
+            }
+        }
+    ],
+    "description": "Resume medis rawat jalan",
+    "securityLabel": [
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                    "code": "N",
+                    "display": "Normal"
+                }
+            ]
+        }
+    ],
+    "content": [
+        {
+            "attachment": {
+                "contentType": "application/pdf",
+                "url": "https://example.org/doc-1.pdf"
+            },
+            "format": {
+                "coding": [
+                    {
+                        "system": "http://ihe.net/fhir/ValueSet/IHE.FormatCode.codesystem",
+                        "code": "urn:ihe:iti:xds:2017:mimeTypeSufficient",
+                        "display": "PDF"
+                    }
+                ]
+            }
+        }
+    ],
+    "context": {
+        "encounter": [
+            {
+                "reference": "Encounter/2000000001"
+            }
+        ]
+    }
+}
