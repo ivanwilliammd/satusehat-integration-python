@@ -1,0 +1,70 @@
+{
+    "resourceType": "Organization",
+    "id": "1000000001",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/organization/1000000001",
+            "value": "1000000001"
+        }
+    ],
+    "active": true,
+    "name": "RS Contoh",
+    "alias": [
+        "RSC"
+    ],
+    "type": [
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+                    "code": "prov",
+                    "display": "Healthcare Provider"
+                }
+            ]
+        }
+    ],
+    "telecom": [
+        {
+            "system": "phone",
+            "value": "0254000000"
+        }
+    ],
+    "address": [
+        {
+            "line": [
+                "Jl. Rumah Sakit No. 1"
+            ],
+            "city": "Serang"
+        }
+    ],
+    "partOf": {
+        "reference": "Organization/1000000009"
+    },
+    "contact": [
+        {
+            "telecom": [
+                {
+                    "system": "phone",
+                    "value": "0254000000"
+                }
+            ],
+            "purpose": {
+                "text": "ADMIN"
+            },
+            "name": {
+                "text": "Bagian Admisi"
+            },
+            "address": {
+                "line": [
+                    "Jl. Rumah Sakit No. 1"
+                ],
+                "city": "Serang"
+            }
+        }
+    ],
+    "endpoint": [
+        {
+            "reference": "Endpoint/end-1"
+        }
+    ]
+}
