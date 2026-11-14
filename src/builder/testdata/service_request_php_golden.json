@@ -1,0 +1,83 @@
+{
+    "resourceType": "ServiceRequest",
+    "id": "9400000001",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/servicerequest/1000000001",
+            "value": "9400000001"
+        }
+    ],
+    "requisition": {
+        "system": "http://sys-ids.kemkes.go.id/requisition/1000000001",
+        "value": "REQ-1"
+    },
+    "status": "active",
+    "intent": "order",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "108252007",
+                    "display": "Laboratory procedure"
+                }
+            ]
+        }
+    ],
+    "priority": "urgent",
+    "doNotPerform": false,
+    "code": {
+        "coding": [
+            {
+                "system": "http://loinc.org",
+                "code": "57021-8",
+                "display": "CBC panel"
+            }
+        ]
+    },
+    "quantityQuantity": {
+        "value": 1,
+        "unit": "panel"
+    },
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "encounter": {
+        "reference": "Encounter/2000000001"
+    },
+    "occurrenceDateTime": "2026-01-05T08:00:00+07:00",
+    "authoredOn": "2026-01-05T07:40:00+07:00",
+    "requester": {
+        "reference": "Practitioner/1000000002",
+        "display": "dr. Ani"
+    },
+    "performer": [
+        {
+            "reference": "Organization/1000000001",
+            "display": "Lab RS Contoh"
+        }
+    ],
+    "reasonCode": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/sid/icd-10",
+                    "code": "A09",
+                    "display": "Diarrhoea"
+                }
+            ]
+        }
+    ],
+    "specimen": [
+        {
+            "reference": "Specimen/4000000001"
+        }
+    ],
+    "note": [
+        {
+            "text": "Mohon hasil dipercepat."
+        }
+    ],
+    "patientInstruction": "Puasa 8 jam sebelum pengambilan darah."
+}

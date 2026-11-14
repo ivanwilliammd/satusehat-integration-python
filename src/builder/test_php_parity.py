@@ -12,6 +12,7 @@ from src.builder.coverage import CoverageBuilder
 from src.builder.observation import ObservationBuilder
 from src.builder.procedure import ProcedureBuilder
 from src.builder.condition import ConditionBuilder
+from src.builder.service_request import ServiceRequestBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -223,3 +224,31 @@ def test_condition_matches_php_payload():
         .add_note("Pasien membaik dengan rehidrasi.")
     )
     assert b.build() == golden("condition")
+
+
+def test_service_request_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        ServiceRequestBuilder()
+        .set_id("9400000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/servicerequest/1000000001", "9400000001")
+        .set_requisition("http://sys-ids.kemkes.go.id/requisition/1000000001", "REQ-1")
+        .set_status("active")
+        .set_intent("order")
+        .add_category(cc("http://snomed.info/sct", "108252007", "Laboratory procedure"))
+        .set_priority("urgent")
+        .set_do_not_perform(False)
+        .set_code(cc("http://loinc.org", "57021-8", "CBC panel"))
+        .set_quantity_quantity({"value": 1, "unit": "panel"})
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .set_occurrence_date_time("2026-01-05T08:00:00+07:00")
+        .set_authored_on("2026-01-05T07:40:00+07:00")
+        .set_requester("Practitioner/1000000002", "dr. Ani")
+        .add_performer("Organization/1000000001", "Lab RS Contoh")
+        .add_reason("A09", "Diarrhoea", "http://hl7.org/fhir/sid/icd-10")
+        .add_specimen({"reference": "Specimen/4000000001"})
+        .add_note("Mohon hasil dipercepat.")
+        .set_patient_instruction("Puasa 8 jam sebelum pengambilan darah.")
+    )
+    assert b.build() == golden("service_request")
