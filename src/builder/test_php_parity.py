@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from src.builder.care_team import CareTeamBuilder
+from src.builder.coverage import CoverageBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -89,3 +90,30 @@ def test_related_person_matches_php_payload():
         )
     )
     assert b.build() == golden("related_person")
+
+
+def test_coverage_matches_php_payload():
+    b = (
+        CoverageBuilder()
+        .set_id("cov-1")
+        .add_identifier("http://sys-ids.kemkes.go.id/coverage/1000000001", "cov-1")
+        .set_status("active")
+        .set_type(
+            "http://terminology.hl7.org/CodeSystem/v3-ActCode", "EHCPOL", "extended healthcare"
+        )
+        .set_policy_holder("Patient/1000000001")
+        .set_subscriber("Patient/1000000001")
+        .set_subscriber_id("BPJS-0001")
+        .set_beneficiary("Patient/1000000001")
+        .set_dependent("1")
+        .set_relationship("http://terminology.hl7.org/CodeSystem/subscriber-relationship", "self")
+        .add_payor("Organization/1000000001", "BPJS Kesehatan")
+        .set_class(
+            "http://terminology.hl7.org/CodeSystem/coverage-class", "group", "GRP-1", "Grup A"
+        )
+        .set_order(1)
+        .set_network("JKN")
+        .set_cost_to_beneficiary(50000.0, "IDR")
+        .set_period("2026-01-01", "2026-12-31")
+    )
+    assert b.build() == golden("coverage")

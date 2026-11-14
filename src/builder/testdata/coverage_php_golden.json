@@ -1,0 +1,73 @@
+{
+    "resourceType": "Coverage",
+    "id": "cov-1",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/coverage/1000000001",
+            "value": "cov-1"
+        }
+    ],
+    "status": "active",
+    "type": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "EHCPOL",
+                "display": "extended healthcare"
+            }
+        ]
+    },
+    "policyHolder": {
+        "reference": "Patient/1000000001"
+    },
+    "subscriber": {
+        "reference": "Patient/1000000001"
+    },
+    "subscriberId": "BPJS-0001",
+    "beneficiary": {
+        "reference": "Patient/1000000001"
+    },
+    "dependent": "1",
+    "relationship": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/subscriber-relationship",
+                "code": "self"
+            }
+        ]
+    },
+    "payor": [
+        {
+            "reference": "Organization/1000000001",
+            "display": "BPJS Kesehatan"
+        }
+    ],
+    "class": [
+        {
+            "type": {
+                "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                        "code": "group"
+                    }
+                ]
+            },
+            "value": "GRP-1",
+            "name": "Grup A"
+        }
+    ],
+    "order": 1,
+    "network": "JKN",
+    "costToBeneficiary": [
+        {
+            "valueMoney": {
+                "value": 50000,
+                "currency": "IDR"
+            }
+        }
+    ],
+    "period": {
+        "start": "2026-01-01",
+        "end": "2026-12-31"
+    }
+}
