@@ -26,6 +26,7 @@ from src.builder.diagnostic_report import DiagnosticReportBuilder
 from src.builder.specimen import SpecimenBuilder
 from src.builder.practitioner import PractitionerBuilder
 from src.builder.organization import OrganizationBuilder
+from src.builder.location import LocationBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -661,3 +662,25 @@ def test_organization_matches_php_payload():
         .add_endpoint("Endpoint/end-1")
     )
     assert b.build() == golden("organization")
+
+
+def test_location_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        LocationBuilder()
+        .set_id("1000000003")
+        .add_identifier({"system": "http://sys-ids.kemkes.go.id/location/1000000003", "value": "1000000003"})
+        .set_status("active")
+        .set_operational_status(cc("http://terminology.hl7.org/CodeSystem/v2-0116", "O", "Occupied"))
+        .set_name("Poli Umum")
+        .add_alias("POLI-01")
+        .set_description("Ruang pemeriksaan umum lantai 1")
+        .set_type(cc("http://terminology.hl7.org/CodeSystem/v3-RoleCode", "OUTPHARM", "outpatient pharmacy"))
+        .add_telecom({"system": "phone", "value": "0254000001"})
+        .add_address({"line": ["Jl. Rumah Sakit No. 1"], "city": "Serang"})
+        .set_physical_type("ro", "Room")
+        .set_position(-6.1234, 106.1234, 12.5)
+        .set_managing_organization("Organization/1000000001")
+        .set_part_of("Location/1000000009")
+    )
+    assert b.build() == golden("location")
