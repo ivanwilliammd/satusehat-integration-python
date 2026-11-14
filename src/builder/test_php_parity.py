@@ -24,6 +24,7 @@ from src.builder.encounter import EncounterBuilder
 from src.builder.allergy_intolerance import AllergyIntoleranceBuilder
 from src.builder.diagnostic_report import DiagnosticReportBuilder
 from src.builder.specimen import SpecimenBuilder
+from src.builder.practitioner import PractitionerBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -604,3 +605,33 @@ def test_specimen_matches_php_payload():
         .add_received_person("Practitioner/1000000002")
     )
     assert b.build() == golden("specimen")
+
+
+def test_practitioner_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        PractitionerBuilder()
+        .set_id("1000000002")
+        .add_identifier(
+            {"system": "http://sys-ids.kemkes.go.id/practitioner/1000000002", "value": "1000000002"}
+        )
+        .set_active(True)
+        .add_name({"text": "dr. Ani Lestari", "family": "Lestari", "given": ["Ani"]})
+        .add_telecom({"system": "phone", "value": "081200000000", "use": "work"})
+        .add_address(
+            {"use": "work", "line": ["Jl. Contoh No. 1"], "city": "Serang", "postalCode": "42111"}
+        )
+        .set_gender("female")
+        .set_birth_date("1985-04-12")
+        .add_photo("https://example.org/ani.jpg", "image/jpeg")
+        .add_qualification_canonical(
+            {"system": "http://sys-ids.kemkes.go.id/qualification/1000000002", "value": "STR-1"},
+            cc("http://terminology.hl7.org/CodeSystem/v2-0360", "MD", "Doctor of Medicine"),
+            "2020-01-01",
+            {"reference": "Organization/1000000001"},
+        )
+        .add_communication(
+            cc("urn:ietf:bcp:47", "id-ID", "Indonesian"), True
+        )
+    )
+    assert b.build() == golden("practitioner")
