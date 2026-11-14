@@ -29,7 +29,8 @@ class HealthcareServiceBuilder(BaseBuilder):
         return self._set("name", val)
 
     def set_type(self, system: str, code: str, display: str = "") -> "HealthcareServiceBuilder":
-        return self._set("type", {"coding": [{"system": system, "code": code, "display": display}]})
+        # FHIR R4: HealthcareService.type adalah 0..*, jadi setiap panggilan menambah, bukan menimpa.
+        return self._push("type", {"coding": [{"system": system, "code": code, "display": display}]})
 
     def set_location(self, ref: str, display: str = None) -> "HealthcareServiceBuilder":
         return self._set("location", self._ref(ref, "Location", display))

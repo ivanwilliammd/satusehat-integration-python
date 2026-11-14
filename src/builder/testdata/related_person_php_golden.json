@@ -1,0 +1,77 @@
+{
+    "resourceType": "RelatedPerson",
+    "id": "rp-1",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/relatedperson/1000000001",
+            "value": "rp-1"
+        }
+    ],
+    "active": true,
+    "patient": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "relationship": [
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
+                    "code": "SPS",
+                    "display": "Spouse"
+                }
+            ]
+        },
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
+                    "code": "CHILD",
+                    "display": null
+                }
+            ]
+        }
+    ],
+    "name": [
+        {
+            "text": "Yessike",
+            "family": "Yessike"
+        }
+    ],
+    "telecom": [
+        {
+            "system": "phone",
+            "value": "081211112222",
+            "use": "home"
+        }
+    ],
+    "address": [
+        {
+            "line": [
+                "Jl. Contoh No. 2"
+            ],
+            "city": "Serang"
+        }
+    ],
+    "communication": [
+        {
+            "language": {
+                "coding": [
+                    {
+                        "system": "urn:ietf:bcp:47",
+                        "code": "id-ID"
+                    }
+                ]
+            },
+            "preferred": true
+        }
+    ],
+    "gender": "female",
+    "birthDate": "1990-02-02",
+    "extension": [
+        {
+            "url": "https://fhir.kemkes.go.id/r4/StructureDefinition/relatedperson-is-guardian",
+            "valueBoolean": true
+        }
+    ]
+}
