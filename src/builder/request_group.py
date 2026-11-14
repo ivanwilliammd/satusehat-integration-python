@@ -6,26 +6,26 @@ class RequestGroupBuilder(BaseBuilder):
     def __init__(self) -> None:
         super().__init__("RequestGroup")
 
-    def set_id(id: str) -> "RequestGroupBuilder":
+    def set_id(self, id: str) -> "RequestGroupBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "RequestGroupBuilder":
+    def add_identifier(self, system: str, value: str) -> "RequestGroupBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "RequestGroupBuilder":
+    def set_status(self, status: str) -> "RequestGroupBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "RequestGroupBuilder":
+    def set_code(self, code: dict) -> "RequestGroupBuilder":
         self._set("code", code)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "RequestGroupBuilder":
+    def set_subject(self, reference: str, display: str = None) -> "RequestGroupBuilder":
         self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
         return self
 
-    def set_description(description: str) -> "RequestGroupBuilder":
+    def set_description(self, description: str) -> "RequestGroupBuilder":
         self._set("description", description)
         return self

@@ -6,26 +6,26 @@ class SubstanceNucleicAcidBuilder(BaseBuilder):
     def __init__(self) -> None:
         super().__init__("SubstanceNucleicAcid")
 
-    def set_id(id: str) -> "SubstanceNucleicAcidBuilder":
+    def set_id(self, id: str) -> "SubstanceNucleicAcidBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "SubstanceNucleicAcidBuilder":
+    def add_identifier(self, system: str, value: str) -> "SubstanceNucleicAcidBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "SubstanceNucleicAcidBuilder":
+    def set_status(self, status: str) -> "SubstanceNucleicAcidBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "SubstanceNucleicAcidBuilder":
+    def set_code(self, code: dict) -> "SubstanceNucleicAcidBuilder":
         self._set("code", code)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "SubstanceNucleicAcidBuilder":
+    def set_subject(self, reference: str, display: str = None) -> "SubstanceNucleicAcidBuilder":
         self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
         return self
 
-    def set_description(description: str) -> "SubstanceNucleicAcidBuilder":
+    def set_description(self, description: str) -> "SubstanceNucleicAcidBuilder":
         self._set("description", description)
         return self
