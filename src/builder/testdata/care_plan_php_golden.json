@@ -1,0 +1,72 @@
+{
+    "resourceType": "CarePlan",
+    "id": "cp-1",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/careplan/1",
+            "value": "cp-1"
+        }
+    ],
+    "status": "active",
+    "intent": "plan",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "38717000",
+                    "display": "Ambulatory"
+                }
+            ]
+        }
+    ],
+    "title": "Rencana Perawatan Hipertensi",
+    "description": "Pemantauan tekanan darah dan diet rendah garam",
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "encounter": {
+        "reference": "Encounter/2000000001"
+    },
+    "period": {
+        "start": "2026-01-05",
+        "end": "2026-04-05"
+    },
+    "author": {
+        "reference": "Practitioner/1000000002",
+        "display": "dr. Ani"
+    },
+    "contributor": [
+        {
+            "reference": "Practitioner/1000000003"
+        }
+    ],
+    "addressee": [
+        {
+            "reference": "Patient/1000000001"
+        }
+    ],
+    "goal": [
+        {
+            "reference": "Goal/g-1"
+        }
+    ],
+    "activity": [
+        {
+            "detail": {
+                "status": "scheduled",
+                "description": "Kontrol tekanan darah tiap 2 minggu",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "386053000",
+                            "display": "Evaluation procedure"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

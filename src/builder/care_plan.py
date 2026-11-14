@@ -45,7 +45,10 @@ class CarePlanBuilder(BaseBuilder):
             self.data["author"]["display"] = display
         return self
 
-    def add_category(self, code: str, system: str, display: Optional[str] = None) -> "CarePlanBuilder":
+    def add_category(self, code: Any, system: Optional[str] = None, display: Optional[str] = None) -> "CarePlanBuilder":
+        if not isinstance(code, str):
+            self.data.setdefault("category", []).append(self._arr(code))
+            return self
         self.data.setdefault("category", [])
         cat: dict = {"coding": [{"system": system, "code": code}]}
         if display:
@@ -89,4 +92,42 @@ class CarePlanBuilder(BaseBuilder):
     def add_note(self, text: str) -> "CarePlanBuilder":
         self.data.setdefault("note", [])
         self.data["note"].append({"text": text})
+        return self
+
+    # --- Nama kanon (cermin PayloadBuilderCarePlan) ---
+
+    def _arr(self, value: Any) -> Any:
+        return value.to_array() if hasattr(value, "to_array") else value
+
+    def add_identifier(self, identifier: Any, value: Optional[str] = None) -> "CarePlanBuilder":
+        entry = {"system": identifier, "value": value} if value is not None else self._arr(identifier)
+        self.data.setdefault("identifier", []).append(entry)
+        return self
+
+    def set_title(self, title: str) -> "CarePlanBuilder":
+        self.data["title"] = title
+        return self
+
+    def set_description(self, description: str) -> "CarePlanBuilder":
+        self.data["description"] = description
+        return self
+
+    def add_contributor(self, contributor: Any) -> "CarePlanBuilder":
+        entry = {"reference": contributor} if isinstance(contributor, str) else self._arr(contributor)
+        self.data.setdefault("contributor", []).append(entry)
+        return self
+
+    def add_addressee(self, addressee: Any) -> "CarePlanBuilder":
+        entry = {"reference": addressee} if isinstance(addressee, str) else self._arr(addressee)
+        self.data.setdefault("addressee", []).append(entry)
+        return self
+
+    def add_goal(self, goal: Any) -> "CarePlanBuilder":
+        entry = {"reference": goal} if isinstance(goal, str) else self._arr(goal)
+        self.data.setdefault("goal", []).append(entry)
+        return self
+
+    def add_activity_detail(self, detail: Dict[str, Any]) -> "CarePlanBuilder":
+        """Bentuk kanon: detail diterima siap pakai dan dibungkus {detail: …}."""
+        self.data.setdefault("activity", []).append({"detail": detail})
         return self
