@@ -69,5 +69,16 @@ class MedicationStatementBuilder(BaseBuilder):
             dosage.setdefault("timing", {"repeat": {}})["repeat"]["periodUnit"] = period_unit
         return self._push("dosage", dosage)
 
-    def add_extension(self, url: str, value: str) -> "MedicationStatementBuilder":
-        return self._push("extension", {"url": url, "valueString": value})
+    def set_category(self, category: Any) -> "MedicationStatementBuilder":
+        return self._set("category", category.to_array() if hasattr(category, "to_array") else category)
+
+    def set_effective_period(self, period: Any) -> "MedicationStatementBuilder":
+        return self._set("effectivePeriod", period.to_array() if hasattr(period, "to_array") else period)
+
+    def add_extension(self, url: str, value: Any, value_type: Optional[str] = None) -> "MedicationStatementBuilder":
+        extension: dict = {"url": url}
+        if value_type is not None:
+            extension["value" + value_type[:1].upper() + value_type[1:]] = value
+        else:
+            extension["valueString"] = value
+        return self._push("extension", extension)
