@@ -21,6 +21,7 @@ from src.builder.medication import MedicationBuilder
 from src.builder.medication_statement import MedicationStatementBuilder
 from src.builder.medication_administration import MedicationAdministrationBuilder
 from src.builder.encounter import EncounterBuilder
+from src.builder.allergy_intolerance import AllergyIntoleranceBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -513,3 +514,35 @@ def test_encounter_matches_php_payload():
         .add_reason_code(cc("http://hl7.org/fhir/sid/icd-10", "A09", "Diarrhoea"))
     )
     assert b.build() == golden("encounter")
+
+
+def test_allergy_intolerance_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        AllergyIntoleranceBuilder()
+        .add_identifier("http://sys-ids.kemkes.go.id/allergy/1000000001", "A1")
+        .set_clinical_status("active")
+        .set_verification_status("confirmed")
+        .set_type("allergy")
+        .add_category("medication")
+        .set_criticality("high")
+        .set_code(cc("http://snomed.info/sct", "387517004", "Paracetamol"))
+        .set_patient("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .set_onset_date_time("2026-01-05T08:00:00+07:00")
+        .set_recorded_date("2026-01-05T08:20:00+07:00")
+        .set_recorder("Practitioner/1000000002", "dr. Ani")
+        .set_asserter("Patient/1000000001")
+        .set_last_occurrence("2026-01-05T08:05:00+07:00")
+        .add_note("Riwayat gatal setelah minum paracetamol.")
+        .add_reaction(
+            cc("http://snomed.info/sct", "387517004", "Paracetamol"),
+            cc("http://snomed.info/sct", "126485001", "Urticaria"),
+            "Ruam merah pada lengan",
+            "2026-01-05T08:05:00+07:00",
+            "moderate",
+            cc("http://terminology.hl7.org/CodeSystem/v3-RouteOfAdministration", "PO", "Oral"),
+            "Muncul 15 menit setelah minum",
+        )
+    )
+    assert b.build() == golden("allergy_intolerance")
