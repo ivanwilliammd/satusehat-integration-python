@@ -1,0 +1,115 @@
+{
+    "resourceType": "MedicationDispense",
+    "id": "8000000001",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/medicationdispense/1000000001",
+            "value": "8000000001"
+        }
+    ],
+    "status": "completed",
+    "medicationReference": {
+        "reference": "Medication/6000000001",
+        "display": "Paracetamol 500 mg"
+    },
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "context": {
+        "reference": "Encounter/2000000001"
+    },
+    "performer": [
+        {
+            "actor": {
+                "reference": "Practitioner/1000000002",
+                "display": "Apt. Rina"
+            }
+        }
+    ],
+    "location": {
+        "reference": "Location/1000000003",
+        "display": "Depo Farmasi"
+    },
+    "authorizingPrescription": [
+        {
+            "reference": "MedicationRequest/7000000001"
+        }
+    ],
+    "category": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationdispense-category",
+                "code": "outpatient",
+                "display": "Outpatient"
+            }
+        ]
+    },
+    "quantity": {
+        "value": 10,
+        "unit": "tablet",
+        "system": "http://unitsofmeasure.org",
+        "code": "TAB"
+    },
+    "daysSupply": {
+        "value": 3,
+        "unit": "day",
+        "system": "http://unitsofmeasure.org",
+        "code": "d"
+    },
+    "whenPrepared": "2026-01-05T10:15:00+07:00",
+    "whenHandedOver": "2026-01-05T10:30:00+07:00",
+    "dosageInstruction": [
+        {
+            "sequence": 1,
+            "text": "3 x 1 tablet sesudah makan",
+            "additionalInstruction": [
+                {
+                    "coding": [
+                        {
+                            "code": "PC",
+                            "display": "Sesudah makan"
+                        }
+                    ]
+                }
+            ],
+            "timing": {
+                "code": {
+                    "coding": [
+                        {
+                            "code": "BID",
+                            "display": "Twice a day"
+                        }
+                    ]
+                }
+            },
+            "route": {
+                "coding": [
+                    {
+                        "code": "O",
+                        "display": "Oral"
+                    }
+                ]
+            },
+            "doseAndRate": [
+                {
+                    "doseQuantity": {
+                        "value": 1,
+                        "unit": "tablet"
+                    }
+                }
+            ]
+        }
+    ],
+    "substitution": {
+        "wasSubstituted": true,
+        "type": {
+            "coding": [
+                {
+                    "code": "G",
+                    "display": "generic"
+                }
+            ]
+        }
+    }
+}

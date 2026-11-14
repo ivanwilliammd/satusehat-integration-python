@@ -16,6 +16,7 @@ from src.builder.service_request import ServiceRequestBuilder
 from src.builder.immunization import ImmunizationBuilder
 from src.builder.patient import PatientBuilder
 from src.builder.medication_request import MedicationRequestBuilder
+from src.builder.medication_dispense import MedicationDispenseBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -357,3 +358,29 @@ def test_medication_request_matches_php_payload():
         )
     )
     assert b.build() == golden("medication_request")
+
+
+def test_medication_dispense_matches_php_payload():
+    b = (
+        MedicationDispenseBuilder()
+        .set_id("8000000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/medicationdispense/1000000001", "8000000001")
+        .status("completed")
+        .set_medication_reference("Medication/6000000001", "Paracetamol 500 mg")
+        .set_subject("1000000001", "Budi Santoso")
+        .set_context("2000000001")
+        .add_performer("1000000002", "Apt. Rina")
+        .set_location("1000000003", "Depo Farmasi")
+        .add_authorizing_prescription("7000000001")
+        .set_category("outpatient", "Outpatient")
+        .set_quantity(10.0, "tablet", "http://unitsofmeasure.org", "TAB")
+        .set_days_supply(3.0, "day", "http://unitsofmeasure.org", "d")
+        .when_prepared("2026-01-05T10:15:00+07:00")
+        .when_handed_over("2026-01-05T10:30:00+07:00")
+        .add_dosage_instruction(
+            1, "3 x 1 tablet sesudah makan", 1.0, "tablet",
+            "O", "Oral", "BID", "Twice a day", "PC", "Sesudah makan",
+        )
+        .set_substitution(True, "G", "generic")
+    )
+    assert b.build() == golden("medication_dispense")
