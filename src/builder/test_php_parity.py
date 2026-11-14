@@ -23,6 +23,7 @@ from src.builder.medication_administration import MedicationAdministrationBuilde
 from src.builder.encounter import EncounterBuilder
 from src.builder.allergy_intolerance import AllergyIntoleranceBuilder
 from src.builder.diagnostic_report import DiagnosticReportBuilder
+from src.builder.specimen import SpecimenBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -571,3 +572,35 @@ def test_diagnostic_report_matches_php_payload():
         .add_conclusion_code(cc("http://snomed.info/sct", "281900007", "No abnormality detected"))
     )
     assert b.build() == golden("diagnostic_report")
+
+
+def test_specimen_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        SpecimenBuilder()
+        .set_id("4000000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/specimen/1000000001", "4000000001")
+        .set_status("available")
+        .set_type(cc("http://snomed.info/sct", "119297000", "Blood specimen"))
+        .set_subject({"reference": "Patient/1000000001", "display": "Budi Santoso"})
+        .set_received_time("2026-01-05T08:45:00+07:00")
+        .set_collected_date_time("2026-01-05T08:15:00+07:00")
+        .set_collector({"reference": "Practitioner/1000000002", "display": "Ns. Dwi"})
+        .set_fasting_status_codeable_concept(
+            cc("http://terminology.hl7.org/CodeSystem/v2-0916", "F", "Patient was fasting")
+        )
+        .set_method(cc("http://snomed.info/sct", "129316008", "Venipuncture"))
+        .set_quantity(
+            {"value": 3, "unit": "mL", "system": "http://unitsofmeasure.org", "code": "mL"}
+        )
+        .set_body_site(cc("http://snomed.info/sct", "368208006", "Left antecubital fossa"))
+        .add_request("ServiceRequest/9400000001")
+        .add_condition("Puasa 8 jam")
+        .add_processing("2026-01-05T08:50:00+07:00")
+        .add_transported_time("2026-01-05T09:10:00+07:00")
+        .add_transported_person(
+            "Kurir Lab", [{"system": "phone", "value": "081200000000"}]
+        )
+        .add_received_person("Practitioner/1000000002")
+    )
+    assert b.build() == golden("specimen")
