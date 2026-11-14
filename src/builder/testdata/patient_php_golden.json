@@ -1,0 +1,74 @@
+{
+    "resourceType": "Patient",
+    "meta": {
+        "profile": [
+            "https://fhir.kemkes.go.id/r4/StructureDefinition/Patient"
+        ]
+    },
+    "id": "1000000001",
+    "identifier": [
+        {
+            "system": "https://fhir.kemkes.go.id/id/nik",
+            "value": "3171234567890001"
+        }
+    ],
+    "active": true,
+    "name": [
+        {
+            "use": "official",
+            "text": "Budi Santoso",
+            "family": "Santoso",
+            "given": [
+                "Budi"
+            ]
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1990-01-31",
+    "telecom": [
+        {
+            "system": "phone",
+            "value": "+6281234567890",
+            "use": "mobile"
+        }
+    ],
+    "address": [
+        {
+            "use": "home",
+            "line": [
+                "Jl. Contoh No. 1"
+            ],
+            "city": "Jakarta",
+            "country": "ID"
+        }
+    ],
+    "maritalStatus": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+                "code": "M",
+                "display": "Married"
+            }
+        ]
+    },
+    "communication": [
+        {
+            "language": {
+                "coding": [
+                    {
+                        "system": "urn:ietf:bcp:47",
+                        "code": "id-ID",
+                        "display": "Indonesian"
+                    }
+                ]
+            },
+            "preferred": true
+        }
+    ],
+    "extension": [
+        {
+            "url": "https://fhir.kemkes.go.id/r4/StructureDefinition/patient-mother",
+            "valueString": "1000000002"
+        }
+    ]
+}
