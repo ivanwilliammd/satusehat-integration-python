@@ -19,10 +19,14 @@ class DiagnosticReportBuilder(BaseBuilder):
 
     def add_category(
         self,
-        code: str,
-        display: str,
+        code: Any,
+        display: Optional[str] = None,
         system: str = "http://terminology.hl7.org/CodeSystem/v2-0074",
     ) -> "DiagnosticReportBuilder":
+        if not isinstance(code, str):
+            entry = code.to_array() if hasattr(code, "to_array") else code
+            self.data.setdefault("category", []).append(entry)
+            return self
         if "category" not in self.data:
             self.data["category"] = []
         self.data["category"].append({
@@ -32,10 +36,13 @@ class DiagnosticReportBuilder(BaseBuilder):
 
     def set_code(
         self,
-        code: str,
-        display: str,
+        code: Any,
+        display: Optional[str] = None,
         system: str = "http://loinc.org",
     ) -> "DiagnosticReportBuilder":
+        if not isinstance(code, str):
+            self.data["code"] = code.to_array() if hasattr(code, "to_array") else code
+            return self
         self.data["code"] = {
             "coding": [{"system": system, "code": code, "display": display}]
         }
@@ -106,4 +113,42 @@ class DiagnosticReportBuilder(BaseBuilder):
             "status": "generated",
             "div": f"<div>{formatted_text}</div>"
         }
+        return self
+
+    # --- Nama kanon (cermin PayloadBuilderDiagnosticReport) ---
+
+    def set_id(self, id: str) -> "DiagnosticReportBuilder":
+        self.data["id"] = id
+        return self
+
+    def set_effective_date_time(self, date_time: str) -> "DiagnosticReportBuilder":
+        self.data["effectiveDateTime"] = date_time
+        return self
+
+    def add_specimen(self, specimen: Any) -> "DiagnosticReportBuilder":
+        entry = {"reference": specimen} if isinstance(specimen, str) else (
+            specimen.to_array() if hasattr(specimen, "to_array") else specimen
+        )
+        self.data.setdefault("specimen", []).append(entry)
+        return self
+
+    def add_conclusion_code(self, conclusion_code: Any) -> "DiagnosticReportBuilder":
+        entry = conclusion_code.to_array() if hasattr(conclusion_code, "to_array") else conclusion_code
+        self.data.setdefault("conclusionCode", []).append(entry)
+        return self
+
+    def add_based_on(self, based_on: Any) -> "DiagnosticReportBuilder":
+        entry = {"reference": based_on} if isinstance(based_on, str) else (
+            based_on.to_array() if hasattr(based_on, "to_array") else based_on
+        )
+        self.data.setdefault("basedOn", []).append(entry)
+        return self
+
+    def add_extension(self, url: str, value: Any, value_type: Optional[str] = None) -> "DiagnosticReportBuilder":
+        extension: Dict[str, Any] = {"url": url}
+        if value_type is not None:
+            extension["value" + value_type[:1].upper() + value_type[1:]] = value
+        else:
+            extension["valueString"] = value
+        self.data.setdefault("extension", []).append(extension)
         return self
