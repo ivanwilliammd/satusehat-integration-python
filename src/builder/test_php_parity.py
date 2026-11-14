@@ -18,6 +18,7 @@ from src.builder.patient import PatientBuilder
 from src.builder.medication_request import MedicationRequestBuilder
 from src.builder.medication_dispense import MedicationDispenseBuilder
 from src.builder.medication import MedicationBuilder
+from src.builder.medication_statement import MedicationStatementBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -419,3 +420,41 @@ def test_medication_matches_php_payload():
         .add_medication_type("NC", "Non-compound")
     )
     assert b.build() == golden("medication")
+
+
+def test_medication_statement_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        MedicationStatementBuilder()
+        .set_id("9000000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/medicationstatement/1000000001", "9000000001")
+        .set_status("active")
+        .add_status_reason(
+            "replaced", "Replaced", "http://terminology.hl7.org/CodeSystem/medication-statement-status"
+        )
+        .set_category(
+            cc(
+                "http://terminology.hl7.org/CodeSystem/medication-statement-category",
+                "inpatient",
+                "Inpatient",
+            )
+        )
+        .set_medication_codeable_concept(
+            cc(
+                "http://terminology.kemkes.go.id/CodeSystem/medication-code",
+                "910002021",
+                "Paracetamol 500 mg",
+            )
+        )
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_context("Encounter/2000000001")
+        .set_date_asserted("2026-01-05T09:00:00+07:00")
+        .set_effective_date_time("2026-01-04T20:00:00+07:00")
+        .set_information_source("Patient/1000000002", "dr. Ani")
+        .set_derived_from("MedicationRequest/7000000001")
+        .add_reason_code(cc("http://hl7.org/fhir/sid/icd-10", "A09", "Diarrhoea"))
+        .add_reason_reference("Condition/5000000001")
+        .add_note("Dilaporkan sendiri oleh pasien.")
+        .add_dosage_instruction("3 x 1 tablet sesudah makan", 3, 1, "d")
+    )
+    assert b.build() == golden("medication_statement")
