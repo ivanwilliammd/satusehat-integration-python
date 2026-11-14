@@ -25,6 +25,7 @@ from src.builder.allergy_intolerance import AllergyIntoleranceBuilder
 from src.builder.diagnostic_report import DiagnosticReportBuilder
 from src.builder.specimen import SpecimenBuilder
 from src.builder.practitioner import PractitionerBuilder
+from src.builder.organization import OrganizationBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -635,3 +636,28 @@ def test_practitioner_matches_php_payload():
         )
     )
     assert b.build() == golden("practitioner")
+
+
+def test_organization_matches_php_payload():
+    b = (
+        OrganizationBuilder()
+        .set_id("1000000001")
+        .add_identifier(
+            {"system": "http://sys-ids.kemkes.go.id/organization/1000000001", "value": "1000000001"}
+        )
+        .set_active(True)
+        .set_name("RS Contoh")
+        .add_alias("RSC")
+        .set_type("prov", "Healthcare Provider")
+        .add_telecom({"system": "phone", "value": "0254000000"})
+        .add_address({"line": ["Jl. Rumah Sakit No. 1"], "city": "Serang"})
+        .set_part_of("Organization/1000000009")
+        .add_contact(
+            {"system": "phone", "value": "0254000000"},
+            "ADMIN",
+            "Bagian Admisi",
+            {"line": ["Jl. Rumah Sakit No. 1"], "city": "Serang"},
+        )
+        .add_endpoint("Endpoint/end-1")
+    )
+    assert b.build() == golden("organization")
