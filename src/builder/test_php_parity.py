@@ -17,6 +17,7 @@ from src.builder.immunization import ImmunizationBuilder
 from src.builder.patient import PatientBuilder
 from src.builder.medication_request import MedicationRequestBuilder
 from src.builder.medication_dispense import MedicationDispenseBuilder
+from src.builder.medication import MedicationBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -384,3 +385,37 @@ def test_medication_dispense_matches_php_payload():
         .set_substitution(True, "G", "generic")
     )
     assert b.build() == golden("medication_dispense")
+
+
+def test_medication_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        MedicationBuilder()
+        .set_meta_profile("https://fhir.kemkes.go.id/r4/StructureDefinition/Medication")
+        .set_id("6000000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/medication/1000000001", "6000000001")
+        .set_code(
+            cc(
+                "http://terminology.kemkes.go.id/CodeSystem/medication-code",
+                "910002021",
+                "Paracetamol 500 mg",
+            )
+        )
+        .set_status("active")
+        .set_manufacturer("Organization/1000000001", "PT Kimia Farma")
+        .set_form(
+            cc("http://terminology.kemkes.go.id/CodeSystem/medication-form", "BS006", "Tablet")
+        )
+        .add_ingredient(
+            cc(
+                "http://terminology.kemkes.go.id/CodeSystem/active-substance",
+                "AS0001",
+                "Paracetamol",
+            ),
+            True,
+            {"value": 500, "unit": "mg", "system": "http://unitsofmeasure.org", "code": "mg"},
+        )
+        .set_batch("LOT-2026-001", "2028-01-31")
+        .add_medication_type("NC", "Non-compound")
+    )
+    assert b.build() == golden("medication")

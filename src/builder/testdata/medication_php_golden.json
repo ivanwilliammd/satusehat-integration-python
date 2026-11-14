@@ -1,0 +1,76 @@
+{
+    "resourceType": "Medication",
+    "meta": {
+        "profile": [
+            "https://fhir.kemkes.go.id/r4/StructureDefinition/Medication"
+        ]
+    },
+    "id": "6000000001",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/medication/1000000001",
+            "value": "6000000001"
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://terminology.kemkes.go.id/CodeSystem/medication-code",
+                "code": "910002021",
+                "display": "Paracetamol 500 mg"
+            }
+        ]
+    },
+    "status": "active",
+    "manufacturer": {
+        "reference": "Organization/1000000001",
+        "display": "PT Kimia Farma"
+    },
+    "form": {
+        "coding": [
+            {
+                "system": "http://terminology.kemkes.go.id/CodeSystem/medication-form",
+                "code": "BS006",
+                "display": "Tablet"
+            }
+        ]
+    },
+    "ingredient": [
+        {
+            "itemCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "http://terminology.kemkes.go.id/CodeSystem/active-substance",
+                        "code": "AS0001",
+                        "display": "Paracetamol"
+                    }
+                ]
+            },
+            "isActive": true,
+            "strength": {
+                "value": 500,
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        }
+    ],
+    "batch": {
+        "lotNumber": "LOT-2026-001",
+        "expirationDate": "2028-01-31"
+    },
+    "extension": [
+        {
+            "url": "https://fhir.kemkes.go.id/r4/StructureDefinition/MedicationType",
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "http://terminology.kemkes.go.id/CodeSystem/medication-type",
+                        "code": "NC",
+                        "display": "Non-compound"
+                    }
+                ]
+            }
+        }
+    ]
+}
