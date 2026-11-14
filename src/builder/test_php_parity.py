@@ -28,6 +28,7 @@ from src.builder.practitioner import PractitionerBuilder
 from src.builder.organization import OrganizationBuilder
 from src.builder.location import LocationBuilder
 from src.builder.goal import GoalBuilder
+from src.builder.care_plan import CarePlanBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -706,3 +707,30 @@ def test_goal_matches_php_payload():
         .add_outcome_reference("Observation/3000000001")
     )
     assert b.build() == golden("goal")
+
+
+def test_care_plan_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        CarePlanBuilder()
+        .set_id("cp-1")
+        .add_identifier("http://sys-ids.kemkes.go.id/careplan/1", "cp-1")
+        .set_status("active")
+        .set_intent("plan")
+        .add_category(cc("http://snomed.info/sct", "38717000", "Ambulatory"))
+        .set_title("Rencana Perawatan Hipertensi")
+        .set_description("Pemantauan tekanan darah dan diet rendah garam")
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .set_period("2026-01-05", "2026-04-05")
+        .set_author("Practitioner/1000000002", "dr. Ani")
+        .add_contributor("Practitioner/1000000003")
+        .add_addressee("Patient/1000000001")
+        .add_goal("Goal/g-1")
+        .add_activity_detail({
+            "status": "scheduled",
+            "description": "Kontrol tekanan darah tiap 2 minggu",
+            "code": cc("http://snomed.info/sct", "386053000", "Evaluation procedure"),
+        })
+    )
+    assert b.build() == golden("care_plan")
