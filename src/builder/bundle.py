@@ -148,3 +148,88 @@ class BundleBuilder(BaseBuilder):
         if "timestamp" not in self.data:
             errors.append("Bundle.timestamp is required")
         return errors
+
+    # --- Nama kanon (cermin PayloadBuilderBundle) ---
+
+    def no_auto_timestamp(self) -> "BundleBuilder":
+        self._timestamp_auto_set = False
+        self.data.pop("timestamp", None)
+        return self
+
+    def add_pagination_links(self, base_url: str, page: int, count: int, total: int) -> "BundleBuilder":
+        offset = (page - 1) * count
+        params = f"offset={offset}&count={count}"
+        self.add_link("self", f"{base_url}?{params}")
+        self.add_link("first", f"{base_url}?offset=0&count={count}")
+        self.add_link("last", f"{base_url}?offset={(total // count) * count}&count={count}")
+        if page > 1:
+            prev_offset = (page - 2) * count
+            self.add_link("previous", f"{base_url}?offset={prev_offset}&count={count}")
+        if (offset + count) < total:
+            next_offset = page * count
+            self.add_link("next", f"{base_url}?offset={next_offset}&count={count}")
+        return self
+
+    def add_batch_only_entry(self, resource: Optional[dict], full_url: str, method: str, url: str,
+                             if_match: Optional[str] = None, if_none_match: Optional[str] = None,
+                             if_none_exist: Optional[str] = None) -> "BundleBuilder":
+        return self.add_batch_entry(resource, full_url, method, url, if_match, if_none_match, if_none_exist)
+
+    def add_history_entry(self, resource: dict, full_url: str, status: str,
+                          status_code: Optional[int] = None, etag: Optional[str] = None,
+                          last_modified: Optional[str] = None, location: Optional[str] = None,
+                          outcome: Optional[str] = None) -> "BundleBuilder":
+        response: dict = {"status": status}
+        if status_code is not None:
+            response["statusCode"] = status_code
+        if etag is not None:
+            response["etag"] = etag
+        if last_modified is not None:
+            response["lastModified"] = last_modified
+        if location is not None:
+            response["location"] = location
+        if outcome is not None:
+            response["outcome"] = outcome
+        self.data.setdefault("entry", []).append(
+            {"fullUrl": full_url, "resource": resource, "response": response}
+        )
+        return self
+
+    def add_entry_with_response(self, resource: dict, full_url: str, status: str,
+                                etag: Optional[str] = None,
+                                last_modified: Optional[str] = None) -> "BundleBuilder":
+        response: dict = {"status": status}
+        if etag is not None:
+            response["etag"] = etag
+        if last_modified is not None:
+            response["lastModified"] = last_modified
+        self.data.setdefault("entry", []).append(
+            {"fullUrl": full_url, "resource": resource, "response": response}
+        )
+        return self
+
+    def add_outcome_entry(self, operation_outcome: dict, full_url: str) -> "BundleBuilder":
+        self.data.setdefault("entry", []).append(
+            {"fullUrl": full_url, "resource": operation_outcome, "search": {"mode": "outcome"}}
+        )
+        return self
+
+    def set_signature(self, sig_type: str, sig_format: str, sig_blob: str,
+                      sig_alg: Optional[str] = None, sig_created: Optional[str] = None,
+                      sig_who: Optional[str] = None,
+                      sig_on_behalf_of: Optional[str] = None) -> "BundleBuilder":
+        signature: dict = {
+            "type": [{"code": sig_type}],
+            "format": sig_format,
+            "data": sig_blob,
+        }
+        if sig_alg is not None:
+            signature["sigAlg"] = sig_alg
+        if sig_created is not None:
+            signature["created"] = sig_created
+        if sig_who is not None:
+            signature["who"] = {"reference": sig_who}
+        if sig_on_behalf_of is not None:
+            signature["onBehalfOf"] = {"reference": sig_on_behalf_of}
+        self.data["signature"] = signature
+        return self
