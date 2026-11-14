@@ -11,6 +11,7 @@ from src.builder.care_team import CareTeamBuilder
 from src.builder.coverage import CoverageBuilder
 from src.builder.observation import ObservationBuilder
 from src.builder.procedure import ProcedureBuilder
+from src.builder.condition import ConditionBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -195,3 +196,30 @@ def test_procedure_matches_php_payload():
         .add_body_site(cc("http://snomed.info/sct", "302509004", "Heart structure"))
     )
     assert b.build() == golden("procedure")
+
+
+def test_condition_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        ConditionBuilder()
+        .set_id("5000000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/condition/1000000001", "5000000001")
+        .set_clinical_status("active", "Active")
+        .set_verification_status("confirmed", "Confirmed")
+        .add_category("encounter-diagnosis", "Encounter Diagnosis")
+        .set_code(
+            "A09",
+            "Diarrhoea and gastroenteritis of presumed infectious origin",
+            "http://hl7.org/fhir/sid/icd-10",
+        )
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .set_onset_date_time("2026-01-04T10:00:00+07:00")
+        .set_recorded_date("2026-01-05T08:45:00+07:00")
+        .set_recorder("Practitioner/1000000002", "dr. Ani")
+        .set_asserter("Practitioner/1000000002", "dr. Ani")
+        .add_stage(cc("http://snomed.info/sct", "255407002", "Stage 1"))
+        .add_evidence(cc("http://loinc.org", "2339-0", "Glucose"))
+        .add_note("Pasien membaik dengan rehidrasi.")
+    )
+    assert b.build() == golden("condition")
