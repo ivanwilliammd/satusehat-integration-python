@@ -102,3 +102,64 @@ class DocumentReferenceBuilder(BaseBuilder):
             author["display"] = display
         self.data["author"].append(author)
         return self
+
+    # --- Nama kanon (cermin PayloadBuilderDocumentReference) ---
+
+    def _arr(self, value: Any) -> Any:
+        return value.to_array() if hasattr(value, "to_array") else value
+
+    def add_identifier(self, identifier: Any, value: Optional[str] = None) -> "DocumentReferenceBuilder":
+        entry = {"system": identifier, "value": value} if value is not None else self._arr(identifier)
+        self.data.setdefault("identifier", []).append(entry)
+        return self
+
+    def set_master_identifier(self, master_identifier: Any, value: Optional[str] = None) -> "DocumentReferenceBuilder":
+        if value is not None:
+            self.data["masterIdentifier"] = {"system": master_identifier, "value": value}
+        else:
+            self.data["masterIdentifier"] = self._arr(master_identifier)
+        return self
+
+    def add_type(self, doc_type: Any) -> "DocumentReferenceBuilder":
+        # PHP menulis type sebagai daftar walau FHIR menyebut 0..1.
+        self.data.setdefault("type", []).append(self._arr(doc_type))
+        return self
+
+    def add_category(self, category: Any) -> "DocumentReferenceBuilder":
+        self.data.setdefault("category", []).append(self._arr(category))
+        return self
+
+    def set_custodian(self, custodian: Any) -> "DocumentReferenceBuilder":
+        entry = {"reference": custodian} if isinstance(custodian, str) else self._arr(custodian)
+        self.data["custodian"] = entry
+        return self
+
+    def add_relates_to(self, code: str, target: Any) -> "DocumentReferenceBuilder":
+        entry = {"reference": target} if isinstance(target, str) else self._arr(target)
+        self.data.setdefault("relatesTo", []).append({"code": code, "target": entry})
+        return self
+
+    def add_security_label_canonical(self, security_label: Any) -> "DocumentReferenceBuilder":
+        """Bentuk kanon: menerima CodeableConcept siap pakai."""
+        self.data.setdefault("securityLabel", []).append(self._arr(security_label))
+        return self
+
+    def add_content(self, attachment: Any, format: Any = None) -> "DocumentReferenceBuilder":
+        row: Dict[str, Any] = {"attachment": self._arr(attachment)}
+        if format is not None:
+            row["format"] = self._arr(format)
+        self.data.setdefault("content", []).append(row)
+        return self
+
+    def set_context(self, context: Dict[str, Any]) -> "DocumentReferenceBuilder":
+        self.data["context"] = context
+        return self
+
+    def add_extension(self, url: str, value: Any, value_type: Optional[str] = None) -> "DocumentReferenceBuilder":
+        extension: Dict[str, Any] = {"url": url}
+        if value_type is not None:
+            extension["value" + value_type[:1].upper() + value_type[1:]] = value
+        else:
+            extension["valueString"] = value
+        self.data.setdefault("extension", []).append(extension)
+        return self
