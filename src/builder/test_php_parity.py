@@ -14,6 +14,7 @@ from src.builder.procedure import ProcedureBuilder
 from src.builder.condition import ConditionBuilder
 from src.builder.service_request import ServiceRequestBuilder
 from src.builder.immunization import ImmunizationBuilder
+from src.builder.patient import PatientBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -283,3 +284,24 @@ def test_immunization_matches_php_payload():
         )
     )
     assert b.build() == golden("immunization")
+
+
+def test_patient_matches_php_payload():
+    b = (
+        PatientBuilder()
+        .set_meta_profile("https://fhir.kemkes.go.id/r4/StructureDefinition/Patient")
+        .set_id("1000000001")
+        .add_identifier({"system": "https://fhir.kemkes.go.id/id/nik", "value": "3171234567890001"})
+        .set_active(True)
+        .add_name({"use": "official", "text": "Budi Santoso", "family": "Santoso", "given": ["Budi"]})
+        .set_gender("male")
+        .set_birth_date("1990-01-31")
+        .add_telecom({"system": "phone", "value": "+6281234567890", "use": "mobile"})
+        .add_address({"use": "home", "line": ["Jl. Contoh No. 1"], "city": "Jakarta", "country": "ID"})
+        .set_marital_status("M", "Married")
+        .add_communication(
+            {"coding": [{"system": "urn:ietf:bcp:47", "code": "id-ID", "display": "Indonesian"}]}, True
+        )
+        .add_extension("https://fhir.kemkes.go.id/r4/StructureDefinition/patient-mother", "1000000002")
+    )
+    assert b.build() == golden("patient")
