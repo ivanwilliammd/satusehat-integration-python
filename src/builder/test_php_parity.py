@@ -9,6 +9,7 @@ from pathlib import Path
 
 from src.builder.care_team import CareTeamBuilder
 from src.builder.coverage import CoverageBuilder
+from src.builder.observation import ObservationBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -117,3 +118,51 @@ def test_coverage_matches_php_payload():
         .set_period("2026-01-01", "2026-12-31")
     )
     assert b.build() == golden("coverage")
+
+
+def test_observation_matches_php_payload():
+    q = lambda value, unit, code: {
+        "value": value,
+        "unit": unit,
+        "system": "http://unitsofmeasure.org",
+        "code": code,
+    }
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+
+    b = (
+        ObservationBuilder()
+        .set_id("3000000001")
+        .add_identifier(
+            {"system": "http://sys-ids.kemkes.go.id/observation/1000000001", "value": "3000000001"}
+        )
+        .set_status("final")
+        .add_category(
+            cc(
+                "http://terminology.hl7.org/CodeSystem/observation-category",
+                "laboratory",
+                "Laboratory",
+            )
+        )
+        .set_code(cc("http://loinc.org", "8867-4", "Heart rate"))
+        .set_subject({"reference": "Patient/1000000001", "display": "Budi Santoso"})
+        .set_encounter({"reference": "Encounter/2000000001"})
+        .set_effective_date_time("2026-01-05T08:30:00+07:00")
+        .set_value_quantity(q(88, "beats/minute", "/min"))
+        .add_interpretation(
+            cc(
+                "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "N",
+                "Normal",
+            )
+        )
+        .add_note("Diukur saat pasien duduk.")
+        .add_body_site(cc("http://snomed.info/sct", "7569003", "Finger structure"))
+        .set_specimen({"reference": "Specimen/4000000001"})
+        .add_reference_range(
+            low=q(60, "beats/minute", "/min"),
+            high=q(100, "beats/minute", "/min"),
+            text="Dewasa saat istirahat",
+        )
+        .add_component(cc("http://loinc.org", "8480-6", "Systolic blood pressure"), q(120, "mmHg", "mm[Hg]"))
+    )
+    assert b.build() == golden("observation")
