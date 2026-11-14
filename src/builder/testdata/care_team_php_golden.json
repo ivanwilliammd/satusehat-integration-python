@@ -1,0 +1,37 @@
+{
+    "resourceType": "CareTeam",
+    "id": "ct-1",
+    "identifier": [
+        {
+            "system": "urn:oid:1.2.3",
+            "value": "ct-1",
+            "use": "official",
+            "type": {
+                "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                        "code": "PRN",
+                        "display": "PRN"
+                    }
+                ]
+            }
+        }
+    ],
+    "status": "active",
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "768242006",
+                "display": "Care team"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "encounter": {
+        "reference": "Encounter/2000000001"
+    }
+}

@@ -33,7 +33,7 @@ class RelatedPersonBuilder(BaseBuilder):
                 "coding": [{
                     "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
                     "code": relationship,
-                    "display": display or relationship,
+                    "display": display,
                 }]
             }
             return self._push("relationship", cc)
@@ -64,9 +64,8 @@ class RelatedPersonBuilder(BaseBuilder):
         if isinstance(language, str):
             cc: Dict[str, Any] = {
                 "coding": [{
-                    "system": "http://terminology.hl7.org/CodeSystem/v3-Language",
+                    "system": "urn:ietf:bcp:47",
                     "code": language,
-                    "display": language,
                 }]
             }
             return self._push("communication", {"language": cc, "preferred": preferred})
