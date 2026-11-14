@@ -13,6 +13,7 @@ from src.builder.observation import ObservationBuilder
 from src.builder.procedure import ProcedureBuilder
 from src.builder.condition import ConditionBuilder
 from src.builder.service_request import ServiceRequestBuilder
+from src.builder.immunization import ImmunizationBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -252,3 +253,33 @@ def test_service_request_matches_php_payload():
         .set_patient_instruction("Puasa 8 jam sebelum pengambilan darah.")
     )
     assert b.build() == golden("service_request")
+
+
+def test_immunization_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        ImmunizationBuilder()
+        .set_meta_profile("https://fhir.kemkes.go.id/r4/StructureDefinition/Immunization")
+        .set_id("9200000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/immunization/1000000001", "9200000001")
+        .status("completed")
+        .vaccine_code(cc("http://snomed.info/sct", "93001282", "Vaksin COVID-19"))
+        .set_patient("Patient/1000000001", "Budi Santoso")
+        .occurrence_date_time("2026-01-05T09:00:00+07:00")
+        .add_performer(
+            "Practitioner/1000000002",
+            cc("http://terminology.hl7.org/CodeSystem/v2-0443", "AP", "Administering Provider"),
+        )
+        .set_dose_quantity(72.0, "ug")
+        .set_location("Location/1000000003", "Poli Umum")
+        .set_lot_number("LOT-2026-001")
+        .set_recorded("2026-01-05T09:05:00+07:00")
+        .set_primary_source(True)
+        .add_protocol_applied(2, cc("http://snomed.info/sct", "1234", "Primary series"), 3)
+        .set_route(cc("http://terminology.hl7.org/CodeSystem/v3-RouteOfAdministration", "IM", "Intramuscular"))
+        .add_reason_code(cc("http://snomed.info/sct", "429060002", "Prophylaxis"))
+        .add_extension(
+            "https://fhir.kemkes.go.id/r4/StructureDefinition/immunization-vaccine-holder", "PT Bio Farma"
+        )
+    )
+    assert b.build() == golden("immunization")
