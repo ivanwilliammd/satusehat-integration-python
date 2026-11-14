@@ -10,6 +10,7 @@ from pathlib import Path
 from src.builder.care_team import CareTeamBuilder
 from src.builder.coverage import CoverageBuilder
 from src.builder.observation import ObservationBuilder
+from src.builder.procedure import ProcedureBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -166,3 +167,31 @@ def test_observation_matches_php_payload():
         .add_component(cc("http://loinc.org", "8480-6", "Systolic blood pressure"), q(120, "mmHg", "mm[Hg]"))
     )
     assert b.build() == golden("observation")
+
+
+def test_procedure_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        ProcedureBuilder()
+        .set_id("9300000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/procedure/1000000001", "9300000001")
+        .set_status("completed")
+        .set_category(cc("http://snomed.info/sct", "103693007", "Diagnostic procedure"))
+        .set_code(cc("http://hl7.org/fhir/sid/icd-9-cm", "88.72", "Diagnostic ultrasound of heart"))
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .add_based_on({"reference": "ServiceRequest/9400000001"})
+        .add_reason_code(cc("http://hl7.org/fhir/sid/icd-10", "I50.9", "Heart failure"))
+        .set_performed_period("2026-01-05T08:00:00+07:00", "2026-01-05T08:30:00+07:00")
+        .add_performer("Practitioner/1000000002", "dr. Ani")
+        .set_outcome(cc("http://snomed.info/sct", "385669000", "Successful"))
+        .add_report({"reference": "DiagnosticReport/9500000001"})
+        .add_follow_up(cc("http://snomed.info/sct", "182836005", "Review of medication"))
+        .add_note("Pasien puasa 6 jam sebelum tindakan.")
+        .add_focal_device(
+            cc("http://snomed.info/sct", "129442004", "Insertion"), device={"reference": "Device/9600000001"}
+        )
+        .add_used_code(cc("http://snomed.info/sct", "40701008", "Echocardiography"))
+        .add_body_site(cc("http://snomed.info/sct", "302509004", "Heart structure"))
+    )
+    assert b.build() == golden("procedure")

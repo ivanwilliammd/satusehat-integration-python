@@ -1,0 +1,132 @@
+{
+    "resourceType": "Procedure",
+    "id": "9300000001",
+    "identifier": [
+        {
+            "system": "http://sys-ids.kemkes.go.id/procedure/1000000001",
+            "value": "9300000001"
+        }
+    ],
+    "status": "completed",
+    "category": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "103693007",
+                "display": "Diagnostic procedure"
+            }
+        ]
+    },
+    "code": {
+        "coding": [
+            {
+                "system": "http://hl7.org/fhir/sid/icd-9-cm",
+                "code": "88.72",
+                "display": "Diagnostic ultrasound of heart"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+    },
+    "encounter": {
+        "reference": "Encounter/2000000001"
+    },
+    "basedOn": [
+        {
+            "reference": "ServiceRequest/9400000001"
+        }
+    ],
+    "reasonCode": [
+        {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/sid/icd-10",
+                    "code": "I50.9",
+                    "display": "Heart failure"
+                }
+            ]
+        }
+    ],
+    "performedPeriod": {
+        "start": "2026-01-05T08:00:00+07:00",
+        "end": "2026-01-05T08:30:00+07:00"
+    },
+    "performer": [
+        {
+            "actor": {
+                "reference": "Practitioner/1000000002",
+                "display": "dr. Ani"
+            }
+        }
+    ],
+    "outcome": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "385669000",
+                "display": "Successful"
+            }
+        ]
+    },
+    "report": [
+        {
+            "reference": "DiagnosticReport/9500000001"
+        }
+    ],
+    "followUp": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "182836005",
+                    "display": "Review of medication"
+                }
+            ]
+        }
+    ],
+    "note": [
+        {
+            "text": "Pasien puasa 6 jam sebelum tindakan."
+        }
+    ],
+    "focalDevice": [
+        {
+            "action": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "129442004",
+                        "display": "Insertion"
+                    }
+                ]
+            },
+            "device": {
+                "reference": "Device/9600000001"
+            }
+        }
+    ],
+    "usedCode": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "40701008",
+                    "display": "Echocardiography"
+                }
+            ]
+        }
+    ],
+    "bodySite": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "302509004",
+                    "display": "Heart structure"
+                }
+            ]
+        }
+    ]
+}
