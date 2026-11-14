@@ -6,26 +6,26 @@ class DeviceUseStatementBuilder(BaseBuilder):
     def __init__(self) -> None:
         super().__init__("DeviceUseStatement")
 
-    def set_id(id: str) -> "DeviceUseStatementBuilder":
+    def set_id(self, id: str) -> "DeviceUseStatementBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "DeviceUseStatementBuilder":
+    def add_identifier(self, system: str, value: str) -> "DeviceUseStatementBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "DeviceUseStatementBuilder":
+    def set_status(self, status: str) -> "DeviceUseStatementBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "DeviceUseStatementBuilder":
+    def set_code(self, code: dict) -> "DeviceUseStatementBuilder":
         self._set("code", code)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "DeviceUseStatementBuilder":
+    def set_subject(self, reference: str, display: str = None) -> "DeviceUseStatementBuilder":
         self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
         return self
 
-    def set_description(description: str) -> "DeviceUseStatementBuilder":
+    def set_description(self, description: str) -> "DeviceUseStatementBuilder":
         self._set("description", description)
         return self

@@ -6,26 +6,26 @@ class LibraryBuilder(BaseBuilder):
     def __init__(self) -> None:
         super().__init__("Library")
 
-    def set_id(id: str) -> "LibraryBuilder":
+    def set_id(self, id: str) -> "LibraryBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "LibraryBuilder":
+    def add_identifier(self, system: str, value: str) -> "LibraryBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "LibraryBuilder":
+    def set_status(self, status: str) -> "LibraryBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "LibraryBuilder":
+    def set_code(self, code: dict) -> "LibraryBuilder":
         self._set("code", code)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "LibraryBuilder":
+    def set_subject(self, reference: str, display: str = None) -> "LibraryBuilder":
         self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
         return self
 
-    def set_description(description: str) -> "LibraryBuilder":
+    def set_description(self, description: str) -> "LibraryBuilder":
         self._set("description", description)
         return self

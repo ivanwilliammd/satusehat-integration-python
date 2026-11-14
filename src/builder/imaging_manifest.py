@@ -6,26 +6,26 @@ class ImagingManifestBuilder(BaseBuilder):
     def __init__(self) -> None:
         super().__init__("ImagingManifest")
 
-    def set_id(id: str) -> "ImagingManifestBuilder":
+    def set_id(self, id: str) -> "ImagingManifestBuilder":
         self._set("id", id)
         return self
 
-    def add_identifier(system: str, value: str) -> "ImagingManifestBuilder":
+    def add_identifier(self, system: str, value: str) -> "ImagingManifestBuilder":
         self._append("identifier", {"system": system, "value": value})
         return self
 
-    def set_status(status: str) -> "ImagingManifestBuilder":
+    def set_status(self, status: str) -> "ImagingManifestBuilder":
         self._set("status", status)
         return self
 
-    def set_code(code: dict) -> "ImagingManifestBuilder":
+    def set_code(self, code: dict) -> "ImagingManifestBuilder":
         self._set("code", code)
         return self
 
-    def set_subject(reference: str, display: str = None) -> "ImagingManifestBuilder":
+    def set_subject(self, reference: str, display: str = None) -> "ImagingManifestBuilder":
         self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
         return self
 
-    def set_description(description: str) -> "ImagingManifestBuilder":
+    def set_description(self, description: str) -> "ImagingManifestBuilder":
         self._set("description", description)
         return self
