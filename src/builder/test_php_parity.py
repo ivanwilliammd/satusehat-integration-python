@@ -22,6 +22,7 @@ from src.builder.medication_statement import MedicationStatementBuilder
 from src.builder.medication_administration import MedicationAdministrationBuilder
 from src.builder.encounter import EncounterBuilder
 from src.builder.allergy_intolerance import AllergyIntoleranceBuilder
+from src.builder.diagnostic_report import DiagnosticReportBuilder
 from src.builder.endpoint import EndpointBuilder
 from src.builder.healthcare_service import HealthcareServiceBuilder
 from src.builder.related_person import RelatedPersonBuilder
@@ -546,3 +547,27 @@ def test_allergy_intolerance_matches_php_payload():
         )
     )
     assert b.build() == golden("allergy_intolerance")
+
+
+def test_diagnostic_report_matches_php_payload():
+    cc = lambda system, code, display: {"coding": [{"system": system, "code": code, "display": display}]}
+    b = (
+        DiagnosticReportBuilder()
+        .set_id("9500000001")
+        .add_identifier("http://sys-ids.kemkes.go.id/diagnosticreport/1000000001", "9500000001")
+        .set_status("final")
+        .add_category(cc("http://terminology.hl7.org/CodeSystem/v2-0074", "LAB", "Laboratory"))
+        .set_code(cc("http://loinc.org", "57021-8", "CBC panel"))
+        .set_subject("Patient/1000000001", "Budi Santoso")
+        .set_encounter("Encounter/2000000001")
+        .set_effective_date_time("2026-01-05T08:30:00+07:00")
+        .set_issued("2026-01-05T09:00:00+07:00")
+        .add_performer("Organization/1000000001", "Lab RS Contoh")
+        .add_result("Observation/3000000001")
+        .add_result("Observation/3000000002")
+        .add_specimen("Specimen/4000000001")
+        .add_based_on("ServiceRequest/9400000001")
+        .set_conclusion("Dalam batas normal")
+        .add_conclusion_code(cc("http://snomed.info/sct", "281900007", "No abnormality detected"))
+    )
+    assert b.build() == golden("diagnostic_report")
