@@ -1,0 +1,71 @@
+{
+  "chargeItem": {
+    "reference": "ChargeItem/ci-1"
+  },
+  "costCenterChargeItemResponse": [
+    {
+      "costCenter": {
+        "display": "Rawat Jalan",
+        "reference": "Organization/1000000001"
+      }
+    }
+  ],
+  "created": "2026-01-06T11:00:00+07:00",
+  "description": "Persetujuan biaya tindakan",
+  "error": [
+    {
+      "code": {
+        "coding": [
+          {
+            "code": "E1",
+            "display": "Kode tidak dikenal",
+            "system": "http://sys.id/error"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "cir-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1200"
+    }
+  ],
+  "outcome": {
+    "coding": [
+      {
+        "code": "approved",
+        "display": "Disetujui",
+        "system": "http://terminology.hl7.org/CodeSystem/chargeitem-response"
+      }
+    ]
+  },
+  "outcomeInfo": [
+    {
+      "code": {
+        "coding": [
+          {
+            "code": "OK",
+            "display": "Sesuai",
+            "system": "http://sys.id/outcome"
+          }
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "reference": "Encounter/enc-1"
+    }
+  ],
+  "request": {
+    "reference": "ServiceRequest/sr-1"
+  },
+  "requestor": {
+    "reference": "Practitioner/1000000002"
+  },
+  "resourceType": "ChargeItemResponse",
+  "responseDate": "2026-01-06",
+  "status": "completed"
+}
