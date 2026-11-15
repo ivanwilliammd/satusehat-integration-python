@@ -45,7 +45,8 @@ class PatientBuilder(BaseBuilder):
         return self
 
     def set_meta_profile(self, profile: str) -> "PatientBuilder":
-        self.data.setdefault("meta", {})["profile"] = [profile]
+        """meta.profile 0..*: dulu MENIMPA, sehingga profil pertama hilang tanpa suara."""
+        self.data.setdefault("meta", {}).setdefault("profile", []).append(profile)
         return self
 
     def set_id(self, id: str) -> "PatientBuilder":
