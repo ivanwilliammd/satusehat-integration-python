@@ -1,0 +1,87 @@
+{
+  "active": true,
+  "actual": true,
+  "code": {
+    "coding": [
+      {
+        "code": "35359004",
+        "display": "Family",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "text": "Keluarga"
+  },
+  "extension": [
+    {
+      "url": "http://sys.id/ext-bool",
+      "valueBoolean": true
+    },
+    {
+      "url": "http://sys.id/ext-str",
+      "valueString": "nilai"
+    },
+    {
+      "url": "http://sys.id/ext-int",
+      "valueInteger": 7
+    },
+    {
+      "url": "http://sys.id/ext-arr",
+      "valueCode": "X"
+    }
+  ],
+  "id": "grp-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1600"
+    },
+    {
+      "system": "http://sys.id/lain",
+      "value": "LAIN-2"
+    }
+  ],
+  "managingEntity": {
+    "reference": "Organization/1000000001"
+  },
+  "member": [
+    {
+      "entity": {
+        "display": "Budi Santoso",
+        "reference": "Patient/1000000001"
+      },
+      "inactive": false,
+      "period": {
+        "start": "2026-01-01"
+      }
+    },
+    {
+      "entity": {
+        "reference": "Patient/1000000002"
+      },
+      "inactive": false
+    },
+    {
+      "entity": {
+        "reference": "Practitioner/1000000003"
+      },
+      "period": {
+        "start": "2026-01-02"
+      }
+    },
+    {
+      "entity": {
+        "reference": "Patient/1000000004"
+      }
+    }
+  ],
+  "meta": {
+    "profile": [
+      "https://fhir.kemkes.go.id/r4/StructureDefinition/Group",
+      "https://fhir.kemkes.go.id/r4/StructureDefinition/Group2"
+    ]
+  },
+  "name": "Keluarga Budi",
+  "quantity": 3,
+  "resourceType": "Group",
+  "type": "person"
+}

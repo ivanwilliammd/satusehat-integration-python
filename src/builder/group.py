@@ -8,7 +8,9 @@ class GroupBuilder(BaseBuilder):
         super().__init__("Group")
 
     def set_meta_profile(self, profile: str) -> "GroupBuilder":
-        self.data["meta/profile"] = [profile]
+        """Dulu menulis kunci literal "meta/profile" — payload JSON sah, tetapi bukan FHIR."""
+        meta = self.data.setdefault("meta", {})
+        meta.setdefault("profile", []).append(profile)
         return self
 
     def set_id(self, value: str) -> "GroupBuilder":
