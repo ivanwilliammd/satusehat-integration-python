@@ -1,0 +1,95 @@
+{
+  "assessor": {
+    "reference": "Practitioner/1000000002"
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "A1",
+        "display": "Asesmen",
+        "system": "http://sys.id/asesmen"
+      }
+    ],
+    "text": "Asesmen awal"
+  },
+  "date": "2026-01-06",
+  "effectiveDateTime": "2026-01-05T09:00:00+07:00",
+  "effectivePeriod": {
+    "end": "2026-01-06",
+    "start": "2026-01-05"
+  },
+  "encounter": {
+    "reference": "Encounter/enc-1"
+  },
+  "finding": [
+    {
+      "itemCodeableConcept": {
+        "coding": [
+          {
+            "code": "386661006",
+            "display": "Fever",
+            "system": "http://snomed.info/sct"
+          }
+        ],
+        "text": "Demam"
+      }
+    },
+    {
+      "itemReference": {
+        "reference": "Observation/obs-2"
+      }
+    }
+  ],
+  "id": "ci-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-2000"
+    }
+  ],
+  "investigation": [
+    {
+      "code": {
+        "text": "Pemeriksaan lab"
+      },
+      "item": [
+        {
+          "reference": "Observation/obs-1"
+        }
+      ]
+    }
+  ],
+  "note": [
+    {
+      "text": "Catatan pertama"
+    },
+    {
+      "author": "dr. Ani",
+      "text": "Catatan anotasi",
+      "time": "2026-01-06"
+    }
+  ],
+  "previousOpinion": {
+    "reference": "ClinicalImpression/ci-0"
+  },
+  "prognosisCodeableConcept": [
+    {
+      "text": "Prognosis baik"
+    }
+  ],
+  "prognosisReference": [
+    {
+      "reference": "RiskAssessment/ra-1"
+    }
+  ],
+  "resourceType": "ClinicalImpression",
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/1000000001"
+  },
+  "supportingInfo": [
+    {
+      "reference": "Observation/obs-3"
+    }
+  ]
+}
