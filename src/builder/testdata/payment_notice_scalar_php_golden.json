@@ -1,0 +1,47 @@
+{
+  "created": "2026-01-07T09:00:00+07:00",
+  "id": "pn-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1300"
+    }
+  ],
+  "insurer": {
+    "reference": "Organization/1000000003"
+  },
+  "payee": {
+    "reference": "Organization/1000000002"
+  },
+  "payment": {
+    "amount": {
+      "currency": "IDR",
+      "value": 250000
+    }
+  },
+  "paymentDate": "2026-01-07",
+  "paymentReconciliation": {
+    "reference": "PaymentReconciliation/pr-1"
+  },
+  "paymentStatus": {
+    "coding": [
+      {
+        "code": "paid",
+        "display": "Dibayar",
+        "system": "http://terminology.hl7.org/CodeSystem/paymentstatus"
+      }
+    ]
+  },
+  "provider": {
+    "reference": "Organization/1000000001"
+  },
+  "request": {
+    "reference": "Claim/clm-1"
+  },
+  "resourceType": "PaymentNotice",
+  "response": {
+    "reference": "ClaimResponse/cr-1"
+  },
+  "status": "active",
+  "statusDate": "2026-01-07"
+}
