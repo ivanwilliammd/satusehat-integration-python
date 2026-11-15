@@ -1,0 +1,16 @@
+{
+  "resourceType": "PaymentReconciliation",
+  "id": "pr-1",
+  "outcome": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/remittance-outcome",
+        "code": "complete",
+        "display": "Complete"
+      }
+    ]
+  },
+  "request": {
+    "reference": "Claim/claim-1"
+  }
+}

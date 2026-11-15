@@ -1,0 +1,32 @@
+{
+  "resourceType": "ChargeItemDefinition",
+  "id": "cid-1",
+  "status": "active",
+  "url": "http://example.org/ChargeItemDefinition/cid-1",
+  "version": "1.0.0",
+  "title": "Tarif kunjungan",
+  "publisher": "RS Sehat",
+  "instance": [
+    {
+      "reference": {
+        "reference": "Organization/1000000001"
+      },
+      "display": "RS Sehat",
+      "timingDateTime": "2026-01-05T09:00:00+07:00"
+    }
+  ],
+  "property": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://example.org/prop",
+            "code": "kategori"
+          }
+        ]
+      },
+      "valueString": "Rawat jalan"
+    }
+  ],
+  "appliesLocation": "Location/3000000001"
+}

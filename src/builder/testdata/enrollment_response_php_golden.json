@@ -1,0 +1,26 @@
+{
+  "resourceType": "EnrollmentResponse",
+  "id": "er-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-6"
+    }
+  ],
+  "status": "active",
+  "request": {
+    "reference": "EnrollmentRequest/erq-1",
+    "display": "Pendaftaran"
+  },
+  "outcome": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/remittance-outcome",
+        "code": "complete",
+        "display": "Complete"
+      }
+    ]
+  },
+  "disposition": "Disetujui",
+  "created": "2026-01-05"
+}

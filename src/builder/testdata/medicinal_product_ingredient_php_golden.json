@@ -1,0 +1,22 @@
+{
+  "resourceType": "MedicinalProductIngredient",
+  "id": "mpg-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-24"
+    }
+  ],
+  "status": "active",
+  "role": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/medicinal-product-ingredient-role",
+        "code": "active",
+        "display": "Active"
+      }
+    ]
+  },
+  "substance": "Amoksisilin trihidrat",
+  "quantity": "500 mg"
+}

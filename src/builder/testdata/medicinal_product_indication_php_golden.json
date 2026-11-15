@@ -1,0 +1,28 @@
+{
+  "resourceType": "MedicinalProductIndication",
+  "id": "mpi-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-23"
+    }
+  ],
+  "status": "active",
+  "subject": {
+    "reference": "MedicinalProduct/mp-1",
+    "display": "Amoksisilin"
+  },
+  "disease": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "233604007",
+        "display": "Pneumonia"
+      }
+    ]
+  },
+  "comorbidity": {
+    "reference": "Condition/cond-10",
+    "display": "Diabetes"
+  }
+}

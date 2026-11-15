@@ -1,0 +1,24 @@
+{
+  "resourceType": "SubstanceReferenceInformation",
+  "id": "sri-1",
+  "status": "active",
+  "comment": "Informasi referensi",
+  "gene": {
+    "coding": [
+      {
+        "system": "http://www.genenames.org",
+        "code": "HGNC:5",
+        "display": "A1BG"
+      }
+    ]
+  },
+  "geneElement": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "123",
+        "display": "Elemen"
+      }
+    ]
+  }
+}

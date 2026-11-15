@@ -1,0 +1,25 @@
+{
+  "resourceType": "CatalogEntry",
+  "id": "ce-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-3"
+    }
+  ],
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/catalogType",
+        "code": "medication",
+        "display": "Medication"
+      }
+    ]
+  },
+  "reference": {
+    "reference": "Medication/med-1",
+    "display": "Amoksisilin"
+  },
+  "validityPeriod": "2026-01-05/2026-12-31"
+}

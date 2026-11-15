@@ -1,0 +1,41 @@
+{
+  "resourceType": "ImagingStudy",
+  "id": "img-1",
+  "status": "available",
+  "subject": {
+    "reference": "Patient/1000000001"
+  },
+  "started": "2026-01-05T08:00:00+07:00",
+  "ended": "2026-01-05T09:00:00+07:00",
+  "location": {
+    "reference": "Location/3000000001"
+  },
+  "referrer": {
+    "reference": "Practitioner/1000000002"
+  },
+  "partOf": [
+    {
+      "reference": "ImagingStudy/img-0"
+    }
+  ],
+  "modality": [
+    {
+      "system": "http://dicom.nema.org/resources/ontology/DCM",
+      "code": "US",
+      "display": "Ultrasound"
+    }
+  ],
+  "series": [
+    {
+      "uid": "1.2.3",
+      "modality": {
+        "system": "http://dicom.nema.org/resources/ontology/DCM",
+        "code": "US",
+        "display": "Ultrasound"
+      },
+      "status": "available",
+      "description": "Abdomen",
+      "number": 1
+    }
+  ]
+}

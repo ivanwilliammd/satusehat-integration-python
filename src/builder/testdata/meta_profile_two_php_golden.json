@@ -1,0 +1,10 @@
+{
+    "resourceType": "Patient",
+    "id": "Patient/1000000001",
+    "meta": {
+        "profile": [
+            "http://example.org/p1",
+            "http://example.org/p2"
+        ]
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "resourceType": "MedicinalProductPharmaceutical",
+  "id": "mph-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-28"
+    }
+  ],
+  "status": "active",
+  "route": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "26643006",
+        "display": "Oral"
+      }
+    ]
+  },
+  "doseForm": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "385055001",
+        "display": "Tablet"
+      }
+    ]
+  },
+  "ingredient": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "387517004",
+        "display": "Amoksisilin"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "resourceType": "MedicinalProductInteraction",
+  "id": "mpn-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-25"
+    }
+  ],
+  "status": "active",
+  "subject": {
+    "reference": "MedicinalProduct/mp-1",
+    "display": "Amoksisilin"
+  },
+  "description": "Interaksi dengan warfarin",
+  "interactant": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "372756006",
+        "display": "Warfarin"
+      }
+    ]
+  }
+}

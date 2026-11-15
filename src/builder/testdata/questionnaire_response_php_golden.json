@@ -1,0 +1,36 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "qr-1",
+  "status": "completed",
+  "questionnaire": "Questionnaire/q-1",
+  "authored": "2026-01-05",
+  "author": {
+    "reference": "Practitioner/1000000002"
+  },
+  "source": {
+    "reference": "Patient/1000000001"
+  },
+  "subject": {
+    "reference": "Patient/1000000001"
+  },
+  "encounter": {
+    "reference": "Encounter/enc-1"
+  },
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Keluhan utama",
+      "answer": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "25064002",
+              "display": "Headache"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

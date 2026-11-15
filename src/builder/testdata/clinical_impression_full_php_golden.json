@@ -1,0 +1,66 @@
+{
+  "resourceType": "ClinicalImpression",
+  "id": "ci-1",
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/1000000001"
+  },
+  "effectiveDateTime": "2026-01-05T09:00:00+07:00",
+  "assessor": {
+    "reference": "Practitioner/1000000002"
+  },
+  "previousOpinion": {
+    "reference": "ClinicalImpression/ci-0"
+  },
+  "finding": [
+    {
+      "itemCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "38341003",
+            "display": "Hypertension"
+          }
+        ]
+      }
+    },
+    {
+      "itemReference": {
+        "reference": "Observation/obs-1"
+      }
+    }
+  ],
+  "prognosisCodeableConcept": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "170968001",
+          "display": "Prognosis good"
+        }
+      ]
+    }
+  ],
+  "supportingInfo": [
+    {
+      "reference": "Observation/obs-2"
+    }
+  ],
+  "investigation": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/investigation-sets",
+            "code": "exam"
+          }
+        ]
+      },
+      "item": [
+        {
+          "display": "Pemeriksaan fisik"
+        }
+      ]
+    }
+  ]
+}

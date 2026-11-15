@@ -1,0 +1,51 @@
+{
+  "resourceType": "ChargeItemResponse",
+  "id": "cir-1",
+  "status": "active",
+  "chargeItem": {
+    "reference": "ChargeItem/ci-1"
+  },
+  "partOf": [
+    {
+      "reference": "ChargeItem/ci-0"
+    }
+  ],
+  "requestor": {
+    "reference": "Practitioner/1000000002"
+  },
+  "responseDate": "2026-01-05",
+  "outcomeInfo": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/chargeitem-status",
+            "code": "billable",
+            "display": "Billable"
+          }
+        ]
+      }
+    }
+  ],
+  "error": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/chargeitem-error",
+            "code": "E1",
+            "display": "Tarif tidak ditemukan"
+          }
+        ]
+      }
+    }
+  ],
+  "costCenterChargeItemResponse": [
+    {
+      "costCenter": {
+        "reference": "Organization/1000000001",
+        "display": "RS Sehat"
+      }
+    }
+  ]
+}

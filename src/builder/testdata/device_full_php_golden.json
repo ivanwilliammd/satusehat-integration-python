@@ -1,0 +1,19 @@
+{
+  "resourceType": "Device",
+  "id": "dev-1",
+  "status": "active",
+  "manufacturer": "Philips",
+  "deviceName": [
+    {
+      "name": "Monitor Pasien",
+      "type": "user-friendly-name"
+    }
+  ],
+  "owner": {
+    "reference": "Organization/1000000001"
+  },
+  "location": {
+    "reference": "Location/3000000001"
+  },
+  "serialNumber": "SN-001"
+}

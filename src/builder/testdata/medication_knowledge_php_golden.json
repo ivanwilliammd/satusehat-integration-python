@@ -1,0 +1,33 @@
+{
+  "resourceType": "MedicationKnowledge",
+  "id": "mk-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-9"
+    }
+  ],
+  "status": "active",
+  "code": {
+    "coding": [
+      {
+        "system": "http://terminology.kemkes.go.id/CodeSystem/medication",
+        "code": "MED-1",
+        "display": "Amoksisilin"
+      }
+    ]
+  },
+  "manufacturer": {
+    "reference": "Organization/1000000001",
+    "display": "Kimia Farma"
+  },
+  "doseForm": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "385055001",
+        "display": "Tablet"
+      }
+    ]
+  }
+}

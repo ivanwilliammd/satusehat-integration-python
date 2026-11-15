@@ -1,0 +1,21 @@
+{
+  "resourceType": "List",
+  "id": "list-1",
+  "status": "current",
+  "mode": "working",
+  "title": "Daftar Pasien",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "11450-4",
+        "display": "Problem list"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/1000000001",
+    "display": "Budi Santoso"
+  },
+  "date": "2026-01-05"
+}

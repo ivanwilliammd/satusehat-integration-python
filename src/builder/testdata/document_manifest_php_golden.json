@@ -1,0 +1,29 @@
+{
+  "resourceType": "DocumentManifest",
+  "id": "dmf-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-5"
+    }
+  ],
+  "status": "current",
+  "type": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "34133-9",
+        "display": "Summary of episode note"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/1000000001",
+    "display": "Budi Santoso"
+  },
+  "created": "2026-01-05",
+  "source": {
+    "reference": "Practitioner/1000000002",
+    "display": "dr. Budi"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "resourceType": "Group",
+  "id": "grp-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-80"
+    }
+  ],
+  "active": true,
+  "type": "person",
+  "actual": true,
+  "code": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/group-type",
+        "code": "person",
+        "display": "Person"
+      }
+    ]
+  },
+  "name": "Keluarga Santoso",
+  "quantity": 3,
+  "managingEntity": {
+    "reference": "Organization/1000000001"
+  },
+  "member": [
+    {
+      "entity": {
+        "reference": "Patient/1000000001",
+        "display": "Budi Santoso"
+      }
+    },
+    {
+      "entity": {
+        "reference": "Patient/1000000002"
+      },
+      "period": {
+        "start": "2026-01-05"
+      }
+    },
+    {
+      "entity": {
+        "reference": "Patient/1000000003"
+      },
+      "inactive": true
+    },
+    {
+      "entity": {
+        "reference": "RelatedPerson/rp-1"
+      }
+    }
+  ],
+  "extension": [
+    {
+      "url": "http://example.org/ext",
+      "valueBoolean": true
+    },
+    {
+      "url": "http://example.org/ext2",
+      "valueString": "teks"
+    }
+  ]
+}

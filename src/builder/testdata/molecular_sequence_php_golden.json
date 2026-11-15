@@ -1,0 +1,47 @@
+{
+  "resourceType": "MolecularSequence",
+  "id": "ms-1",
+  "patient": {
+    "reference": "Patient/1000000001"
+  },
+  "coordinateSystem": 0,
+  "specimen": {
+    "reference": "Specimen/sp-1"
+  },
+  "device": {
+    "reference": "Device/dev-1"
+  },
+  "performer": {
+    "reference": "Practitioner/1000000002"
+  },
+  "referenceSeq": {
+    "referenceSeqId": {
+      "coding": [
+        {
+          "system": "http://www.ncbi.nlm.nih.gov/nuccore",
+          "code": "NC_000001.11",
+          "display": "chr1"
+        }
+      ]
+    },
+    "strand": "watson",
+    "windowStart": 100,
+    "windowEnd": 200,
+    "orientation": "sense"
+  },
+  "variant": [
+    {
+      "start": 100,
+      "end": 101,
+      "observedAllele": "A",
+      "referenceAllele": "G",
+      "variantPointer": {
+        "reference": "Observation/obs-1"
+      }
+    }
+  ],
+  "text": {
+    "status": "generated",
+    "div": "<div>Urutan</div>"
+  }
+}

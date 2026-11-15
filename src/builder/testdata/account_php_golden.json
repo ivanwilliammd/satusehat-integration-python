@@ -1,0 +1,22 @@
+{
+  "resourceType": "Account",
+  "id": "acc-1",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "PBI",
+        "display": "Patient Billing"
+      }
+    ],
+    "text": "Tagihan pasien"
+  },
+  "coverage": [
+    {
+      "coverage": {
+        "reference": "Coverage/1400000001"
+      },
+      "priority": 1
+    }
+  ]
+}

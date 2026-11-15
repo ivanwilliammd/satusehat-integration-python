@@ -1,0 +1,25 @@
+{
+  "resourceType": "MedicinalProductAuthorization",
+  "id": "mpa-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-21"
+    }
+  ],
+  "status": "active",
+  "country": {
+    "coding": [
+      {
+        "system": "urn:iso:std:iso:3166",
+        "code": "ID",
+        "display": "Indonesia"
+      }
+    ]
+  },
+  "regulator": {
+    "reference": "Organization/1000000002",
+    "display": "BPOM"
+  },
+  "validityPeriod": "2026-01-05/2031-01-05"
+}

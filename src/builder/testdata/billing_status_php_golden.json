@@ -1,0 +1,27 @@
+{
+  "resourceType": "BillingStatus",
+  "id": "bs-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-90"
+    }
+  ],
+  "status": "active",
+  "insurer": {
+    "reference": "Organization/1000000001",
+    "display": "BPJS"
+  },
+  "recipient": {
+    "reference": "Organization/1000000002",
+    "display": "RS Sehat"
+  },
+  "subject": {
+    "reference": "Patient/1000000001",
+    "display": "Budi Santoso"
+  },
+  "request": {
+    "reference": "CoverageEligibilityRequest/cer-1",
+    "display": "Klaim"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "resourceType": "ClinicalImpression",
+  "id": "ci-1",
+  "date": "2026-01-05",
+  "note": [
+    {
+      "text": "Pasien stabil."
+    }
+  ]
+}

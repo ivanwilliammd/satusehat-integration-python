@@ -1,0 +1,56 @@
+{
+  "resourceType": "RiskAssessment",
+  "id": "ra-1",
+  "status": "final",
+  "subject": {
+    "reference": "Patient/1000000001"
+  },
+  "occurrenceDateTime": "2026-01-05T09:00:00+07:00",
+  "condition": {
+    "reference": "Condition/cond-1"
+  },
+  "performer": {
+    "reference": "Practitioner/1000000002"
+  },
+  "reasonReference": [
+    {
+      "reference": "Observation/obs-1"
+    }
+  ],
+  "basis": [
+    {
+      "reference": "Observation/obs-2"
+    }
+  ],
+  "prediction": [
+    {
+      "outcome": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "52101004",
+            "display": "Present"
+          }
+        ]
+      },
+      "probabilityDecimal": 0.7,
+      "qualitativeRisk": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/risk-probability",
+            "code": "moderate",
+            "display": "Moderate"
+          }
+        ]
+      },
+      "relativeRisk": 1.5
+    }
+  ],
+  "mitigation": "Pemantauan tekanan darah tiap bulan.",
+  "extension": [
+    {
+      "url": "http://example.org/risk",
+      "valueInteger": 3
+    }
+  ]
+}

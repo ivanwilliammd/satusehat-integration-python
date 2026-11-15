@@ -1,0 +1,8 @@
+{
+  "resourceType": "Device",
+  "id": "dev-1",
+  "patient": {
+    "reference": "Patient/1000000001",
+    "display": "Budi Santoso"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "resourceType": "PurificationDecision",
+  "id": "pd-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-91"
+    }
+  ],
+  "status": {
+    "coding": [
+      {
+        "code": "approved",
+        "display": "Approved",
+        "system": "http://terminology.hl7.org/CodeSystem/decision"
+      }
+    ]
+  },
+  "insurer": {
+    "reference": "Organization/1000000001",
+    "display": "BPJS"
+  },
+  "provider": {
+    "reference": "Organization/1000000002",
+    "display": "RS Sehat"
+  },
+  "claimResponse": {
+    "reference": "ClaimResponse/cr-1",
+    "display": "Respons"
+  },
+  "created": "2026-01-05"
+}

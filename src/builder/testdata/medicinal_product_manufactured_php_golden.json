@@ -1,0 +1,25 @@
+{
+  "resourceType": "MedicinalProductManufactured",
+  "id": "mpm-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-26"
+    }
+  ],
+  "status": "active",
+  "quantity": "500 mg",
+  "manufacturer": {
+    "reference": "Organization/1000000001",
+    "display": "Kimia Farma"
+  },
+  "ingredient": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "387517004",
+        "display": "Amoksisilin"
+      }
+    ]
+  }
+}

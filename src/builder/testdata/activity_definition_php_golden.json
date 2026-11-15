@@ -1,0 +1,35 @@
+{
+  "resourceType": "ActivityDefinition",
+  "id": "ad-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1"
+    }
+  ],
+  "status": "active",
+  "description": "Edukasi gizi",
+  "kind": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/activity-definition-kind",
+        "code": "ServiceRequest",
+        "display": "Service Request"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://terminology.kemkes.go.id/CodeSystem/activity",
+        "code": "EDU-1",
+        "display": "Edukasi"
+      }
+    ]
+  },
+  "author": {
+    "reference": "Practitioner/1000000002",
+    "display": "dr. Budi"
+  },
+  "timing": "2026-01-05"
+}

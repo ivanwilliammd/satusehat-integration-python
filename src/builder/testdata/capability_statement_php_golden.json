@@ -1,0 +1,48 @@
+{
+  "resourceType": "CapabilityStatement",
+  "id": "cs-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-2"
+    }
+  ],
+  "status": "active",
+  "date": "2026-01-05",
+  "kind": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/capability-statement-kind",
+        "code": "instance",
+        "display": "Instance"
+      }
+    ]
+  },
+  "fhirVersion": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/FHIR-version",
+        "code": "4.0.1",
+        "display": "4.0.1"
+      }
+    ]
+  },
+  "format": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/restful-format",
+        "code": "json",
+        "display": "JSON"
+      }
+    ]
+  },
+  "rest": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/restful-mode",
+        "code": "server",
+        "display": "Server"
+      }
+    ]
+  }
+}

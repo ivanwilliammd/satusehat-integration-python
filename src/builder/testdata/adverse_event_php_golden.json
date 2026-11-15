@@ -1,0 +1,27 @@
+{
+  "resourceType": "AdverseEvent",
+  "id": "ae-1",
+  "identifier": [
+    {
+      "system": "http://sys-ids.kemkes.go.id/adverseevent/1",
+      "value": "ae-1"
+    }
+  ],
+  "status": "active",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "840544004",
+        "display": "Suspected COVID-19"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/1000000001",
+    "display": "Budi Santoso"
+  },
+  "encounter": {
+    "reference": "Encounter/2000000001"
+  }
+}

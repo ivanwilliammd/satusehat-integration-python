@@ -1,0 +1,30 @@
+{
+  "resourceType": "Claim",
+  "id": "claim-1",
+  "item": [
+    {
+      "sequence": 1,
+      "productOrService": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/sid/icd-9-cm",
+            "code": "88.72",
+            "display": "Diagnostic ultrasound of heart"
+          }
+        ]
+      },
+      "quantity": {
+        "value": 2,
+        "currency": "IDR"
+      },
+      "unitPrice": {
+        "value": 250000,
+        "currency": "IDR"
+      },
+      "servicedPeriod": {
+        "start": "2026-01-05",
+        "end": "2026-01-06"
+      }
+    }
+  ]
+}

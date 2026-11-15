@@ -1,0 +1,38 @@
+{
+  "resourceType": "ObservationDefinition",
+  "id": "od-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-10"
+    }
+  ],
+  "status": "active",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+      }
+    ]
+  },
+  "category": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+        "code": "vital-signs",
+        "display": "Vital Signs"
+      }
+    ]
+  },
+  "method": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "37931006",
+        "display": "Auscultation"
+      }
+    ]
+  }
+}

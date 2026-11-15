@@ -1,0 +1,28 @@
+{
+  "resourceType": "MedicinalProductContraindication",
+  "id": "mpc-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-22"
+    }
+  ],
+  "status": "active",
+  "subject": {
+    "reference": "MedicinalProduct/mp-1",
+    "display": "Amoksisilin"
+  },
+  "disease": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "91936005",
+        "display": "Alergi penisilin"
+      }
+    ]
+  },
+  "comorbidity": {
+    "reference": "Condition/cond-9",
+    "display": "Gagal ginjal"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "resourceType": "FamilyMemberHistory",
+  "id": "fmh-1",
+  "status": "completed",
+  "patient": {
+    "reference": "Patient/1000000001"
+  },
+  "date": "2026-01-05",
+  "name": "Ibu kandung",
+  "relationship": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+        "code": "MTH",
+        "display": "mother"
+      }
+    ]
+  },
+  "sex": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/administrative-gender",
+        "code": "female",
+        "display": "Female"
+      }
+    ]
+  },
+  "bornDate": "1960-03-01",
+  "ageAge": 65,
+  "ageUnit": "a",
+  "deceasedBoolean": false,
+  "note": [
+    {
+      "text": "Riwayat hipertensi."
+    }
+  ]
+}
