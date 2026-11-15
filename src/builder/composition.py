@@ -1,5 +1,5 @@
 """Composition resource builder for SATUSEHAT FHIR R4."""
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from src.builder.base_builder import BaseBuilder
 
 

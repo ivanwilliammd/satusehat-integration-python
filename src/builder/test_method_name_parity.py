@@ -3,13 +3,20 @@
 Uji ini menjaga PERMUKAAN method, bukan perilaku — perilaku dijaga golden per resource.
 Kalau kanon menambah setter baru, uji ini berbunyi sebelum ada yang menyadarinya.
 """
+import os
 import pathlib
 import re
 
 import pytest
 
-PHP = pathlib.Path("/home/openclaw/projects/satusehat-integration/src/Builder")
+# Uji ini butuh checkout repo kanon PHP. Di CI tidak ada, jadi ia DILEWATI — bukan gagal,
+# dan bukan lulus diam-diam: tanpa berkas kanon, tidak ada yang bisa diperiksa.
+PHP = pathlib.Path(os.environ.get("PHP_BUILDER_DIR", "/home/openclaw/projects/satusehat-integration/src/Builder"))
 PY = pathlib.Path(__file__).resolve().parent
+
+pytestmark = pytest.mark.skipif(
+    not PHP.is_dir(), reason=f"berkas kanon PHP tidak ada di {PHP} (set PHP_BUILDER_DIR)"
+)
 
 # Method kanon yang memang tidak diporting, beserta alasannya.
 DIPERBOLEHKAN = {
