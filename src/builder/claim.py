@@ -16,13 +16,13 @@ class ClaimBuilder(BaseBuilder):
         self.data["status"] = status
         return self
 
-    def set_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimBuilder":
+    def set_type(self, system: str, code: str, display: Optional[str] = None) -> "ClaimBuilder":
         self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["type"]["coding"][0]["display"] = display
         return self
 
-    def set_sub_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimBuilder":
+    def set_sub_type(self, system: str, code: str, display: Optional[str] = None) -> "ClaimBuilder":
         self.data["subType"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["subType"]["coding"][0]["display"] = display
@@ -32,7 +32,7 @@ class ClaimBuilder(BaseBuilder):
         self.data["use"] = use
         return self
 
-    def set_priority(self, code: str, system: str, display: Optional[str] = None) -> "ClaimBuilder":
+    def set_priority(self, system: str, code: str, display: Optional[str] = None) -> "ClaimBuilder":
         self.data["priority"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["priority"]["coding"][0]["display"] = display
@@ -69,7 +69,7 @@ class ClaimBuilder(BaseBuilder):
             self.data["provider"]["display"] = display
         return self
 
-    def set_priority_code(self, code: str, system: str = "http://hl7.org/fhir/request-priority") -> "ClaimBuilder":
+    def set_priority_code(self, system: str = "http://hl7.org/fhir/request-priority", code: str = "") -> "ClaimBuilder":
         self.data["priority"] = {"coding": [{"system": system, "code": code}]}
         return self
 

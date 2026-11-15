@@ -16,7 +16,7 @@ class ImagingStudyBuilder(BaseBuilder):
         self.data["status"] = status
         return self
 
-    def set_modality(self, code: str, system: str = "http://dicom.nema.org/resources/ontology/DCM", display: Optional[str] = None) -> "ImagingStudyBuilder":
+    def set_modality(self, system: str = "http://dicom.nema.org/resources/ontology/DCM", code: str = "", display: Optional[str] = None) -> "ImagingStudyBuilder":
         self.data.setdefault("modality", [])
         mod: dict = {"system": system, "code": code}
         if display:

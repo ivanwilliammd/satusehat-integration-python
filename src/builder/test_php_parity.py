@@ -779,7 +779,7 @@ def test_composition_matches_php_payload():
         .set_id("comp-1")
         .add_identifier("http://sys-ids.kemkes.go.id/composition/1000000001", "comp-1")
         .set_status("final")
-        .set_type("11488-4", "http://loinc.org", "Consult note")
+        .set_type("http://loinc.org", "11488-4", "Consult note")
         .add_category(cc("http://terminology.hl7.org/CodeSystem/v3-ActCode", "LP173421-1", "Report"))
         .set_title("Resume Medis Rawat Jalan")
         .set_date("2026-01-05T09:30:00+07:00")

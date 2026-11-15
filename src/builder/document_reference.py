@@ -20,13 +20,13 @@ class DocumentReferenceBuilder(BaseBuilder):
         self.data["docStatus"] = doc_status
         return self
 
-    def set_type(self, code: str, system: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
+    def set_type(self, system: str, code: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
         self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["type"]["coding"][0]["display"] = display
         return self
 
-    def set_category(self, code: str, system: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
+    def set_category(self, system: str, code: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
         self.data["category"] = [{"coding": [{"system": system, "code": code}]}]
         if display:
             self.data["category"][0]["coding"][0]["display"] = display
@@ -46,7 +46,7 @@ class DocumentReferenceBuilder(BaseBuilder):
         self.data["description"] = description
         return self
 
-    def add_security_label(self, code: str, system: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
+    def add_security_label(self, system: str, code: str, display: Optional[str] = None) -> "DocumentReferenceBuilder":
         self.data.setdefault("securityLabel", [])
         label: dict = {"coding": [{"system": system, "code": code}]}
         if display:

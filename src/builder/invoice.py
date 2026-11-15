@@ -16,7 +16,7 @@ class InvoiceBuilder(BaseBuilder):
         self.data["status"] = status
         return self
 
-    def set_code(self, code: str, system: str, display: Optional[str] = None) -> "InvoiceBuilder":
+    def set_code(self, system: str, code: str, display: Optional[str] = None) -> "InvoiceBuilder":
         self.data["code"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["code"]["coding"][0]["display"] = display

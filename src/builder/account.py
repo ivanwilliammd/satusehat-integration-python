@@ -16,7 +16,7 @@ class AccountBuilder(BaseBuilder):
         self.data["status"] = status
         return self
 
-    def set_type(self, code: str, system: str, display: Optional[str] = None) -> "AccountBuilder":
+    def set_type(self, system: str, code: str, display: Optional[str] = None) -> "AccountBuilder":
         self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["type"]["coding"][0]["display"] = display

@@ -7,14 +7,14 @@ class AllergyIntoleranceBuilder(BaseBuilder):
     def identifier(self, identifier: dict) -> "AllergyIntoleranceBuilder":
         return self._push("identifier", identifier)
 
-    def clinical_status(self, code: str, system: str = "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", display: str = "") -> "AllergyIntoleranceBuilder":
+    def clinical_status(self, system: str = "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", code: str = "", display: str = "") -> "AllergyIntoleranceBuilder":
         v = {"coding": [{"system": system, "code": code, "display": display}]}
         return self._set("clinicalStatus", v)
 
-    def verification_status(self, code: str, system: str = "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", display: str = "") -> "AllergyIntoleranceBuilder":
+    def verification_status(self, system: str = "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", code: str = "", display: str = "") -> "AllergyIntoleranceBuilder":
         return self._set("verificationStatus", {"coding": [{"system": system, "code": code, "display": display}]})
 
-    def type(self, code: str, system: str = "http://hl7.org/fhir/allergy-intolerance-type", display: str = "") -> "AllergyIntoleranceBuilder":
+    def type(self, system: str = "http://hl7.org/fhir/allergy-intolerance-type", code: str = "", display: str = "") -> "AllergyIntoleranceBuilder":
         return self._set("type", {"coding": [{"system": system, "code": code, "display": display}]})
 
     def category(self, value: str) -> "AllergyIntoleranceBuilder":

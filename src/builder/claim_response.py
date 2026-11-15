@@ -16,13 +16,13 @@ class ClaimResponseBuilder(BaseBuilder):
         self.data["status"] = status
         return self
 
-    def set_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
+    def set_type(self, system: str, code: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
         self.data["type"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["type"]["coding"][0]["display"] = display
         return self
 
-    def set_sub_type(self, code: str, system: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
+    def set_sub_type(self, system: str, code: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
         self.data["subType"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["subType"]["coding"][0]["display"] = display
@@ -56,7 +56,7 @@ class ClaimResponseBuilder(BaseBuilder):
         self.data["outcome"] = outcome
         return self
 
-    def add_decision_reason(self, code: str, system: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
+    def add_decision_reason(self, system: str, code: str, display: Optional[str] = None) -> "ClaimResponseBuilder":
         self.data.setdefault("decisionReason", [])
         reason: dict = {"coding": [{"system": system, "code": code}]}
         if display:

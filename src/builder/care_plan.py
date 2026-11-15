@@ -45,9 +45,9 @@ class CarePlanBuilder(BaseBuilder):
             self.data["author"]["display"] = display
         return self
 
-    def add_category(self, code: Any, system: Optional[str] = None, display: Optional[str] = None) -> "CarePlanBuilder":
-        if not isinstance(code, str):
-            self.data.setdefault("category", []).append(self._arr(code))
+    def add_category(self, system: Optional[str] = None, code: str = "", display: Optional[str] = None) -> "CarePlanBuilder":
+        if isinstance(system, dict):
+            self.data.setdefault("category", []).append(self._arr(system))
             return self
         self.data.setdefault("category", [])
         cat: dict = {"coding": [{"system": system, "code": code}]}

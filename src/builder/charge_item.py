@@ -16,7 +16,7 @@ class ChargeItemBuilder(BaseBuilder):
         self.data["status"] = status
         return self
 
-    def set_code(self, code: str, system: str, display: Optional[str] = None) -> "ChargeItemBuilder":
+    def set_code(self, system: str, code: str, display: Optional[str] = None) -> "ChargeItemBuilder":
         self.data["code"] = {"coding": [{"system": system, "code": code}]}
         if display:
             self.data["code"]["coding"][0]["display"] = display
@@ -63,7 +63,7 @@ class ChargeItemBuilder(BaseBuilder):
         self.data["quantity"] = {"value": value, "code": code, "system": system}
         return self
 
-    def set_bodysite(self, code: str, system: str, display: Optional[str] = None) -> "ChargeItemBuilder":
+    def set_bodysite(self, system: str, code: str, display: Optional[str] = None) -> "ChargeItemBuilder":
         self.data["bodySite"] = [{"coding": [{"system": system, "code": code}]}]
         if display:
             self.data["bodySite"][0]["coding"][0]["display"] = display
@@ -73,7 +73,7 @@ class ChargeItemBuilder(BaseBuilder):
         self.data["factorOverride"] = factor
         return self
 
-    def add_reason(self, code: str, system: str, display: Optional[str] = None) -> "ChargeItemBuilder":
+    def add_reason(self, system: str, code: str, display: Optional[str] = None) -> "ChargeItemBuilder":
         self.data.setdefault("reason", [])
         reason: dict = {"coding": [{"system": system, "code": code}]}
         if display:
