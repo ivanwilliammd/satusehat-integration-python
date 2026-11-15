@@ -76,3 +76,28 @@ class RiskAssessmentBuilder(BaseBuilder):
         self.data.setdefault("basis", [])
         self.data["basis"].append({"reference": reference})
         return self
+
+    def add_identifier(self, system: str, value: str) -> "RiskAssessmentBuilder":
+        return self._push("identifier", {"system": system, "value": value})
+
+    def set_code(self, konsep) -> "RiskAssessmentBuilder":
+        return self._set("code", konsep)
+
+    def set_performer(self, reference) -> "RiskAssessmentBuilder":
+        return self._set("performer", reference if isinstance(reference, dict) else {"reference": reference})
+
+    def add_reason_reference(self, reference) -> "RiskAssessmentBuilder":
+        ref = reference if isinstance(reference, dict) else {"reference": reference}
+        return self._push("reasonReference", ref)
+
+    def add_extension(self, url: str, value, value_type: Optional[str] = None) -> "RiskAssessmentBuilder":
+        ext = {"url": url}
+        if value_type is not None:
+            ext[f"value{value_type[0].upper()}{value_type[1:]}"] = value
+        else:
+            ext["valueString"] = value
+        return self._push("extension", ext)
+
+    def set_occurrence_date_time(self, value: str) -> "RiskAssessmentBuilder":
+        """Elemen R4 bernama `occurrence[x]`; kanon menulis `occurrenceDateTime`."""
+        return self.set_occurrence_datetime(value)

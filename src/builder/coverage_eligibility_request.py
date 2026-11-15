@@ -102,3 +102,9 @@ class CoverageEligibilityRequestBuilder(BaseBuilder):
         if category_system and category_code:
             item["category"] = {"coding": [{"system": category_system, "code": category_code}]}
         return self._push("item", item)
+
+    def set_serviced_period(self, start: str, end: str = "") -> "CoverageEligibilityRequestBuilder":
+        self._set("servicedPeriod/start", start)
+        if end:
+            self._set("servicedPeriod/end", end)
+        return self

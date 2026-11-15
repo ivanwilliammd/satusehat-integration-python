@@ -36,3 +36,6 @@ class AdverseEventBuilder(BaseBuilder):
     def set_description(self, description: str) -> "AdverseEventBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "AdverseEventBuilder":
+        return self._set("encounter", {"reference": reference})

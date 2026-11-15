@@ -82,3 +82,9 @@ class MedicationStatementBuilder(BaseBuilder):
         else:
             extension["valueString"] = value
         return self._push("extension", extension)
+
+    def set_reason_code(self, konsep) -> "MedicationStatementBuilder":
+        return self.add_reason_code(konsep)
+
+    def set_reason_reference(self, reference) -> "MedicationStatementBuilder":
+        return self.add_reason_reference(reference)

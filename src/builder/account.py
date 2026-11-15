@@ -65,3 +65,9 @@ class AccountBuilder(BaseBuilder):
     def set_description(self, description: str) -> "AccountBuilder":
         self.data["description"] = description
         return self
+
+    def add_subject(self, reference: str, display: Optional[str] = None) -> "AccountBuilder":
+        subject = {"reference": reference}
+        if display is not None:
+            subject["display"] = display
+        return self._push("subject", subject)

@@ -159,3 +159,21 @@ class MedicationRequestBuilder(BaseBuilder):
         else:
             extension["valueString"] = value
         return self._push("extension", extension)
+
+    def set_status(self, value: str) -> "MedicationRequestBuilder":
+        return self.status(value)
+
+    def set_intent(self, value: str) -> "MedicationRequestBuilder":
+        return self.intent(value)
+
+    def set_subject(self, value: str) -> "MedicationRequestBuilder":
+        return self.subject(value)
+
+    def set_encounter(self, value: str) -> "MedicationRequestBuilder":
+        return self.encounter(value)
+
+    def set_authored_on(self, value: str) -> "MedicationRequestBuilder":
+        return self.authored_on(value)
+
+    def set_requester(self, value: str) -> "MedicationRequestBuilder":
+        return self.requester(value)

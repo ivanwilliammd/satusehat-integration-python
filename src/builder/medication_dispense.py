@@ -127,3 +127,12 @@ class MedicationDispenseBuilder(BaseBuilder):
 
     def add_contained(self, resource: dict) -> "MedicationDispenseBuilder":
         return self._push("contained", resource)
+
+    def set_status(self, value: str) -> "MedicationDispenseBuilder":
+        return self.status(value)
+
+    def set_when_prepared(self, value: str) -> "MedicationDispenseBuilder":
+        return self.when_prepared(value)
+
+    def set_when_handed_over(self, value: str) -> "MedicationDispenseBuilder":
+        return self.when_handed_over(value)

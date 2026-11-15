@@ -82,3 +82,6 @@ class MedicationAdministrationBuilder(BaseBuilder):
 
     def add_contained(self, resource: dict) -> "MedicationAdministrationBuilder":
         return self._push("contained", resource)
+
+    def set_status(self, value: str) -> "MedicationAdministrationBuilder":
+        return self.status(value)

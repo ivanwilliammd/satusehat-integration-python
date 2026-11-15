@@ -97,3 +97,9 @@ class MolecularSequenceBuilder(BaseBuilder):
     def set_pointer(self, reference: str) -> "MolecularSequenceBuilder":
         self.data["pointer"] = [{"reference": reference}]
         return self
+
+    def set_text(self, status: str, div: str) -> "MolecularSequenceBuilder":
+        return self._set("text", {"status": status, "div": div})
+
+    def set_performer(self, reference) -> "MolecularSequenceBuilder":
+        return self._set("performer", reference if isinstance(reference, dict) else {"reference": reference})

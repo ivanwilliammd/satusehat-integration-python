@@ -36,3 +36,7 @@ class AppointmentBuilder(BaseBuilder):
     def set_description(self, description: str) -> "AppointmentBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "AppointmentBuilder":
+        """Kanon menulis `encounter`, meskipun Appointment R4 tidak punya elemen itu."""
+        return self._set("encounter", {"reference": reference})

@@ -99,3 +99,9 @@ class CoverageEligibilityResponseBuilder(BaseBuilder):
                 }
             insurance["benefitBalance"] = [item]
         return self._push("insurance", insurance)
+
+    def set_serviced_period(self, start: str, end: str = "") -> "CoverageEligibilityResponseBuilder":
+        self._set("servicedPeriod/start", start)
+        if end:
+            self._set("servicedPeriod/end", end)
+        return self

@@ -124,3 +124,6 @@ class PractitionerRoleBuilder(BaseBuilder):
         else:
             ext["valueString"] = value
         return self._append("extension", ext)
+
+    def add_availability_exceptions(self, text: str) -> "PractitionerRoleBuilder":
+        return self.set_availability_exceptions(text)

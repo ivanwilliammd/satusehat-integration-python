@@ -173,3 +173,26 @@ class ImmunizationBuilder(BaseBuilder):
         else:
             extension["valueString"] = value
         return self._push("extension", extension)
+
+    STATUSES = ["completed", "entered-in-error", "not-done"]
+    VACCINE_CODES = ["93001282"]
+
+    def set_status(self, value: str) -> "ImmunizationBuilder":
+        if value not in self.STATUSES:
+            raise ValueError(f"Invalid Immunization.status: {value}")
+        return self._set("status", value)
+
+    def set_vaccine_code_from_code(
+        self, code: str, display: Optional[str] = None, system: str = "http://snomed.info/sct"
+    ) -> "ImmunizationBuilder":
+        if code not in self.VACCINE_CODES:
+            raise ValueError(f"Invalid vaccine code: {code}")
+        return self.set_vaccine_code({"coding": [{"system": system, "code": code, "display": display}]})
+
+    def set_route_from_code(
+        self,
+        code: str,
+        display: Optional[str] = None,
+        system: str = "http://terminology.hl7.org/CodeSystem/v3-RouteOfAdministration",
+    ) -> "ImmunizationBuilder":
+        return self.set_route({"coding": [{"system": system, "code": code, "display": display}]})
