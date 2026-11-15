@@ -1,0 +1,92 @@
+{
+  "allergyType": [
+    {
+      "coding": [
+        {
+          "code": "A1",
+          "display": "Seafood",
+          "system": "http://sys.id/alergi"
+        }
+      ],
+      "text": "Alergi seafood"
+    }
+  ],
+  "dateTime": "2026-01-06T08:00:00+07:00",
+  "encounter": {
+    "reference": "Encounter/enc-1"
+  },
+  "enteralFormula": {
+    "baseFormulaType": {
+      "text": "Formula standar"
+    },
+    "caloricDensity": {
+      "value": 1
+    }
+  },
+  "excludeFoodModifier": [
+    {
+      "text": "Kacang"
+    }
+  ],
+  "foodPreferenceModifier": [
+    {
+      "coding": [
+        {
+          "code": "VEG",
+          "display": "Vegetarian",
+          "system": "http://hl7.org/fhir/diet"
+        }
+      ]
+    }
+  ],
+  "id": "no-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1900"
+    }
+  ],
+  "intent": "order",
+  "oralDiet": {
+    "schedule": [
+      {
+        "repeat": {
+          "frequency": 3,
+          "period": 1,
+          "periodUnit": "d"
+        }
+      }
+    ],
+    "type": [
+      {
+        "coding": [
+          {
+            "code": "RG",
+            "display": "Rendah Garam",
+            "system": "http://sys.id/diet"
+          }
+        ],
+        "text": "Diet rendah garam"
+      },
+      {
+        "text": "Diet lunak"
+      }
+    ]
+  },
+  "orderer": {
+    "reference": "Practitioner/1000000002"
+  },
+  "patient": {
+    "reference": "Patient/1000000001"
+  },
+  "resourceType": "NutritionOrder",
+  "status": "active",
+  "supplement": [
+    {
+      "productName": "Ferrous",
+      "type": {
+        "text": "Suplemen zat besi"
+      }
+    }
+  ]
+}
