@@ -1,0 +1,251 @@
+{
+  "billablePeriod": {
+    "end": "2026-01-06",
+    "start": "2026-01-05"
+  },
+  "careTeam": [
+    {
+      "provider": {
+        "reference": "Practitioner/1000000002"
+      },
+      "role": {
+        "coding": [
+          {
+            "code": "primary",
+            "display": "Dokter Utama",
+            "system": "http://terminology.hl7.org/CodeSystem/claimcareteamrole"
+          }
+        ]
+      },
+      "sequence": 1
+    }
+  ],
+  "coverage": [
+    {
+      "reference": "Coverage/cov-1"
+    },
+    {
+      "focal": false,
+      "priority": {
+        "coding": [
+          {
+            "code": "2",
+            "system": "http://terminology.hl7.org/CodeSystem/coverage-priority"
+          }
+        ]
+      },
+      "reference": "Coverage/cov-2"
+    }
+  ],
+  "created": "2026-01-06T10:00:00+07:00",
+  "diagnosis": [
+    {
+      "diagnosisCodeableConcept": {
+        "coding": [
+          {
+            "code": "A09",
+            "system": "http://hl7.org/fhir/sid/icd-10"
+          }
+        ]
+      },
+      "sequence": 1,
+      "type": {
+        "coding": [
+          {
+            "code": "principal",
+            "system": "http://terminology.hl7.org/CodeSystem/ex-diagnosistype"
+          }
+        ]
+      }
+    }
+  ],
+  "enterer": {
+    "reference": "Practitioner/1000000002"
+  },
+  "facility": {
+    "display": "Rawat Jalan",
+    "reference": "Location/loc-1"
+  },
+  "id": "clm-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-500"
+    }
+  ],
+  "insurance": {
+    "account": [
+      {
+        "reference": "Account/acc-1"
+      },
+      {
+        "reference": "Account/acc-2"
+      }
+    ]
+  },
+  "insurer": {
+    "reference": "Organization/1000000003"
+  },
+  "item": [
+    {
+      "careTeamSequence": [
+        1
+      ],
+      "diagnosisSequence": [
+        1
+      ],
+      "location": [
+        {
+          "coding": [
+            {
+              "code": "LOC-1",
+              "display": "Rawat Jalan",
+              "system": "http://sys.id/loc"
+            }
+          ]
+        },
+        {
+          "coding": [
+            {
+              "code": "LOC-2",
+              "display": "Rawat Inap",
+              "system": "http://sys.id/loc"
+            }
+          ]
+        }
+      ],
+      "procedureSequence": [
+        1
+      ],
+      "productOrService": {
+        "coding": [
+          {
+            "code": "93000515",
+            "display": "Amoksisilin",
+            "system": "http://sys-ids.kemkes.go.id/kfa"
+          }
+        ]
+      },
+      "quantity": {
+        "currency": "IDR",
+        "value": 10
+      },
+      "sequence": 1,
+      "servicedPeriod": {
+        "end": "2026-01-06",
+        "start": "2026-01-05"
+      },
+      "unitPrice": {
+        "currency": "IDR",
+        "value": 15000
+      }
+    },
+    {
+      "productOrService": {
+        "coding": [
+          {
+            "code": "PROC-2",
+            "display": "Visite",
+            "system": "http://terminology.kemkes.go.id/CodeSystem/procedure"
+          }
+        ]
+      },
+      "sequence": 2,
+      "unitPrice": {
+        "currency": "IDR",
+        "value": 150000
+      }
+    }
+  ],
+  "patient": {
+    "display": "Budi Santoso",
+    "reference": "Patient/1000000001"
+  },
+  "prescriber": {
+    "reference": "Practitioner/1000000005"
+  },
+  "priority": {
+    "coding": [
+      {
+        "code": "normal",
+        "display": "Normal",
+        "system": "http://terminology.hl7.org/CodeSystem/processpriority"
+      }
+    ]
+  },
+  "priorityPayor": [
+    {
+      "reference": "Organization/1000000003"
+    },
+    {
+      "reference": "Organization/1000000004"
+    }
+  ],
+  "procedure": [
+    {
+      "date": "2026-01-05",
+      "procedureCodeableConcept": {
+        "coding": [
+          {
+            "code": "PROC-2",
+            "system": "http://terminology.kemkes.go.id/CodeSystem/procedure"
+          }
+        ]
+      },
+      "sequence": 1,
+      "type": {
+        "coding": [
+          {
+            "code": "primary",
+            "system": "http://terminology.hl7.org/CodeSystem/ex-procedure-type"
+          }
+        ]
+      }
+    }
+  ],
+  "provider": {
+    "reference": "Organization/1000000001"
+  },
+  "related": [
+    {
+      "reference": {
+        "code": "CLM-OLD",
+        "display": "Klaim lama",
+        "system": "http://sys.id/claim-ref"
+      },
+      "relationship": {
+        "coding": [
+          {
+            "code": "prior",
+            "system": "http://terminology.hl7.org/CodeSystem/ex-relatedclaimrelationship"
+          }
+        ]
+      }
+    }
+  ],
+  "resourceType": "Claim",
+  "status": "active",
+  "subType": {
+    "coding": [
+      {
+        "code": "subrogation",
+        "display": "Subrogasi",
+        "system": "http://terminology.hl7.org/CodeSystem/ex-claimsubtype"
+      }
+    ]
+  },
+  "total": {
+    "currency": "IDR",
+    "value": 315000
+  },
+  "type": {
+    "coding": [
+      {
+        "code": "institutional",
+        "display": "Institusi",
+        "system": "http://terminology.hl7.org/CodeSystem/claim-type"
+      }
+    ]
+  },
+  "use": "claim"
+}
