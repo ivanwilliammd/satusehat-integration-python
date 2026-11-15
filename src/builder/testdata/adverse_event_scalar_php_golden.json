@@ -1,0 +1,23 @@
+{
+  "code": {
+    "coding": [
+      {
+        "code": "42284007",
+        "display": "Reaksi transfusi",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  },
+  "id": "ae-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-800"
+    }
+  ],
+  "resourceType": "AdverseEvent",
+  "status": "active",
+  "subject": {
+    "reference": "Patient/1000000001"
+  }
+}

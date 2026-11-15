@@ -1,0 +1,14 @@
+{
+  "description": "Akun rawat inap",
+  "id": "acc-2",
+  "name": "Akun Rawat Inap",
+  "owner": {
+    "reference": "Organization/1000000001"
+  },
+  "resourceType": "Account",
+  "servicePeriod": {
+    "end": "2026-01-07",
+    "start": "2026-01-05"
+  },
+  "status": "active"
+}

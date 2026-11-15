@@ -18,8 +18,15 @@ class AppointmentBuilder(BaseBuilder):
         self._set("status", status)
         return self
 
-    def set_code(self, code: dict) -> "AppointmentBuilder":
-        self._set("code", code)
+    def set_code(self, system, code: str = "", display: str = "") -> "AppointmentBuilder":
+        """Menerima (system, code, display) seperti PHP, atau satu dict CodeableConcept."""
+        if isinstance(system, dict):
+            self._set("code", system)
+            return self
+        konsep = {"coding": [{"system": system, "code": code}]}
+        if display:
+            konsep["coding"][0]["display"] = display
+        self._set("code", konsep)
         return self
 
     def set_subject(self, reference: str, display: str = None) -> "AppointmentBuilder":

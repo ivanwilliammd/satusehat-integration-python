@@ -1,0 +1,23 @@
+{
+  "code": {
+    "coding": [
+      {
+        "code": "185389009",
+        "display": "Kunjungan",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  },
+  "id": "appt-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-801"
+    }
+  ],
+  "resourceType": "Appointment",
+  "status": "booked",
+  "subject": {
+    "reference": "Patient/1000000001"
+  }
+}
