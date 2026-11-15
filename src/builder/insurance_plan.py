@@ -29,7 +29,10 @@ class InsurancePlanBuilder(BaseBuilder):
         return self._set("name", val)
 
     def set_type(self, system: str, code: str, display: str = "") -> "InsurancePlanBuilder":
-        return self._set("type", {"coding": [{"system": system, "code": code, "display": display}]})
+        # FHIR R4: InsurancePlan.type 0..*. Menimpa berarti plan medical+dental
+        # kehilangan satu tipe tanpa keluhan — cacat yang sama ditemukan di Go dan Node.
+        self._push("type", {"coding": [{"system": system, "code": code, "display": display}]})
+        return self
 
     def set_administered_by(self, ref: str, display: str = None) -> "InsurancePlanBuilder":
         return self._set("administeredBy", self._ref(ref, "Organization", display))
