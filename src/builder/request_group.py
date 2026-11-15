@@ -29,3 +29,7 @@ class RequestGroupBuilder(BaseBuilder):
     def set_description(self, description: str) -> "RequestGroupBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "RequestGroupBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

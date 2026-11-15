@@ -29,3 +29,7 @@ class ResearchElementDefinitionBuilder(BaseBuilder):
     def set_description(self, description: str) -> "ResearchElementDefinitionBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "ResearchElementDefinitionBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

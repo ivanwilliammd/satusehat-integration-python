@@ -29,3 +29,7 @@ class EffectEvidenceSynthesisBuilder(BaseBuilder):
     def set_description(self, description: str) -> "EffectEvidenceSynthesisBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "EffectEvidenceSynthesisBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

@@ -29,3 +29,7 @@ class BinaryBuilder(BaseBuilder):
     def set_description(self, description: str) -> "BinaryBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "BinaryBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

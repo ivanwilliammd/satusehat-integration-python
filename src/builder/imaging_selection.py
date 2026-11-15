@@ -29,3 +29,7 @@ class ImagingSelectionBuilder(BaseBuilder):
     def set_description(self, description: str) -> "ImagingSelectionBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "ImagingSelectionBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

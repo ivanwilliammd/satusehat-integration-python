@@ -25,7 +25,16 @@ class VisionPrescriptionBuilder(BaseBuilder):
     def set_status(self, val: str) -> "VisionPrescriptionBuilder":
         return self._set("status", val)
 
-    def set_code(self, system: str, code: str, display: str) -> "VisionPrescriptionBuilder":
+    def set_code(self, *args) -> "VisionPrescriptionBuilder":
+        """Menerima dua bentuk, karena modul ini satu-satunya yang memakai tiga argumen.
+
+        Bentuk lain di repo ini `set_code({"coding": [...]})`; pemanggil lama di sini
+        memakai `set_code(system, code, display)`. Keduanya diterima supaya tidak ada
+        pemanggil yang pecah karena perbedaan yang tidak ada gunanya.
+        """
+        if len(args) == 1 and isinstance(args[0], dict):
+            return self._set("code", args[0])
+        system, code, display = args
         return self._set("code", {"coding": [{"system": system, "code": code, "display": display}]})
 
     def set_subject(self, ref: str, display: str = None) -> "VisionPrescriptionBuilder":

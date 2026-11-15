@@ -29,3 +29,7 @@ class SlotBuilder(BaseBuilder):
     def set_description(self, description: str) -> "SlotBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "SlotBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

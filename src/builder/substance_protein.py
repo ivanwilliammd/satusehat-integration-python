@@ -29,3 +29,7 @@ class SubstanceProteinBuilder(BaseBuilder):
     def set_description(self, description: str) -> "SubstanceProteinBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "SubstanceProteinBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

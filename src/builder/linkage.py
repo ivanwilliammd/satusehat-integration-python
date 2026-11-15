@@ -29,3 +29,7 @@ class LinkageBuilder(BaseBuilder):
     def set_description(self, description: str) -> "LinkageBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "LinkageBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

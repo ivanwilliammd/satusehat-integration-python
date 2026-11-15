@@ -29,3 +29,7 @@ class EventDefinitionBuilder(BaseBuilder):
     def set_description(self, description: str) -> "EventDefinitionBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "EventDefinitionBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

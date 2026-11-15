@@ -29,3 +29,7 @@ class ScheduleBuilder(BaseBuilder):
     def set_description(self, description: str) -> "ScheduleBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "ScheduleBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

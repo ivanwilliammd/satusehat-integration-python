@@ -29,3 +29,7 @@ class LibraryBuilder(BaseBuilder):
     def set_description(self, description: str) -> "LibraryBuilder":
         self._set("description", description)
         return self
+
+    def set_encounter(self, reference: str) -> "LibraryBuilder":
+        self._set("encounter", {"reference": reference})
+        return self
