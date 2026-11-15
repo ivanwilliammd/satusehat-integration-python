@@ -1,0 +1,54 @@
+{
+  "appliesAge": "18",
+  "appliesDateTime": "2026-01-01",
+  "code": {
+    "coding": [
+      {
+        "code": "PROC-1",
+        "display": "Konsultasi",
+        "system": "http://terminology.kemkes.go.id/CodeSystem/procedure"
+      }
+    ]
+  },
+  "date": "2026-01-01",
+  "description": "Definisi tarif tindakan rawat jalan",
+  "id": "cid-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1100"
+    }
+  ],
+  "instance": [
+    {
+      "display": "Konsultasi umum",
+      "reference": {
+        "reference": "ChargeItem/ci-1"
+      },
+      "timingDateTime": "2026-01-05T09:00:00+07:00"
+    },
+    {
+      "display": "Tanpa referensi"
+    }
+  ],
+  "name": "Tarif Tindakan Rawat Jalan",
+  "property": [
+    {
+      "code": {
+        "coding": [
+          {
+            "code": "123",
+            "system": "http://snomed.info/sct"
+          }
+        ]
+      },
+      "valueString": "Nilai"
+    }
+  ],
+  "publisher": "RS Contoh",
+  "resourceType": "ChargeItemDefinition",
+  "status": "active",
+  "title": "Tarif Tindakan",
+  "url": "https://fhir.kemkes.go.id/ChargeItemDefinition/tindakan-1",
+  "version": "1.0.0"
+}
