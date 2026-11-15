@@ -1,0 +1,99 @@
+{
+  "encounter": {
+    "reference": "Encounter/enc-1"
+  },
+  "ended": "2026-01-05T09:30:00+07:00",
+  "id": "img-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-1500"
+    }
+  ],
+  "location": {
+    "reference": "Location/loc-1"
+  },
+  "modality": [
+    {
+      "code": "CT",
+      "display": "Computed Tomography",
+      "system": "http://dicom.nema.org/resources/ontology/DCM"
+    }
+  ],
+  "partOf": [
+    {
+      "reference": "ImagingStudy/img-0"
+    },
+    {
+      "reference": "ImagingStudy/img-00"
+    }
+  ],
+  "referrer": {
+    "reference": "Practitioner/1000000003"
+  },
+  "resourceType": "ImagingStudy",
+  "series": [
+    {
+      "bodySite": {
+        "coding": [
+          {
+            "code": "51185008",
+            "system": "http://snomed.info/sct"
+          }
+        ]
+      },
+      "description": "Potongan toraks",
+      "modality": {
+        "code": "CT",
+        "display": "Computed Tomography",
+        "system": "http://dicom.nema.org/resources/ontology/DCM"
+      },
+      "number": 1,
+      "status": "available",
+      "uid": "1.2.840.1.1"
+    },
+    {
+      "bodySite": {
+        "coding": [
+          {
+            "code": "51185008",
+            "display": "Toraks",
+            "system": "http://snomed.info/sct"
+          }
+        ]
+      },
+      "instance": [
+        {
+          "number": 5,
+          "sopClass": {
+            "code": "1.2.840.10008.5.1.4.1.1.4",
+            "display": "MR Image Storage",
+            "system": "http://dicom.nema.org/resources/ontology/DCM"
+          },
+          "uid": "1.2.3.4.5"
+        },
+        {
+          "number": 6,
+          "sopClass": {
+            "code": "1.2.840.10008.5.1.4.1.1.4",
+            "display": "MR Image Storage",
+            "system": "http://dicom.nema.org/resources/ontology/DCM"
+          },
+          "uid": "1.2.3.4.6"
+        }
+      ],
+      "modality": {
+        "code": "MR",
+        "display": "Magnetic Resonance",
+        "system": "http://dicom.nema.org/resources/ontology/DCM"
+      },
+      "started": "2026-01-05T10:00:00+07:00",
+      "uid": "1.2.840.2.2"
+    }
+  ],
+  "started": "2026-01-05T09:00:00+07:00",
+  "status": "available",
+  "subject": {
+    "reference": "Patient/1000000001"
+  }
+}
