@@ -74,17 +74,3 @@ class CoverageBuilder(BaseBuilder):
         if end:
             self._set("period/end", end)
         return self
-
-    def build(self) -> Dict[str, object]:
-        """Bangun dict, dengan path bertitik seperti period/start diubah menjadi objek bersarang."""
-        data: Dict[str, object] = {}
-        for key, value in self.data.items():
-            if key in ("resourceType",) or value not in (None, "", [], {}):
-                if "/" in key:
-                    luar, dalam = key.split("/", 1)
-                    wadah = data.setdefault(luar, {})
-                    if isinstance(wadah, dict):
-                        wadah[dalam] = value
-                else:
-                    data[key] = value
-        return data

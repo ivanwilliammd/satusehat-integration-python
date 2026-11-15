@@ -5,16 +5,35 @@ class BaseBuilder:
     def __init__(self, resource_type: str):
         self.data: Dict[str, Any] = {"resourceType": resource_type}
 
+    @staticmethod
+    def _titik(wadah: Any, segs: list):
+        """Telusuri jalur `a/b/0/c`, buat objek antara, dan kembalikan (induk, kunci akhir)."""
+        cur = wadah
+        for i, seg in enumerate(segs[:-1]):
+            kunci: Any = int(seg) if seg.lstrip("-").isdigit() else seg
+            if isinstance(cur, list):
+                while len(cur) <= kunci:
+                    cur.append({})
+                cur = cur[kunci]
+                continue
+            if kunci not in cur or not isinstance(cur[kunci], (dict, list)):
+                cur[kunci] = [] if segs[i + 1].lstrip("-").isdigit() else {}
+            cur = cur[kunci]
+        akhir = segs[-1]
+        return cur, (int(akhir) if akhir.lstrip("-").isdigit() else akhir)
+
     def _set(self, key: str, value: Any) -> "BaseBuilder":
+        """`set('period/start', …)` menulis period.start, bukan kunci literal "period/start"."""
         if value is not None and value != "" and value != [] and value != {}:
-            self.data[key] = value
+            induk, akhir = self._titik(self.data, key.split("/"))
+            induk[akhir] = value
         return self
 
     def _push(self, key: str, value: Any) -> "BaseBuilder":
-        if key not in self.data:
-            self.data[key] = []
-        if isinstance(self.data[key], list):
-            self.data[key].append(value)
+        induk, akhir = self._titik(self.data, key.split("/"))
+        if not isinstance(induk.get(akhir), list):
+            induk[akhir] = []
+        induk[akhir].append(value)
         return self
 
     def _append(self, key: str, value: Any) -> "BaseBuilder":
