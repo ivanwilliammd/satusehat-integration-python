@@ -1,0 +1,18 @@
+{
+  "code": {
+    "coding": [
+      {
+        "code": "93000515",
+        "display": "Amoksisilin",
+        "system": "http://sys-ids.kemkes.go.id/kfa"
+      }
+    ]
+  },
+  "id": "sub-1",
+  "resourceType": "Substance",
+  "status": "active",
+  "text": {
+    "div": "<div>Amoksisilin</div>",
+    "status": "generated"
+  }
+}
