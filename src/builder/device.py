@@ -28,13 +28,15 @@ class DeviceBuilder(BaseBuilder):
         return self._set("status", value)
 
     def status_reason(self, codeable_concept: dict) -> "DeviceBuilder":
-        return self._append("statusReason", codeable_concept)
+        """R4: statusReason 0..1 — dulu ditumpuk, kini menimpa."""
+        return self._set("statusReason", codeable_concept)
 
     def distinct_identifier(self, value: str) -> "DeviceBuilder":
         return self._set("distinctIdentifier", value)
 
     def manufacturer(self, value: str) -> "DeviceBuilder":
-        return self._set("manufacturerString", value)
+        """Dulu menulis `manufacturerString`; elemen R4 dan kanon adalah `manufacturer`."""
+        return self._set("manufacturer", value)
 
     def manufacture_date(self, value: str) -> "DeviceBuilder":
         return self._set("manufactureDate", value)
@@ -48,7 +50,8 @@ class DeviceBuilder(BaseBuilder):
     def serial_number(self, value: str) -> "DeviceBuilder":
         return self._set("serialNumber", value)
 
-    def device_name(self, name: str, type_: str = "user-defined-name") -> "DeviceBuilder":
+    def device_name(self, name: str, type_: str = "user-friendly-name") -> "DeviceBuilder":
+        """Default kanon `user-friendly-name`; `user-defined-name` bukan kode R4."""
         return self._append("deviceName", {"name": name, "type": type_})
 
     def model_number(self, value: str) -> "DeviceBuilder":
@@ -109,3 +112,38 @@ class DeviceBuilder(BaseBuilder):
 
     def identifier(self, system: str, value: str) -> "DeviceBuilder":
         return self._append("identifier", {"system": system, "value": value})
+
+    # --- alias nama kanon -----------------------------------------------------
+
+    def set_id(self, id: str) -> "DeviceBuilder":
+        return self._set("id", id)
+
+    def add_identifier(self, system: str, value: str) -> "DeviceBuilder":
+        return self.identifier(system, value)
+
+    def set_status(self, value: str) -> "DeviceBuilder":
+        return self.status(value)
+
+    def set_manufacturer(self, value: str) -> "DeviceBuilder":
+        return self.manufacturer(value)
+
+    def add_device_name(self, name: str, type_: str = "user-friendly-name") -> "DeviceBuilder":
+        return self.device_name(name, type_)
+
+    def set_type(self, konsep: dict) -> "DeviceBuilder":
+        return self.type(konsep)
+
+    def set_patient(self, reference: str, display: Optional[str] = None) -> "DeviceBuilder":
+        return self.patient(reference, display)
+
+    def set_owner(self, reference: str, display: Optional[str] = None) -> "DeviceBuilder":
+        return self.owner(reference, display)
+
+    def set_location(self, reference: str, display: Optional[str] = None) -> "DeviceBuilder":
+        return self.location(reference, display)
+
+    def set_serial_number(self, value: str) -> "DeviceBuilder":
+        return self.serial_number(value)
+
+    def add_note(self, note) -> "DeviceBuilder":
+        return self._append("note", note if isinstance(note, dict) else {"text": note})

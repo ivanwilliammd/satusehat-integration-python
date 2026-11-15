@@ -1,0 +1,52 @@
+{
+  "deviceName": [
+    {
+      "name": "Monitor Pasien",
+      "type": "user-friendly-name"
+    },
+    {
+      "name": "M-1234",
+      "type": "model-name"
+    }
+  ],
+  "id": "dev-1",
+  "identifier": [
+    {
+      "system": "http://sys.id/ni",
+      "value": "NI-2100"
+    }
+  ],
+  "location": {
+    "reference": "Location/loc-1"
+  },
+  "manufacturer": "Philips",
+  "note": [
+    {
+      "text": "Catatan perangkat"
+    },
+    {
+      "author": "dr. Ani",
+      "text": "Diperiksa",
+      "time": "2026-01-06"
+    }
+  ],
+  "owner": {
+    "reference": "Organization/1000000001"
+  },
+  "patient": {
+    "reference": "Patient/1000000001"
+  },
+  "resourceType": "Device",
+  "serialNumber": "SN-999",
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "code": "26763009",
+        "display": "Monitor",
+        "system": "http://snomed.info/sct"
+      }
+    ],
+    "text": "Monitor"
+  }
+}
