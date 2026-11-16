@@ -26,7 +26,11 @@ def snake(nama: str) -> str:
 def daftar_builder() -> list[tuple[str, list[str]]]:
     hasil = []
     for path in sorted(BUILDER.glob("*.py")):
-        if path.name.startswith(("_", "test_")) or path.name == "base_builder.py":
+        # `test_script.py`/`test_report.py` adalah builder TestScript/TestReport, bukan uji:
+        # berkas uji dikenali dari adanya fungsi `def test_` di dalamnya.
+        if path.name.startswith("_") or path.name == "base_builder.py":
+            continue
+        if "\ndef test_" in path.read_text(encoding="utf-8"):
             continue
         teks = path.read_text()
         # Sebagian builder tidak memakai BaseBuilder; resource-nya dibaca dari resourceType.

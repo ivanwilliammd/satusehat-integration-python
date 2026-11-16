@@ -104,8 +104,12 @@ def sinkronkan() -> list[str]:
     berubah: list[str] = []
     for path in sorted(BUILDER.glob("*.py")):
         # Berkas uji di direktori builder memuat builder palsu (resourceType "X"); tanpa pengecualian
-        # ini, generator membuat parser untuk resource yang tidak ada.
-        if path.name.startswith(("_", "test_")) or path.name in {"base_builder.py"}:
+        # ini, generator membuat parser untuk resource yang tidak ada. Tandanya bukan nama berkas:
+        # `test_script.py` dan `test_report.py` adalah builder sungguhan untuk TestScript/TestReport.
+        if path.name.startswith("_") or path.name == "base_builder.py":
+            continue
+        isi = path.read_text(encoding="utf-8")
+        if "\ndef test_" in isi:
             continue
         teks = path.read_text()
         resource = resource_dari(teks)
