@@ -8,7 +8,7 @@
     "datatype":          { "php": 33, "node": 33, "python": 33, "go": 33, "rust": 12 },
     "terminology_files": { "php": 21, "node": 21, "python": 21, "go": 21, "rust": 1 },
     "queue_files":       { "php": 8, "node": 8, "python": 8, "go": 8, "rust": 1 },
-    "parser_files":      { "php": 142, "node": 142, "python": 137, "go": 142, "rust": 1 },
+    "parser_files":      { "php": 142, "node": 142, "python": 139, "go": 142, "rust": 1 },
     "test_files":        { "php": 235, "node": 211, "python": 217, "go": 249, "rust": 100 }
   },
   "capabilities": {
