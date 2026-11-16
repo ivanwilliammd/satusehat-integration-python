@@ -26,14 +26,17 @@ def snake(nama: str) -> str:
 def daftar_builder() -> list[tuple[str, list[str]]]:
     hasil = []
     for path in sorted(BUILDER.glob("*.py")):
-        if path.name.startswith("_") or path.name == "base_builder.py":
+        if path.name.startswith(("_", "test_")) or path.name == "base_builder.py":
             continue
         teks = path.read_text()
-        m = re.search(r'super\(\).__init__\(\s*"([^"]+)"', teks)
+        # Sebagian builder tidak memakai BaseBuilder; resource-nya dibaca dari resourceType.
+        m = re.search(r'super\(\)\.__init__\(\s*"([^"]+)"', teks) or re.search(
+            r'"resourceType"\s*:\s*"([A-Za-z0-9]+)"', teks
+        )
         if not m:
             continue
         elemen: list[str] = []
-        for k in re.findall(r'self\._(?:set|append)\(\s*"([^"]+)"', teks):
+        for k in re.findall(r'self\.(?:_set|_append|set|push)\(\s*"([^"]+)"', teks):
             akar = k.split("/")[0]
             if akar != "resourceType" and akar not in elemen:
                 elemen.append(akar)

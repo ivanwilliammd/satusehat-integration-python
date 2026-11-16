@@ -17,9 +17,14 @@ AKAR = pathlib.Path(__file__).resolve().parents[1]
 BUILDER = AKAR / "src" / "builder"
 PARSER = AKAR / "src" / "parser"
 
+# Dua gaya penulisan builder hidup berdampingan di repo ini: yang memakai BaseBuilder
+# (`self._set`/`self._append`) dan yang menulis `self.set`/`self.push` sendiri. Keduanya harus
+# terbaca, kalau tidak builder gaya kedua terlewat tanpa suara.
 POLA = (
     re.compile(r"self\._set\(\s*\"([^\"]+)\""),
     re.compile(r"self\._append\(\s*\"([^\"]+)\""),
+    re.compile(r"self\.set\(\s*\"([^\"]+)\""),
+    re.compile(r"self\.push\(\s*\"([^\"]+)\""),
 )
 
 
@@ -29,7 +34,15 @@ def snake(nama: str) -> str:
 
 
 def resource_dari(teks: str) -> str | None:
-    m = re.search(r"super\(\).__init__\(\s*\"([^\"]+)\"", teks)
+    """Nama resource, dari panggilan induk atau dari resourceType yang ditulis langsung.
+
+    Sebagian builder tidak memakai BaseBuilder dan menulis `{"resourceType": "X"}` sendiri; tanpa
+    jalur kedua, mereka dilewati generator dan parser-nya tidak pernah ikut diperbarui.
+    """
+    m = re.search(r"super\(\)\.__init__\(\s*\"([^\"]+)\"", teks)
+    if m:
+        return m.group(1)
+    m = re.search(r'"resourceType"\s*:\s*"([A-Za-z0-9]+)"', teks)
     return m.group(1) if m else None
 
 
@@ -90,7 +103,9 @@ def getter_ada(teks: str) -> set[str]:
 def sinkronkan() -> list[str]:
     berubah: list[str] = []
     for path in sorted(BUILDER.glob("*.py")):
-        if path.name.startswith("_") or path.name in {"base_builder.py"}:
+        # Berkas uji di direktori builder memuat builder palsu (resourceType "X"); tanpa pengecualian
+        # ini, generator membuat parser untuk resource yang tidak ada.
+        if path.name.startswith(("_", "test_")) or path.name in {"base_builder.py"}:
             continue
         teks = path.read_text()
         resource = resource_dari(teks)
