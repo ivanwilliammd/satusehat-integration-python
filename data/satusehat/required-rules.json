@@ -1,0 +1,238 @@
+{
+ "_sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/encounter",
+ "_diambil": "2026-11-16",
+ "_catatan": "Aturan wajib yang dinyatakan dokumentasi SATUSEHAT (tanda * pada judul elemen), bukan preferensi lokal. Setiap aturan menyebut sumbernya.",
+ "Encounter": [
+  {
+   "elemen": "class",
+   "jenis": "sistem",
+   "sistem": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/encounter"
+  },
+  {
+   "elemen": "status",
+   "jenis": "kode",
+   "kode": [
+    "planned",
+    "arrived",
+    "triaged",
+    "in-progress",
+    "onleave",
+    "finished",
+    "cancelled",
+    "entered-in-error",
+    "unknown"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/encounter"
+  }
+ ],
+ "Observation": [
+  {
+   "elemen": "status",
+   "jenis": "kode",
+   "kode": [
+    "registered",
+    "preliminary",
+    "final",
+    "amended",
+    "corrected",
+    "cancelled",
+    "entered-in-error",
+    "unknown"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/observation"
+  },
+  {
+   "elemen": "code.coding",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/observation"
+  },
+  {
+   "elemen": "subject",
+   "jenis": "referensi",
+   "awalan": "Patient/",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/observation"
+  },
+  {
+   "elemen": "encounter",
+   "jenis": "ada",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/observation"
+  }
+ ],
+ "Patient": [
+  {
+   "elemen": "identifier",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/patient"
+  },
+  {
+   "elemen": "name",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/patient"
+  }
+ ],
+ "Condition": [
+  {
+   "elemen": "code.coding",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/condition"
+  },
+  {
+   "elemen": "subject",
+   "jenis": "referensi",
+   "awalan": "Patient/",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/condition"
+  },
+  {
+   "elemen": "encounter",
+   "jenis": "ada",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/condition"
+  }
+ ],
+ "Procedure": [
+  {
+   "elemen": "status",
+   "jenis": "kode",
+   "kode": [
+    "preparation",
+    "in-progress",
+    "not-done",
+    "on-hold",
+    "stopped",
+    "completed",
+    "entered-in-error",
+    "unknown"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/procedure"
+  },
+  {
+   "elemen": "code.coding",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/procedure"
+  },
+  {
+   "elemen": "subject",
+   "jenis": "referensi",
+   "awalan": "Patient/",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/procedure"
+  },
+  {
+   "elemen": "encounter",
+   "jenis": "ada",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/procedure"
+  }
+ ],
+ "_jenis": {
+  "kode": "nilai harus salah satu daftar",
+  "isi": "wajib ada dan tidak kosong",
+  "referensi": "wajib reference dengan awalan tertentu",
+  "ada": "wajib ada",
+  "sistem": "Coding dengan system tertentu",
+  "salah_satu": "minimal satu dari pilihan ada"
+ },
+ "DiagnosticReport": [
+  {
+   "elemen": "status",
+   "jenis": "kode",
+   "kode": [
+    "registered",
+    "partial",
+    "preliminary",
+    "final",
+    "amended",
+    "corrected",
+    "appended",
+    "cancelled",
+    "entered-in-error",
+    "unknown"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/diagnostic-report"
+  },
+  {
+   "elemen": "code.coding",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/diagnostic-report"
+  },
+  {
+   "elemen": "subject",
+   "jenis": "referensi",
+   "awalan": "Patient/",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/diagnostic-report"
+  },
+  {
+   "elemen": "encounter",
+   "jenis": "ada",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/diagnostic-report"
+  }
+ ],
+ "Immunization": [
+  {
+   "elemen": "status",
+   "jenis": "kode",
+   "kode": [
+    "completed",
+    "entered-in-error",
+    "not-done"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/immunization"
+  },
+  {
+   "elemen": "vaccineCode.coding",
+   "jenis": "isi",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/immunization"
+  },
+  {
+   "elemen": "patient",
+   "jenis": "referensi",
+   "awalan": "Patient/",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/immunization"
+  },
+  {
+   "elemen": "occurrence[x]",
+   "jenis": "salah_satu",
+   "pilihan": [
+    "occurrenceDateTime",
+    "occurrenceString"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/immunization"
+  }
+ ],
+ "MedicationRequest": [
+  {
+   "elemen": "status",
+   "jenis": "kode",
+   "kode": [
+    "active",
+    "on-hold",
+    "cancelled",
+    "completed",
+    "entered-in-error",
+    "stopped",
+    "draft",
+    "unknown"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/medication-request"
+  },
+  {
+   "elemen": "intent",
+   "jenis": "kode",
+   "kode": [
+    "proposal",
+    "plan",
+    "order",
+    "original-order",
+    "reflex-order",
+    "filler-order",
+    "instance-order",
+    "option"
+   ],
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/medication-request"
+  },
+  {
+   "elemen": "subject",
+   "jenis": "referensi",
+   "awalan": "Patient/",
+   "sumber": "https://satusehat.kemkes.go.id/platform/docs/id/fhir/resources/medication-request"
+  }
+ ]
+}

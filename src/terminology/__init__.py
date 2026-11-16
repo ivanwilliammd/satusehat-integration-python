@@ -50,3 +50,5 @@ __all__ = [
     "TerminologyClient",
     "TerminologyQueryBuilder",
 ]
+
+from .satusehat_rules import ACT_CODE, violations  # noqa: E402
