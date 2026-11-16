@@ -65,3 +65,13 @@ class MedicationParser:
         return self.payload.get("extension")
 
     getExtension = get_extension
+
+    def get_package(self) -> Any:
+        return self._data.get("package")
+
+    getPackage = get_package
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id

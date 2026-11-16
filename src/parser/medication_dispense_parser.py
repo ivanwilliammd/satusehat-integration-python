@@ -95,3 +95,28 @@ class MedicationDispenseParser:
         return self.payload.get("dosageInstruction")
 
     getDosageInstruction = get_dosage_instruction
+
+    def get_medication(self) -> Any:
+        return self._data.get("medication")
+
+    getMedication = get_medication
+
+    def get_encounter(self) -> Any:
+        return self._data.get("encounter")
+
+    getEncounter = get_encounter
+
+    def get_destination(self) -> Any:
+        return self._data.get("destination")
+
+    getDestination = get_destination
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_substitution(self) -> Any:
+        return self._data.get("substitution")
+
+    getSubstitution = get_substitution

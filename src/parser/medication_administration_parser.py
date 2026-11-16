@@ -75,3 +75,28 @@ class MedicationAdministrationParser:
         return self.payload.get("dosage")
 
     getDosage = get_dosage
+
+    def get_medication(self) -> Any:
+        return self._data.get("medication")
+
+    getMedication = get_medication
+
+    def get_encounter(self) -> Any:
+        return self._data.get("encounter")
+
+    getEncounter = get_encounter
+
+    def get_effective_date_time(self) -> Any:
+        return self._data.get("effectiveDateTime")
+
+    getEffectiveDateTime = get_effective_date_time
+
+    def get_requester(self) -> Any:
+        return self._data.get("requester")
+
+    getRequester = get_requester
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id

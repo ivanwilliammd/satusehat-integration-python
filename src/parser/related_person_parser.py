@@ -60,3 +60,13 @@ class RelatedPersonParser:
         return self.related_person.get("communication")
 
     getCommunications = get_communications
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_patient(self) -> Any:
+        return self._data.get("patient")
+
+    getPatient = get_patient

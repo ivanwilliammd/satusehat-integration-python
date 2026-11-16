@@ -2,6 +2,23 @@
 
 > **Open-source Python SDK for integrating with SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4. Pure Python, no framework dependency.
 
+## Status & cakupan (diukur, bukan diklaim)
+
+| Bagian | Jumlah | Bukti |
+| --- | --- | --- |
+| Builder | 141 resource | `src/builder` |
+| Method kanon | 1.405 | `src/builder/test_method_name_parity.py` (kontrak `contracts/php_method_surface.json`) |
+| Parser | 141 resource | `src/parser`, `src/parser/test_parser_surface.py` |
+| Namespace R5 | 144 modul builder | `src/r5/builder`, `src/r5/test_r5_namespace.py` |
+| Tes | 2.191 | `python -m pytest` |
+
+R4 tetap acuan; R5 cukup ganti import:
+
+```python
+from src.builder.basic import BasicBuilder      # R4
+from src.r5.builder.basic import BasicBuilder   # R5 — hanya baris ini
+```
+
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)
 [![FHIR R4](https://img.shields.io/badge/FHIR-R4-orange)](https://hl7.org/fhir/R4/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)

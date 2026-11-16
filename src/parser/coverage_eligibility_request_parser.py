@@ -90,3 +90,18 @@ class CoverageEligibilityRequestParser:
         return self.payload.get("contained")
 
     getContained = get_contained
+
+    def get_requestor(self) -> Any:
+        return self._data.get("requestor")
+
+    getRequestor = get_requestor
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_serviced_period(self) -> Any:
+        return self._data.get("servicedPeriod")
+
+    getServicedPeriod = get_serviced_period

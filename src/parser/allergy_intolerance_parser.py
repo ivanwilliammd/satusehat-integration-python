@@ -65,3 +65,23 @@ class AllergyIntoleranceParser:
         return self.payload.get("recorder")
 
     getRecorder = get_recorder
+
+    def get_type(self) -> Any:
+        return self._data.get("type")
+
+    getType = get_type
+
+    def get_onset_date_time(self) -> Any:
+        return self._data.get("onsetDateTime")
+
+    getOnsetDateTime = get_onset_date_time
+
+    def get_asserter(self) -> Any:
+        return self._data.get("asserter")
+
+    getAsserter = get_asserter
+
+    def get_note(self) -> Any:
+        return self._data.get("note")
+
+    getNote = get_note

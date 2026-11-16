@@ -55,3 +55,18 @@ class VisionPrescriptionParser:
         return self.payload.get("lensSpecification")
 
     getLensSpecification = get_lens_specification
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_code(self) -> Any:
+        return self._data.get("code")
+
+    getCode = get_code
+
+    def get_subject(self) -> Any:
+        return self._data.get("subject")
+
+    getSubject = get_subject

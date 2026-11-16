@@ -100,3 +100,48 @@ class ImmunizationParser:
         return self.payload.get("protocolApplied")
 
     getProtocolApplied = get_protocol_applied
+
+    def get_subject(self) -> Any:
+        return self._data.get("subject")
+
+    getSubject = get_subject
+
+    def get_report_origin(self) -> Any:
+        return self._data.get("reportOrigin")
+
+    getReportOrigin = get_report_origin
+
+    def get_manufacturer(self) -> Any:
+        return self._data.get("manufacturer")
+
+    getManufacturer = get_manufacturer
+
+    def get_site(self) -> Any:
+        return self._data.get("site")
+
+    getSite = get_site
+
+    def get_reason_reference(self) -> Any:
+        return self._data.get("reasonReference")
+
+    getReasonReference = get_reason_reference
+
+    def get_is_subpotent(self) -> Any:
+        return self._data.get("isSubpotent")
+
+    getIsSubpotent = get_is_subpotent
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_note(self) -> Any:
+        return self._data.get("note")
+
+    getNote = get_note
+
+    def get_subpotent_reason(self) -> Any:
+        return self._data.get("subpotentReason")
+
+    getSubpotentReason = get_subpotent_reason

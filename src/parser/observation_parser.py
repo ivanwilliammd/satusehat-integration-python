@@ -148,3 +148,63 @@ class ObservationParser:
         return self.observation.get("note")
 
     getNote = get_note
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_effective_period(self) -> Any:
+        return self._data.get("effectivePeriod")
+
+    getEffectivePeriod = get_effective_period
+
+    def get_effective_instant(self) -> Any:
+        return self._data.get("effectiveInstant")
+
+    getEffectiveInstant = get_effective_instant
+
+    def get_effective_timing(self) -> Any:
+        return self._data.get("effectiveTiming")
+
+    getEffectiveTiming = get_effective_timing
+
+    def get_value_boolean(self) -> Any:
+        return self._data.get("valueBoolean")
+
+    getValueBoolean = get_value_boolean
+
+    def get_value_integer(self) -> Any:
+        return self._data.get("valueInteger")
+
+    getValueInteger = get_value_integer
+
+    def get_value_range(self) -> Any:
+        return self._data.get("valueRange")
+
+    getValueRange = get_value_range
+
+    def get_value_ratio(self) -> Any:
+        return self._data.get("valueRatio")
+
+    getValueRatio = get_value_ratio
+
+    def get_value_time(self) -> Any:
+        return self._data.get("valueTime")
+
+    getValueTime = get_value_time
+
+    def get_value_date_time(self) -> Any:
+        return self._data.get("valueDateTime")
+
+    getValueDateTime = get_value_date_time
+
+    def get_value_period(self) -> Any:
+        return self._data.get("valuePeriod")
+
+    getValuePeriod = get_value_period
+
+    def get_device(self) -> Any:
+        return self._data.get("device")
+
+    getDevice = get_device

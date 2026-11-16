@@ -70,3 +70,23 @@ class DeviceRequestParser:
         return self.payload.get("reasonCode")
 
     getReasonCode = get_reason_code
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_code(self) -> Any:
+        return self._data.get("code")
+
+    getCode = get_code
+
+    def get_description(self) -> Any:
+        return self._data.get("description")
+
+    getDescription = get_description
+
+    def get_encounter(self) -> Any:
+        return self._data.get("encounter")
+
+    getEncounter = get_encounter

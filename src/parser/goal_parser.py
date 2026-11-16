@@ -75,3 +75,38 @@ class GoalParser:
         return self.payload.get("outcomeCode")
 
     getOutcomeCode = get_outcome_code
+
+    def get_priority(self) -> Any:
+        return self._data.get("priority")
+
+    getPriority = get_priority
+
+    def get_start_date(self) -> Any:
+        return self._data.get("startDate")
+
+    getStartDate = get_start_date
+
+    def get_start_codeable_concept(self) -> Any:
+        return self._data.get("startCodeableConcept")
+
+    getStartCodeableConcept = get_start_codeable_concept
+
+    def get_status_reason(self) -> Any:
+        return self._data.get("statusReason")
+
+    getStatusReason = get_status_reason
+
+    def get_note(self) -> Any:
+        return self._data.get("note")
+
+    getNote = get_note
+
+    def get_outcome_reference(self) -> Any:
+        return self._data.get("outcomeReference")
+
+    getOutcomeReference = get_outcome_reference
+
+    def get_subject_history(self) -> Any:
+        return self._data.get("subjectHistory")
+
+    getSubjectHistory = get_subject_history

@@ -75,3 +75,43 @@ class PaymentReconciliationParser:
         return self.payload.get("processNote")
 
     getProcessNote = get_process_note
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_type(self) -> Any:
+        return self._data.get("type")
+
+    getType = get_type
+
+    def get_request(self) -> Any:
+        return self._data.get("request")
+
+    getRequest = get_request
+
+    def get_request_provider(self) -> Any:
+        return self._data.get("requestProvider")
+
+    getRequestProvider = get_request_provider
+
+    def get_insurer(self) -> Any:
+        return self._data.get("insurer")
+
+    getInsurer = get_insurer
+
+    def get_request_match_date(self) -> Any:
+        return self._data.get("requestMatchDate")
+
+    getRequestMatchDate = get_request_match_date
+
+    def get_payment_identifier(self) -> Any:
+        return self._data.get("paymentIdentifier")
+
+    getPaymentIdentifier = get_payment_identifier
+
+    def get_total_amount(self) -> Any:
+        return self._data.get("totalAmount")
+
+    getTotalAmount = get_total_amount

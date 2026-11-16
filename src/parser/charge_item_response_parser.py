@@ -90,3 +90,8 @@ class ChargeItemResponseParser:
         return self.payload.get("excess")
 
     getExcess = get_excess
+
+    def get_outcome(self) -> Any:
+        return self._data.get("outcome")
+
+    getOutcome = get_outcome

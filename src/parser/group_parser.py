@@ -52,3 +52,8 @@ class GroupParser:
         return self.group.get("member")
 
     getMembers = get_members
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id

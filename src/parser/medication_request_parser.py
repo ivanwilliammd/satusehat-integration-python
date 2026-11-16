@@ -90,3 +90,23 @@ class MedicationRequestParser:
         return self.payload.get("dispenseRequest")
 
     getDispenseRequest = get_dispense_request
+
+    def get_medication_codeable_concept(self) -> Any:
+        return self._data.get("medicationCodeableConcept")
+
+    getMedicationCodeableConcept = get_medication_codeable_concept
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_recorder(self) -> Any:
+        return self._data.get("recorder")
+
+    getRecorder = get_recorder
+
+    def get_substitution(self) -> Any:
+        return self._data.get("substitution")
+
+    getSubstitution = get_substitution

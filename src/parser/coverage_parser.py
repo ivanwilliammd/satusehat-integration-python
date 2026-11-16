@@ -60,3 +60,43 @@ class CoverageParser:
         return self.payload.get("extension")
 
     getExtension = get_extension
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_policy_holder(self) -> Any:
+        return self._data.get("policyHolder")
+
+    getPolicyHolder = get_policy_holder
+
+    def get_subscriber(self) -> Any:
+        return self._data.get("subscriber")
+
+    getSubscriber = get_subscriber
+
+    def get_dependent(self) -> Any:
+        return self._data.get("dependent")
+
+    getDependent = get_dependent
+
+    def get_relationship(self) -> Any:
+        return self._data.get("relationship")
+
+    getRelationship = get_relationship
+
+    def get_order(self) -> Any:
+        return self._data.get("order")
+
+    getOrder = get_order
+
+    def get_network(self) -> Any:
+        return self._data.get("network")
+
+    getNetwork = get_network
+
+    def get_period(self) -> Any:
+        return self._data.get("period")
+
+    getPeriod = get_period

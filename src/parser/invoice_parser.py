@@ -55,3 +55,13 @@ class InvoiceParser:
         return self.payload.get("totalNet")
 
     getTotalNet = get_total_net
+
+    def get_total_gross(self) -> Any:
+        return self._data.get("totalGross")
+
+    getTotalGross = get_total_gross
+
+    def get_total_vat(self) -> Any:
+        return self._data.get("totalVAT")
+
+    getTotalVAT = get_total_vat

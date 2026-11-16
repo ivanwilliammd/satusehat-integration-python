@@ -122,3 +122,38 @@ class SpecimenParser:
         return self.specimen.get("processing")
 
     getProcessing = get_processing
+
+    def get_accession_identifier(self) -> Any:
+        return self._data.get("accessionIdentifier")
+
+    getAccessionIdentifier = get_accession_identifier
+
+    def get_collection(self) -> Any:
+        return self._data.get("collection")
+
+    getCollection = get_collection
+
+    def get_identifier(self) -> Any:
+        return self._data.get("identifier")
+
+    getIdentifier = get_identifier
+
+    def get_parent(self) -> Any:
+        return self._data.get("parent")
+
+    getParent = get_parent
+
+    def get_request(self) -> Any:
+        return self._data.get("request")
+
+    getRequest = get_request
+
+    def get_container(self) -> Any:
+        return self._data.get("container")
+
+    getContainer = get_container
+
+    def get_note(self) -> Any:
+        return self._data.get("note")
+
+    getNote = get_note

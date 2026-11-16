@@ -70,3 +70,18 @@ class MedicationStatementParser:
         return self.payload.get("context")
 
     getContext = get_context
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_medication_codeable_concept(self) -> Any:
+        return self._data.get("medicationCodeableConcept")
+
+    getMedicationCodeableConcept = get_medication_codeable_concept
+
+    def get_effective_period(self) -> Any:
+        return self._data.get("effectivePeriod")
+
+    getEffectivePeriod = get_effective_period

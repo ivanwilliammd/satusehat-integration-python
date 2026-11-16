@@ -65,3 +65,28 @@ class SupplyDeliveryParser:
         return self.payload.get("receiver")
 
     getReceiver = get_receiver
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_code(self) -> Any:
+        return self._data.get("code")
+
+    getCode = get_code
+
+    def get_subject(self) -> Any:
+        return self._data.get("subject")
+
+    getSubject = get_subject
+
+    def get_description(self) -> Any:
+        return self._data.get("description")
+
+    getDescription = get_description
+
+    def get_encounter(self) -> Any:
+        return self._data.get("encounter")
+
+    getEncounter = get_encounter

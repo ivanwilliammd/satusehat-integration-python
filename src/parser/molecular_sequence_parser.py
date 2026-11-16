@@ -68,3 +68,8 @@ class MolecularSequenceParser:
         return self.molecular_sequence.get("variant")
 
     getVariants = get_variants
+
+    def get_performer(self) -> Any:
+        return self._data.get("performer")
+
+    getPerformer = get_performer

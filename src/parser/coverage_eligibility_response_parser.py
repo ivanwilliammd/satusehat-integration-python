@@ -80,3 +80,23 @@ class CoverageEligibilityResponseParser:
         return self.payload.get("extension")
 
     getExtension = get_extension
+
+    def get_serviced_date(self) -> Any:
+        return self._data.get("servicedDate")
+
+    getServicedDate = get_serviced_date
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_request_provider(self) -> Any:
+        return self._data.get("requestProvider")
+
+    getRequestProvider = get_request_provider
+
+    def get_serviced_period(self) -> Any:
+        return self._data.get("servicedPeriod")
+
+    getServicedPeriod = get_serviced_period

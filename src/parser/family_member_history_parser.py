@@ -50,3 +50,103 @@ class FamilyMemberHistoryParser:
         return self.payload.get("condition")
 
     getCondition = get_condition
+
+    def get_id(self) -> Any:
+        return self._data.get("id")
+
+    getId = get_id
+
+    def get_instantiates_canonical(self) -> Any:
+        return self._data.get("instantiatesCanonical")
+
+    getInstantiatesCanonical = get_instantiates_canonical
+
+    def get_data_absent_reason(self) -> Any:
+        return self._data.get("dataAbsentReason")
+
+    getDataAbsentReason = get_data_absent_reason
+
+    def get_name(self) -> Any:
+        return self._data.get("name")
+
+    getName = get_name
+
+    def get_sex(self) -> Any:
+        return self._data.get("sex")
+
+    getSex = get_sex
+
+    def get_born_period(self) -> Any:
+        return self._data.get("bornPeriod")
+
+    getBornPeriod = get_born_period
+
+    def get_born_date(self) -> Any:
+        return self._data.get("bornDate")
+
+    getBornDate = get_born_date
+
+    def get_born_string(self) -> Any:
+        return self._data.get("bornString")
+
+    getBornString = get_born_string
+
+    def get_age_age(self) -> Any:
+        return self._data.get("ageAge")
+
+    getAgeAge = get_age_age
+
+    def get_age_unit(self) -> Any:
+        return self._data.get("ageUnit")
+
+    getAgeUnit = get_age_unit
+
+    def get_age_range(self) -> Any:
+        return self._data.get("ageRange")
+
+    getAgeRange = get_age_range
+
+    def get_age_string(self) -> Any:
+        return self._data.get("ageString")
+
+    getAgeString = get_age_string
+
+    def get_deceased_age(self) -> Any:
+        return self._data.get("deceasedAge")
+
+    getDeceasedAge = get_deceased_age
+
+    def get_deceased_age_unit(self) -> Any:
+        return self._data.get("deceasedAgeUnit")
+
+    getDeceasedAgeUnit = get_deceased_age_unit
+
+    def get_deceased_range(self) -> Any:
+        return self._data.get("deceasedRange")
+
+    getDeceasedRange = get_deceased_range
+
+    def get_deceased_date(self) -> Any:
+        return self._data.get("deceasedDate")
+
+    getDeceasedDate = get_deceased_date
+
+    def get_deceased_string(self) -> Any:
+        return self._data.get("deceasedString")
+
+    getDeceasedString = get_deceased_string
+
+    def get_deceased_codeable_concept(self) -> Any:
+        return self._data.get("deceasedCodeableConcept")
+
+    getDeceasedCodeableConcept = get_deceased_codeable_concept
+
+    def get_reason_code(self) -> Any:
+        return self._data.get("reasonCode")
+
+    getReasonCode = get_reason_code
+
+    def get_code(self) -> Any:
+        return self._data.get("code")
+
+    getCode = get_code
