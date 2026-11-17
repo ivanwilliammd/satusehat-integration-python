@@ -1,6 +1,6 @@
 [project]
 name = "satusehat-integration"
-version = "4.19.0"
+version = "4.19.1"
 description = "Unofficial SATUSEHAT FHIR R4 SDK for Python — 141 PayloadBuilder classes, SSRequest, SSResponse, 558 Validation Rules, 18 Parsers, and Durable Queue."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -28,6 +28,16 @@ dev = ["pytest", "pytest-cov", "ruff"]
 Homepage = "https://github.com/ivanwilliammd/satusehat-integration-python"
 Repository = "https://github.com/ivanwilliammd/satusehat-integration-python"
 Issues = "https://github.com/ivanwilliammd/satusehat-integration-python/issues"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["satusehat_integration*"]
+
+[tool.setuptools.package-data]
+"satusehat_integration" = ["data/**/*.json"]
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]

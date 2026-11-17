@@ -14,8 +14,8 @@ import re
 import sys
 
 AKAR = pathlib.Path(__file__).resolve().parents[1]
-BUILDER = AKAR / "src" / "builder"
-PARSER = AKAR / "src" / "parser"
+BUILDER = AKAR / "satusehat_integration" / "builder"
+PARSER = AKAR / "satusehat_integration" / "parser"
 
 # Dua gaya penulisan builder hidup berdampingan di repo ini: yang memakai BaseBuilder
 # (`self._set`/`self._append`) dan yang menulis `self.set`/`self.push` sendiri. Keduanya harus

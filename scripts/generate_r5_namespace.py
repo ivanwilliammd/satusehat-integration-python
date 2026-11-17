@@ -2,8 +2,8 @@
 
 Memakai R5 cukup dengan mengganti baris `import`:
 
-    from src.builder.basic import BasicBuilder        # R4
-    from src.r5.builder.basic import BasicBuilder     # R5 — hanya baris ini
+    from satusehat_integration.builder.basic import BasicBuilder        # R4
+    from satusehat_integration.r5.builder.basic import BasicBuilder     # R5 — hanya baris ini
 
 Setiap kelas R5 adalah turunan apa adanya dari kelas kanon selama R5 tidak mengubahnya. Bila satu
 resource memang berbeda di R5, hapus penanda `@generated` pada berkas itu dan tulis implementasinya;
@@ -16,8 +16,8 @@ import re
 import sys
 
 AKAR = pathlib.Path(__file__).resolve().parents[1]
-SUMBER = {"builder": AKAR / "src" / "builder", "datatype": AKAR / "src" / "datatype"}
-TUJUAN = AKAR / "src" / "r5"
+SUMBER = {"builder": AKAR / "satusehat_integration" / "builder", "datatype": AKAR / "satusehat_integration" / "datatype"}
+TUJUAN = AKAR / "satusehat_integration" / "r5"
 
 
 def kelas_dari(berkas: pathlib.Path) -> str | None:
@@ -34,7 +34,7 @@ dan tulis implementasinya di sini.
 """
 from __future__ import annotations
 
-from src.{ruang}.{modul} import {nama} as _R4{nama}
+from satusehat_integration.{ruang}.{modul} import {nama} as _R4{nama}
 
 
 class {nama}(_R4{nama}):
