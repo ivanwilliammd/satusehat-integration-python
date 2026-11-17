@@ -1,5 +1,20 @@
 # Changelog
 
+## v4.19.1 — 2026-11-17
+
+### Fixed
+
+- **The published wheel could not be imported.** `pip install satusehat-integration` installed top-level
+  modules named `builder`, `parser`, `ssrequest`, … because `src/` was treated as the package root, so
+  `import satusehat_integration` raised `ModuleNotFoundError`. The directory is now
+  `satusehat_integration/`, the imports inside the package follow, and a clean virtualenv can import and
+  build a Patient from the wheel.
+- Test and generator scripts that resolved `src/…` paths follow the new directory name.
+
+### Changed
+
+- Test count corrected in `docs/SRD.md`: 2,080 passing + 2 skipped (previously stated as 2,219 + 1).
+
 ## v4.19.0 - 2026-11-17
 
 ### Added

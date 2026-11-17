@@ -1,4 +1,4 @@
-# src/terminology package
+# satusehat_integration/terminology package
 from .base import TerminologyBase
 from .icd10 import Icd10
 from .icd9cm import Icd9cm
