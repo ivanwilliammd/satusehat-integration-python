@@ -11,17 +11,17 @@
 
 | Bagian | Jumlah | Bukti |
 | --- | --- | --- |
-| Builder | 141 resource | `src/builder` |
-| Method builder | 1.405 | `src/builder/test_method_name_parity.py` (kontrak `contracts/php_method_surface.json`) |
-| Parser | 141 resource (setiap builder) | `src/parser`, `src/parser/test_parser_surface.py` |
-| Namespace R5 | 144 modul builder | `src/r5/builder`, `src/r5/test_r5_namespace.py` |
+| Builder | 141 resource | `satusehat_integration/builder` |
+| Method builder | 1.405 | `satusehat_integration/builder/test_method_name_parity.py` (kontrak `contracts/php_method_surface.json`) |
+| Parser | 141 resource (setiap builder) | `satusehat_integration/parser`, `satusehat_integration/parser/test_parser_surface.py` |
+| Namespace R5 | 144 modul builder | `satusehat_integration/r5/builder`, `satusehat_integration/r5/test_r5_namespace.py` |
 | Tes | 2.194 | `python -m pytest` |
 
 R4 tetap acuan; R5 cukup ganti import:
 
 ```python
-from src.builder.basic import BasicBuilder      # R4
-from src.r5.builder.basic import BasicBuilder   # R5 — this line only
+from satusehat_integration.builder.basic import BasicBuilder      # R4
+from satusehat_integration.r5.builder.basic import BasicBuilder   # R5 — this line only
 ```
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)
@@ -80,7 +80,7 @@ ORGID_DEV=your_org_id
 
 ## Architecture
 
-### DataType Classes (`src/datatype/`)
+### DataType Classes (`satusehat_integration/datatype/`)
 
 Atomic FHIR R4 value objects. All provide a `to_json()` method — nested types serialize to clean FHIR JSON automatically.
 
@@ -93,7 +93,7 @@ Atomic FHIR R4 value objects. All provide a `to_json()` method — nested types 
 Example — `HumanName`:
 
 ```python
-from src.datatype.datatypes import HumanName
+from satusehat_integration.datatype.datatypes import HumanName
 
 name = HumanName(
     family='Doe',
@@ -103,12 +103,12 @@ name = HumanName(
 # name.to_json() → {'family': 'Doe', 'given': ['John', 'Michael'], 'use': 'official'}
 ```
 
-### PayloadBuilder Pattern (`src/builder/`)
+### PayloadBuilder Pattern (`satusehat_integration/builder/`)
 
 Fluent builder for each FHIR resource. Each builder exposes chainable methods and returns the resource payload via `to_json()`.
 
 ```python
-from src.builder.payload_builders import PatientBuilder, HumanName
+from satusehat_integration.builder.payload_builders import PatientBuilder, HumanName
 
 patient = PatientBuilder()
 patient.add_name(HumanName(family='Doe', given=['John'], use='official').to_json())
@@ -118,11 +118,11 @@ patient.set_birth_date('1990-01-15')
 payload = patient.to_json()
 ```
 
-### HTTP Client & Response Handling (`src/ssrequest/`, `src/ssresponse/`)
+### HTTP Client & Response Handling (`satusehat_integration/ssrequest/`, `satusehat_integration/ssresponse/`)
 
 ```python
-from src.ssrequest import OAuth2Client, SSRequest
-from src.ssresponse import BundleResponse, SSValidationError
+from satusehat_integration.ssrequest import OAuth2Client, SSRequest
+from satusehat_integration.ssresponse import BundleResponse, SSValidationError
 
 oauth = OAuth2Client(satusehat_env="DEV")
 req = SSRequest(oauth2=oauth)
@@ -135,19 +135,19 @@ else:
     print(validator.get_summary())
 ```
 
-### Resource Parsers (`src/parser/`)
+### Resource Parsers (`satusehat_integration/parser/`)
 
 ```python
-from src.parser import EncounterParser, ObservationParser
+from satusehat_integration.parser import EncounterParser, ObservationParser
 
 enc = EncounterParser(encounter_json)
 print(enc.get_subject_reference(), enc.get_location_references())
 ```
 
-### SQLite Queue & Worker (`src/queue/`)
+### SQLite Queue & Worker (`satusehat_integration/queue/`)
 
 ```python
-from src.queue import SqliteQueue, Worker, QueueMonitor
+from satusehat_integration.queue import SqliteQueue, Worker, QueueMonitor
 
 queue = SqliteQueue("satusehat_queue.db")
 queue.enqueue("POST", "Encounter", "Encounter", encounter_payload)
@@ -176,18 +176,18 @@ print(monitor.health_check())
 | 1 | Account | `AccountBuilder` |
 | 2 | AllergyIntolerance | `AllergyIntoleranceBuilder` |
 | 3 | BillingStatus ⚡NON-FHIR | `BillingStatusBuilder` |
-| 4–37 | CarePlan, Condition, Encounter, Goal, Immunization, Location, Medication*, Observation, Organization, Patient, Practitioner, Procedure, ServiceRequest, Specimen, Substance, Task, and more | see `src/builder/` |
+| 4–37 | CarePlan, Condition, Encounter, Goal, Immunization, Location, Medication*, Observation, Organization, Patient, Practitioner, Procedure, ServiceRequest, Specimen, Substance, Task, and more | see `satusehat_integration/builder/` |
 | 38 | **Endpoint** | `EndpointBuilder` |
 | 39 | **MedicationStatement** | `MedicationStatementBuilder` |
 | 40 | **Task** | `TaskBuilder` |
 | 41 | **PurificationDecision** ⚡NON-FHIR | `PurificationDecisionBuilder` |
-| 42–47 | Claim, ClaimResponse, CoverageEligibilityRequest/Response, DocumentReference, QuestionnaireResponse | see `src/builder/` |
+| 42–47 | Claim, ClaimResponse, CoverageEligibilityRequest/Response, DocumentReference, QuestionnaireResponse | see `satusehat_integration/builder/` |
 
 ⚡ = NON-FHIR JSON (SATUSEHAT-specific extension)
 
 ### BillingStatus (NON-FHIR JSON)
 ```python
-from src.builder.billing_status import BillingStatusBuilder
+from satusehat_integration.builder.billing_status import BillingStatusBuilder
 
 billing = (BillingStatusBuilder()
     .set_id('bs-001')
@@ -201,7 +201,7 @@ billing = (BillingStatusBuilder()
 
 ### Endpoint (FHIR R4)
 ```python
-from src.builder.endpoint import EndpointBuilder
+from satusehat_integration.builder.endpoint import EndpointBuilder
 
 endpoint = (EndpointBuilder()
     .set_id('ep-001')
@@ -215,7 +215,7 @@ endpoint = (EndpointBuilder()
 
 ### PurificationDecision (NON-FHIR JSON)
 ```python
-from src.builder.purification_decision import PurificationDecisionBuilder
+from satusehat_integration.builder.purification_decision import PurificationDecisionBuilder
 
 pd = (PurificationDecisionBuilder()
     .set_id('pd-001')
@@ -230,7 +230,7 @@ pd = (PurificationDecisionBuilder()
 
 ### TerminologyResolver — castable codes
 ```python
-from src.terminology.resolver import resolve, expand_array
+from satusehat_integration.terminology.resolver import resolve, expand_array
 
 # Cast terminology strings directly to CodeableConcept
 resolve('ICD10:A00')
@@ -262,7 +262,7 @@ When both are supplied, PAT wins. Other environment variables: `TERMINOLOGY_BASE
 (default `https://terminology.ivanmd.id`).
 
 ```python
-from src.terminology import TerminologyClient
+from satusehat_integration.terminology import TerminologyClient
 
 term = TerminologyClient()  # baca env, atau: TerminologyClient(token='pat-xxx')
 
@@ -305,7 +305,7 @@ network error melempar `RuntimeError("TerminologyClient network error: …")`.
 ### Patient
 
 ```python
-from src.builder.payload_builders import PatientBuilder
+from satusehat_integration.builder.payload_builders import PatientBuilder
 
 patient = PatientBuilder()
 patient.add_name({
@@ -324,7 +324,7 @@ print(payload)
 ### Claim (BPJS Klaim)
 
 ```python
-from src.builder.payload_builders import ClaimBuilder
+from satusehat_integration.builder.payload_builders import ClaimBuilder
 
 claim = ClaimBuilder()
 claim.set_status('active')

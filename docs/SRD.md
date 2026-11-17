@@ -15,18 +15,18 @@ mapping, compatibility rules, and test state. SATUSEHAT usage belongs in `README
 ## 2. Architecture principles
 
 1. **Parity from construction to delivery.**
-   - `src/builder` and `src/datatype` build FHIR R4 payloads purely, with no network access.
-   - `src/ssrequest` (`OAuth2Client`, `SSRequest`) handles SATUSEHAT OAuth2 (`DEV`/`STG`/`PROD`), HTTP
+   - `satusehat_integration/builder` and `satusehat_integration/datatype` build FHIR R4 payloads purely, with no network access.
+   - `satusehat_integration/ssrequest` (`OAuth2Client`, `SSRequest`) handles SATUSEHAT OAuth2 (`DEV`/`STG`/`PROD`), HTTP
      transport, automatic token refresh on `401`, and exponential backoff with `Retry-After` on
      `429`/`5xx`.
-   - `src/ssresponse` (`SSResponse`, `BundleResponse`, `SSValidationError`) wraps HTTP responses and
+   - `satusehat_integration/ssresponse` (`SSResponse`, `BundleResponse`, `SSValidationError`) wraps HTTP responses and
      maps all **558 SATUSEHAT validation rules** (`RuleNumber`) plus 14 response categories.
-   - `src/parser` provides one parser per FHIR resource.
-   - `src/queue` provides SQLite-backed asynchronous delivery: `SqliteQueue`, `Worker`, `QueueMonitor`,
+   - `satusehat_integration/parser` provides one parser per FHIR resource.
+   - `satusehat_integration/queue` provides SQLite-backed asynchronous delivery: `SqliteQueue`, `Worker`, `QueueMonitor`,
      `RateLimiter`, `ErrorClassifier`, `QueueInterface`, `QueueResult`, `QueueException`.
-   - `src/terminology` provides `TerminologyClient` and `TerminologyResolver` for SmarTerm.
-   - `src/conformance` provides `unknown_elements` / `assert_r4_elements` (opt-in strict R4 guard).
-2. **A pip package, not a script.** `src/` is installed through `pyproject.toml`; tests run with
+   - `satusehat_integration/terminology` provides `TerminologyClient` and `TerminologyResolver` for SmarTerm.
+   - `satusehat_integration/conformance` provides `unknown_elements` / `assert_r4_elements` (opt-in strict R4 guard).
+2. **A pip package, not a script.** `satusehat_integration/` is installed through `pyproject.toml`; tests run with
    `python -m pytest src`.
 3. **Secrets come from the environment or arguments only.** SATUSEHAT and SmarTerm credentials are read
    from environment variables or constructor arguments.
@@ -52,22 +52,22 @@ mapping, compatibility rules, and test state. SATUSEHAT usage belongs in `README
 
 | Capability | PHP | Python | Evidence |
 |---|---|---|---|
-| Payload builders | 141 | 141 | `src/builder` |
-| Datatypes | 33 | 33 | `src/datatype` |
-| FHIR parsers | 142 | 141 | `src/parser` |
-| R5 namespace | 142 | 144 | `src/r5/builder` |
-| Queue modules | 8 | 8 | `src/queue` |
-| Terminology modules | 23 | 23 | `src/terminology` |
+| Payload builders | 141 | 141 | `satusehat_integration/builder` |
+| Datatypes | 33 | 33 | `satusehat_integration/datatype` |
+| FHIR parsers | 142 | 141 | `satusehat_integration/parser` |
+| R5 namespace | 142 | 144 | `satusehat_integration/r5/builder` |
+| Queue modules | 8 | 8 | `satusehat_integration/queue` |
+| Terminology modules | 23 | 23 | `satusehat_integration/terminology` |
 | SATUSEHAT required rules | yes | yes | `_rules_generated.py` + `RULES_SHA` |
-| Non-standard SATUSEHAT objects | yes | yes | `src/terminology/satusehat_nonstandard.py` |
-| R4 element guard (opt-in) | yes | yes | `src/conformance/r4_element_guard.py` |
+| Non-standard SATUSEHAT objects | yes | yes | `satusehat_integration/terminology/satusehat_nonstandard.py` |
+| R4 element guard (opt-in) | yes | yes | `satusehat_integration/conformance/r4_element_guard.py` |
 
 The one-parser difference is naming: PHP calls the `List` resource parser `ListParser`, Python calls it
 `ListResourceParser`. Resource coverage is identical.
 
 ## 5. Public contract
 
-- Package entry point: `src/__init__.py` re-exports builder, datatype, terminology, transport, parser,
+- Package entry point: `satusehat_integration/__init__.py` re-exports builder, datatype, terminology, transport, parser,
   queue, and conformance modules.
 - `pyproject.toml` declares `satusehat-integration` with `requires-python = ">=3.10"` and two runtime
   dependencies (`requests`, `pydantic`).
