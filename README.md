@@ -21,7 +21,7 @@ R4 tetap acuan; R5 cukup ganti import:
 
 ```python
 from src.builder.basic import BasicBuilder      # R4
-from src.r5.builder.basic import BasicBuilder   # R5 — hanya baris ini
+from src.r5.builder.basic import BasicBuilder   # R5 — this line only
 ```
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)
@@ -248,18 +248,18 @@ expand_array(['ICD10:A00', 'ICD10:J18.9'])
 
 ### TerminologyClient — HTTP client SmarTerm (terminology.ivanmd.id)
 
-`TerminologyClient` adalah HTTP client standalone untuk **SmarTerm**, TERPISAH
-dari ekosistem SATUSEHAT — jangan reuse OAuth SATUSEHAT Kemkes. SmarTerm punya
-auth sendiri, dual-mode:
+`TerminologyClient` is a standalone HTTP client for **SmarTerm**, separate from the SATUSEHAT
+ecosystem — do not reuse the Kemkes SATUSEHAT OAuth. SmarTerm has its own authentication, in two
+modes:
 
-1. **Sanctum PAT** (token statis) — header `Bearer`. Env `TERMINOLOGY_API_TOKEN`.
-2. **OIDC client_credentials** ke `auth.ivanmd.id` (Passport) — JWT di-fetch
-   lazy, di-cache sampai expire, auto-refresh sekali saat respon `401`.
-   Env `TERMINOLOGY_CLIENT_ID`, `TERMINOLOGY_CLIENT_SECRET`,
-   `TERMINOLOGY_TOKEN_URL` (default `https://auth.ivanmd.id/oauth/token`).
+1. **Sanctum PAT** (static token) sent as a `Bearer` header. Environment: `TERMINOLOGY_API_TOKEN`.
+2. **OIDC client_credentials** against `auth.ivanmd.id` (Passport) — the JWT is fetched lazily, cached
+   until expiry, and refreshed once on a `401`. Environment: `TERMINOLOGY_CLIENT_ID`,
+   `TERMINOLOGY_CLIENT_SECRET`, `TERMINOLOGY_TOKEN_URL`
+   (default `https://auth.ivanmd.id/oauth/token`).
 
-Jika keduanya diberikan, PAT menang. Env lain: `TERMINOLOGY_BASE_URL` (default
-`https://terminology.ivanmd.id`).
+When both are supplied, PAT wins. Other environment variables: `TERMINOLOGY_BASE_URL`
+(default `https://terminology.ivanmd.id`).
 
 ```python
 from src.terminology import TerminologyClient
