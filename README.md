@@ -12,7 +12,7 @@
 | Bagian | Jumlah | Bukti |
 | --- | --- | --- |
 | Builder | 141 resource | `src/builder` |
-| Method kanon | 1.405 | `src/builder/test_method_name_parity.py` (kontrak `contracts/php_method_surface.json`) |
+| Method builder | 1.405 | `src/builder/test_method_name_parity.py` (kontrak `contracts/php_method_surface.json`) |
 | Parser | 141 resource (setiap builder) | `src/parser`, `src/parser/test_parser_surface.py` |
 | Namespace R5 | 144 modul builder | `src/r5/builder`, `src/r5/test_r5_namespace.py` |
 | Tes | 2.194 | `python -m pytest` |
