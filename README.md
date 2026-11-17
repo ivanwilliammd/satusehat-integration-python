@@ -2,6 +2,11 @@
 
 > **Open-source Python SDK for integrating with SATUSEHAT** — Indonesia's national health data platform powered by FHIR R4. Pure Python, no framework dependency.
 
+[![PyPI](https://img.shields.io/pypi/v/satusehat-integration?label=pypi)](https://pypi.org/project/satusehat-integration/)
+[![downloads](https://img.shields.io/pypi/dm/satusehat-integration)](https://pypi.org/project/satusehat-integration/)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://pypi.org/project/satusehat-integration/)
+[![FHIR R4](https://img.shields.io/badge/FHIR-R4-orange)](https://hl7.org/fhir/R4/)
+
 ## Status & cakupan (diukur, bukan diklaim)
 
 | Bagian | Jumlah | Bukti |
