@@ -1,0 +1,40 @@
+from typing import Optional
+from satusehat_integration.builder.base_builder import BaseBuilder
+
+
+class TestScriptBuilder(BaseBuilder):
+    # Nama FHIR-nya memang berawalan "Test" (TestReport/TestScript), tetapi ini
+    # pembangun resource — bukan kelas uji. Tanpa penanda ini pytest mencoba
+    # mengumpulkannya sebagai berkas uji dan memunculkan peringatan yang menyembunyikan
+    # peringatan lain.
+    __test__ = False
+    def __init__(self) -> None:
+        super().__init__("TestScript")
+
+    def set_id(self, id: str) -> "TestScriptBuilder":
+        self._set("id", id)
+        return self
+
+    def add_identifier(self, system: str, value: str) -> "TestScriptBuilder":
+        self._append("identifier", {"system": system, "value": value})
+        return self
+
+    def set_status(self, status: str) -> "TestScriptBuilder":
+        self._set("status", status)
+        return self
+
+    def set_code(self, code: dict) -> "TestScriptBuilder":
+        self._set("code", code)
+        return self
+
+    def set_subject(self, reference: str, display: str = None) -> "TestScriptBuilder":
+        self._set("subject", {"reference": reference, "display": display}) if display else self._set("subject", {"reference": reference})
+        return self
+
+    def set_description(self, description: str) -> "TestScriptBuilder":
+        self._set("description", description)
+        return self
+
+    def set_encounter(self, reference: str) -> "TestScriptBuilder":
+        self._set("encounter", {"reference": reference})
+        return self

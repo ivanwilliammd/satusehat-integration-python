@@ -14,7 +14,7 @@ import pathlib
 
 AKAR = pathlib.Path(__file__).resolve().parent.parent
 SUMBER = AKAR / "data" / "satusehat" / "required-rules.json"
-TUJUAN = AKAR / "src" / "terminology" / "_rules_generated.py"
+TUJUAN = AKAR / "satusehat_integration" / "terminology" / "_rules_generated.py"
 
 KEPALA = '"""BERKAS INI DIGENERATE — jangan disunting tangan.\n\nSumber: data/satusehat/required-rules.json lewat scripts/generate_rules.py.\nAturan yang sama dipakai kelima port; ubah JSON-nya, lalu jalankan skrip ini.\n"""\nfrom __future__ import annotations\n\nRULES_SHA: str = {sha!r}\n\nRULES: dict[str, list[dict]] = {badan}\n'
 

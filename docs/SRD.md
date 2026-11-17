@@ -46,7 +46,7 @@ mapping, compatibility rules, and test state. SATUSEHAT usage belongs in `README
 | Queue modules | 8 | `ls src/queue/*.py \| grep -v test_ \| wc -l` |
 | Terminology modules | 23 | `scripts/parity-manifest.sh` |
 | Test files | 218 | `find src -name "test_*.py" \| wc -l` |
-| Test cases | 2.219 passing, 1 skipped | `python -m pytest -q` |
+| Test cases | 2.080 passing, 2 skipped | `python -m pytest -q` |
 
 ## 4. Capability parity with the PHP SDK
 

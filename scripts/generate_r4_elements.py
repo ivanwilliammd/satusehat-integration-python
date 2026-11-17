@@ -11,7 +11,7 @@ import sys
 
 sumber = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else
                       "../satusehat-integration/data/r4_elements.json")
-tujuan = pathlib.Path(__file__).resolve().parents[1] / "src" / "conformance" / "_r4_elements_generated.py"
+tujuan = pathlib.Path(__file__).resolve().parents[1] / "satusehat_integration" / "conformance" / "_r4_elements_generated.py"
 
 data = json.loads(sumber.read_text(encoding="utf-8"))
 bersih = {nama: sorted(daftar) for nama, daftar in sorted(data.items())}
