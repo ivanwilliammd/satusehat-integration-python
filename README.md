@@ -42,7 +42,7 @@ Built on the official [SATUSEHAT Platform Guidelines](https://satusehat.kemkes.g
 - **50 DataType** classes — composable FHIR R4 value objects with `to_json()` serialization
 - **`OAuth2Client` & `SSRequest`** — full SATUSEHAT OAuth2 authentication (`DEV`, `STG`, `PROD`), FHIR R4 HTTP client (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `patch_fhir_path`, `post_bundle`) with automatic 401 token refresh and 429/5xx exponential backoff
 - **`SSResponse`, `BundleResponse` & `SSValidationError`** — response wrappers and complete 558-rule SATUSEHAT validation error dictionary (`RuleNumber` 10003–20021)
-- **18 FHIR Resource Parsers** — `PatientParser`, `EncounterParser`, `ObservationParser`, `DiagnosticReportParser`, `PractitionerParser`, `ProcedureParser`, `ServiceRequestParser`, `SpecimenParser`, `TaskParser`, and more
+- **142 FHIR Resource Parsers** — `PatientParser`, `EncounterParser`, `ObservationParser`, `DiagnosticReportParser`, `PractitionerParser`, `ProcedureParser`, `ServiceRequestParser`, `SpecimenParser`, `TaskParser`, and more
 - **SQLite Queue + Worker + Monitor** — full 8-module persistent SQLite queue (`SqliteQueue`, `Worker`, `QueueMonitor`, `RateLimiter`, `ErrorClassifier`, `QueueResult`, `QueueException`, `QueueInterface`) with DLQ and retry scheduling
 - **`TerminologyClient` & `TerminologyResolver`** — SmarTerm HTTP client + castable terminology strings (`"ICD10:A00"`, `"LOINC:2951-2"`, `"SNOMED:38341003"`) directly to CodeableConcept
 - **3 SATUSEHAT-specific** resources: BillingStatus (NON-FHIR JSON), PurificationDecision (NON-FHIR JSON), Endpoint (FHIR R4)
