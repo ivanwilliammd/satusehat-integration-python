@@ -7,17 +7,17 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://pypi.org/project/satusehat-integration/)
 [![FHIR R4](https://img.shields.io/badge/FHIR-R4-orange)](https://hl7.org/fhir/R4/)
 
-## Status & cakupan (diukur, bukan diklaim)
+## Status and coverage (measured, not claimed)
 
-| Bagian | Jumlah | Bukti |
+| Area | Count | Evidence |
 | --- | --- | --- |
-| Builder | 141 resource | `satusehat_integration/builder` |
-| Method builder | 1.405 | `satusehat_integration/builder/test_method_name_parity.py` (kontrak `contracts/php_method_surface.json`) |
-| Parser | 141 resource (setiap builder) | `satusehat_integration/parser`, `satusehat_integration/parser/test_parser_surface.py` |
-| Namespace R5 | 144 modul builder | `satusehat_integration/r5/builder`, `satusehat_integration/r5/test_r5_namespace.py` |
-| Tes | 2.194 | `python -m pytest` |
+| Builder | 141 resources | `satusehat_integration/builder` |
+| Builder methods | 1,405 | `satusehat_integration/builder/test_method_name_parity.py` (contract `contracts/php_method_surface.json`) |
+| Parser | 141 resources (one per builder) | `satusehat_integration/parser`, `satusehat_integration/parser/test_parser_surface.py` |
+| R5 namespace | 144 builder modules | `satusehat_integration/r5/builder`, `satusehat_integration/r5/test_r5_namespace.py` |
+| Tests | 2,080 | `python -m pytest` |
 
-R4 tetap acuan; R5 cukup ganti import:
+R4 stays the reference; R5 means changing one import:
 
 ```python
 from satusehat_integration.builder.basic import BasicBuilder      # R4
@@ -271,7 +271,7 @@ term.query('pemasangan kateter').on('kptl').limit(10).get()
 term.query('demam').category('diagnosis').first()
 term.query('paracetamol').on('kfa').all()
 
-# as_code() → POST validate, sistem ditebak dari bentuk kode
+# as_code() → POST validate; the system is inferred from the shape of the code
 term.query('93004944').as_code().get()   # 93xxxx → system 'kfa'
 term.query('J18.9').as_code().get()      # ICD-10
 
