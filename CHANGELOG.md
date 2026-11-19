@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **HL7 v2 + MLLP**: `satusehat_integration.hl7v2` — `Message`/`Segment` (ER7 parse, path access,
+  escape decode/encode, byte-for-byte round trip), `Mllp` framing with a stateful `MllpReader`, `Ack`
+  (AA/AE/AR with MSA-2 echo), `Client` with `send()` and `session()` (one socket, one result per
+  message), and declarative `Profile`s (`adt_a01()`, `adt_a08()`, `oru_r01()`).
+- **Shared corpus**: the 20 fixtures are copied byte-for-byte from the PHP SDK, so behaviour parity is
+  tested with the same messages instead of being re-described in prose.
+
 ## v4.19.1 — 2026-11-17
 
 ### Fixed

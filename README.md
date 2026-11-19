@@ -339,6 +339,53 @@ payload = claim.to_json()
 
 ---
 
+## HL7 v2 and MLLP
+
+SATUSEHAT speaks FHIR R4; analyzers and LIS speak HL7 v2 over MLLP. Both ship in this package, so one
+install covers the whole path from instrument to national platform.
+
+```python
+from satusehat_integration.hl7v2 import Ack, Client, Message, Profiles
+
+msg = Message.parse(er7)          # CR, LF or CRLF; encoding characters read from MSH-2
+msg.message_type()                # "ADT"
+msg.get("PID.5.1")                # family name, escapes decoded
+msg.set("PID.8", "F")             # re-escaped on write
+str(msg)                          # ER7, CR-terminated, byte-for-byte round trip
+```
+
+```python
+result = Client("10.0.0.21:2575").send(msg)
+result.accepted      # MSA-1 == "AA"
+result.control_id    # MSA-2, verified against MSH-10
+
+results = Client("10.0.0.21:2575").session(messages)   # one socket, one result each
+```
+
+Rules that are enforced rather than documented:
+
+- **Transport failures retry, verdicts do not.** `AE`/`AR` is returned to the caller; retrying an
+  application rejection turns one bad message into a thousand.
+- **MSA-2 must echo MSH-10.** A reply with a different control id is stale or misrouted and raises.
+- **Frames carry over.** `MllpReader` keeps bytes that arrive after a complete frame, because one
+  `recv()` often returns two or three ACKs — a stateless reader would return the first and lose the rest.
+
+Validation is data:
+
+```python
+from satusehat_integration.hl7v2 import PROFILES, Message
+
+issues = PROFILES["oruR01"]().validate(Message.parse(er7))   # also adtA01, adtA08
+errors = [i for i in issues if i.severity == "error"]        # warnings do not block
+```
+
+The test corpus lives in `satusehat_integration/hl7v2/fixtures/` and is **copied byte-for-byte from the
+PHP SDK**: ten messages a hospital actually sends and ten that must be refused. Porting the corpus
+rather than rewriting the tests is what makes "same behaviour in five languages" measurable.
+
+Not implemented yet, and not claimed: batches (FHS/BHS), vendor-specific profiles beyond the three
+built in, HL7 v2 table validation, and a supervised MLLP server daemon.
+
 ## Documentation
 
 | Page | Description |
