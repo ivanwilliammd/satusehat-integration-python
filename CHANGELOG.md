@@ -1,3 +1,12 @@
+## [Unreleased]
+
+### Added
+
+- **CDA R2**: `satusehat_integration.cda.Document` parses and builds `ClinicalDocument`
+  (`patient()`, `authors()`, `section(loinc)`, `section_text(loinc)`, `validate()`, `to_xml()`), with
+  `Section` and `PatientRole` value objects. Unknown structure survives a round trip; the licensed HL7
+  schemas are not redistributed. Standard library only (`xml.etree`). Tests 11; suite 2,116 → 2,127.
+
 # Changelog
 
 ## Unreleased

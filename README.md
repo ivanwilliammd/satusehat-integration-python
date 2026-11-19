@@ -386,6 +386,59 @@ rather than rewriting the tests is what makes "same behaviour in five languages"
 Not implemented yet, and not claimed: batches (FHS/BHS), vendor-specific profiles beyond the three
 built in, HL7 v2 table validation, and a supervised MLLP server daemon.
 
+## CDA R2 documents
+
+HL7 CDA R2 is the document format that travels alongside HL7 v2 messages: v2 carries the
+transaction, CDA carries the signed document. This SDK reads and writes the part that is actually
+used — the header and the sections with narrative text — and leaves everything else alone.
+
+```python
+from satusehat_integration.cda import Document
+
+doc = Document.parse(xml)                  # refuses anything whose root is not ClinicalDocument
+doc.title()                                # "Resume Medis Rawat Inap"
+doc.patient().identifier("2.16.840.1.113883.3.3157.1003.1")   # NIK
+doc.patient().name()
+doc.authors()                              # ["Ivan HARSONO"]
+doc.section("10164-2").title               # section by LOINC, searched depth-first
+doc.section_text("10164-2")                # narrative flattened to text, paragraphs kept
+doc.validate()                             # [] means exchangeable, not clinically correct
+```
+
+```python
+from satusehat_integration.cda import Document
+
+doc = Document.build({
+    "id": "DOC-1",
+    "title": "Resume Medis",
+    "custodian": "RS Contoh",
+    "author": "Dokter Contoh",
+    "patientId": "3171234567890001",
+    "patientName": "ANGGRAENI",
+    "gender": "F",
+    "birthTime": "19850312",
+    "sections": [{"loinc": "10164-2", "title": "Riwayat", "text": "<paragraph>Demam.</paragraph>"}],
+})
+print(doc.to_xml())
+```
+
+Two decisions worth stating:
+
+- **Unknown structure survives a round trip.** Parsing keeps the `ElementTree` and `to_xml()` writes
+  it back, so `componentOf/encompassingEncounter`, `participant`, `legalAuthenticator` and vendor
+  extensions are preserved even though the SDK does not model them. A parser that rebuilds the
+  document from its own model quietly deletes everything it did not understand.
+- **Identifiers keep their `root`.** A NIK without its assigning-authority root cannot be matched
+  against anything, and dropping the root is how a local MRN silently becomes a national NIK.
+
+No new dependency: `xml.etree.ElementTree` is the standard library. It does not resolve external
+entities, so a hostile document cannot pull in a local file through the parser. The HL7 CDA R2
+schemas are licensed; the classes implement the structural rules from the specification and do not
+redistribute them.
+
+Not implemented: signature verification (`ds:Signature`), templates beyond the generic
+`POCD_MT000040` header, `nonXMLBody` attachments, CDA → FHIR mapping.
+
 ## Documentation
 
 | Page | Description |
